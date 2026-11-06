@@ -1,0 +1,24 @@
+# url ou dominio
+@URL = http://localhost
+# Porta do servidor
+@PORT = 3600
+# endpoint ou rota do teste
+@ENDPOINT = upload
+# uri - rota final do teste
+@URI = {{URL}}:{{PORT}}/{{ENDPOINT}}
+
+###
+# inclui novos registros
+POST  {{URI}}
+Content-Type: multipart/form-data; boundary=MinhaBoundary
+
+--MinhaBoundary
+Content-Disposition: form-data; name="title"
+
+Teste upload
+--MinhaBoundary
+Content-Disposition: form-data; name="avatar"; filename="1.png"
+Content-Type: image/png
+
+< ./1.png
+--MinhaBoundary--

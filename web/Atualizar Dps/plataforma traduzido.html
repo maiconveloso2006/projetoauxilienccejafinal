@@ -1,0 +1,3460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Estudos - Auxilio Encceja</title>
+    <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- Nota: O ícone local foi mantido, mas caso não exista, o alt text aparecerá -->
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #34495e;
+            --primary-dark: #344953;
+            --secondary: #57c5b6;
+            --accent: #159895;
+            --bg-light: #f8fafb;
+            --bg-card: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --radius: 16px;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 100px;
+            color: var(--text-dark);
+            transition: all var(--transition-speed) ease;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f0f4f3 0%, #e2e8f0 100%);
+            z-index: -1;
+        }
+
+        /* 1. Realce de Links (Mantido) */
+        body.highlight-links a {
+            text-decoration: underline !important;
+            text-decoration-thickness: 3px !important;
+            text-underline-offset: 4px !important;
+            background-color: #e3f2fd !important; /* Azul claro */
+            color: #0d47a1 !important; /* Azul muito escuro */
+            padding: 2px 6px !important;
+            border-radius: 4px !important;
+            font-weight: 600 !important;
+            transition: all 0.2s ease !important;
+        }
+
+        body.highlight-links a:hover {
+            background-color: #bbdefb !important;
+            color: #000000 !important;
+        }
+
+        body.highlight-links .nav-link, body.highlight-links .nav-link.active,
+        body.highlight-links .footer-links a {
+            background-color: #e3f2fd !important;
+            color: #0d47a1 !important;
+            padding: 6px 12px !important;
+            border-radius: 6px !important;
+            border: 1px solid #90caf9 !important;
+        }
+        
+        body.highlight-links .nav-link:hover, 
+        body.highlight-links .footer-links a:hover {
+            background-color: #ffffff !important;
+            border-color: #0d47a1 !important;
+        }
+
+        /* 2. Espaçamento de Letras (Mantido) */
+        body.letter-spacing {
+            letter-spacing: 1.5px;
+            word-spacing: 1.2px;
+        }
+
+        /* 3. Filtros de Daltonismo */
+        body.protanopia::before,
+        body.protanopia .navbar,
+        body.protanopia .footer,
+        body.protanopia .main-container,
+        body.protanopia .accessibility-modal-content,
+        body.protanopia .btn-accessibility {
+            filter: url('#protanopia-filter');
+        }
+
+        body.deuteranopia::before,
+        body.deuteranopia .navbar,
+        body.deuteranopia .footer,
+        body.deuteranopia .main-container,
+        body.deuteranopia .accessibility-modal-content,
+        body.deuteranopia .btn-accessibility {
+            filter: url('#deuteranopia-filter');
+        }
+
+        body.tritanopia::before,
+        body.tritanopia .navbar,
+        body.tritanopia .footer,
+        body.tritanopia .main-container,
+        body.tritanopia .accessibility-modal-content,
+        body.tritanopia .btn-accessibility {
+            filter: url('#tritanopia-filter');
+        }
+
+        /* Acromatopsia (Monocromacia Total) */
+        body.achromatopsia::before,
+        body.achromatopsia .navbar,
+        body.achromatopsia .footer,
+        body.achromatopsia .main-container,
+        body.achromatopsia .accessibility-modal-content,
+        body.achromatopsia .btn-accessibility {
+            filter: url('#achromatopsia-filter');
+        }
+
+        /* Guia de Leitura (Ruler) */
+        #reading-ruler {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background-color: rgba(255, 255, 0, 0.3); /* Amarelo transparente */
+            border-bottom: 3px solid #d32f2f; /* Linha vermelha embaixo */
+            border-top: 1px solid rgba(0,0,0,0.1);
+            pointer-events: none; /* Permite clicar através da régua */
+            z-index: 9999; /* Fica acima de tudo */
+            display: none; /* Oculto por padrão */
+            transform: translateY(-15px); /* Centraliza a barra no cursor */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: opacity 0.2s;
+        }
+
+        /* Ativa a visibilidade da régua */
+        body.ruler-active #reading-ruler {
+            display: block;
+        }
+
+        /* Fonte Amigável para Dislexia */
+        body.dyslexia-font {
+            font-family: 'OpenDyslexic', 'Comic Sans MS', 'Chalkboard SE', sans-serif !important;
+        }
+
+        /* --- NOVA FUNCIONALIDADE SUBSTITUTA: OCULTAR IMAGENS --- */
+        
+        /* 5. Ocultar Imagens (Substitui o antigo Modo de Leitura) */
+        body.hide-images img,
+        body.hide-images .content-icon,
+        body.hide-images .resource-icon,
+        body.hide-images .welcome-illustration {
+            display: none !important;
+        }
+        /* Ajuste de layout quando imagens somem */
+        body.hide-images .content-card {
+            padding: 1rem !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        body.hide-images .resource-card {
+            padding-left: 1rem;
+        }
+
+        /* --- FIM DA NOVA FUNCIONALIDADE --- */
+
+        /* Modo Alto Contraste Original (Dark) */
+        body.high-contrast {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast::before {
+            display: none !important;
+        }
+
+        body.high-contrast .navbar {
+            background: #000000 !important;
+            border-bottom: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .navbar-brand,
+        body.high-contrast .navbar-nav .nav-link {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .welcome-banner {
+            background: #000000 !important;
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .welcome-title,
+        body.high-contrast .welcome-subtitle,
+        body.high-contrast .section-title {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .content-card,
+        body.high-contrast .resource-card {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .content-title,
+        body.high-contrast .content-count,
+        body.high-contrast .resource-title,
+        body.high-contrast .modal-subtitle,
+        body.high-contrast .resource-description,
+        body.high-contrast .content-option-title,
+        body.high-contrast .content-option-count {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .modal-content {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffffff !important;
+            box-shadow: none;
+        }
+
+        body.high-contrast .modal-header {
+            background: #000000 !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-bottom: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .modal-header::before {
+            display: none !important;
+        }
+
+        body.high-contrast .modal-footer {
+            border: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .content-option {
+            background-color: #000000 !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .content-option:hover {
+            background-color: #000000 !important;
+        }
+
+        body.high-contrast .footer {
+            background: #000000 !important;
+            border-top: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-modal-content {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-modal-header {
+            background: #000000 !important;
+            border-bottom: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-modal-title {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-modal-close {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #000000;
+        }
+
+        body.high-contrast .accessibility-modal-body {
+            background-color: #000000 !important;
+        }
+
+        body.high-contrast .accessibility-section-title {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-option {
+            background-color: #1a1a1a !important;
+            color: #ffffff !important;
+            border: 1px solid #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-option-title {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-option-description {
+            color: #cccccc !important;
+        }
+
+        body.high-contrast .accessibility-modal-footer {
+            background-color: #1a1a1a !important;
+            border-top: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .btn-accessibility {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        /* Modo Escuro */
+        body.dark-mode {
+            background-color: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode::before {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%) !important;
+        }
+
+        body.dark-mode .navbar {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        body.dark-mode .navbar-brand,
+        body.dark-mode .navbar-nav .nav-link {
+            color: rgba(224, 224, 224, 0.9) !important;
+        }
+
+        body.dark-mode .navbar-nav .nav-link.active {
+            background-color: var(--accent) !important;
+            color: white !important;
+        }
+
+        body.dark-mode .welcome-banner {
+            background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+        }
+
+        body.dark-mode .welcome-title,
+        body.dark-mode .section-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .welcome-subtitle {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .content-card,
+        body.dark-mode .resource-card {
+            background-color: #1e1e1e !important;
+            color: #e0e0e0 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .content-card:hover,
+        body.dark-mode .resource-card:hover {
+            border-color: var(--accent) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        body.dark-mode .content-title,
+        body.dark-mode .content-count,
+        body.dark-mode .resource-title,
+        body.dark-mode .resource-description,
+        body.dark-mode .content-option-title,
+        body.dark-mode .content-option-count {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .footer {
+            background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #1e1e1e !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .modal-header {
+            background: #2d2d2d !important;
+            border-bottom-color: rgba(255,255,255,0.1) !important;
+        }
+
+        body.dark-mode .modal-footer {
+            border-top-color: rgba(255,255,255,0.1) !important;
+        }
+
+        body.dark-mode .content-option {
+            background-color: #2d2d2d !important;
+            border-color: rgba(255,255,255,0.1) !important;
+        }
+
+        body.dark-mode .content-option:hover {
+            background-color: #3d3d3d !important;
+        }
+
+        body.dark-mode .accessibility-modal-content {
+            background-color: #1e1e1e !important;
+            color: #e0e0e0 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .accessibility-modal-header {
+            background: #2d2d2d !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .accessibility-modal-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-modal-body {
+            background-color: #1e1e1e !important;
+        }
+
+        body.dark-mode .accessibility-section-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-option {
+            background-color: #2d2d2d !important;
+            color: #e0e0e0 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .accessibility-option:hover {
+            background-color: #3d3d3d !important;
+        }
+
+        body.dark-mode .accessibility-option-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-option-description {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .accessibility-toggle-label,
+        body.dark-mode .accessibility-range-label {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-range {
+            background: #3d3d3d !important;
+        }
+
+        body.dark-mode .accessibility-modal-footer {
+            background-color: #2d2d2d !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .accessibility-reset-btn {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .accessibility-reset-btn:hover {
+            background-color: #3d3d3d !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-save-btn {
+            background-color: var(--accent) !important;
+        }
+
+        /* Cursor Grande */
+        body.big-cursor,
+        body.big-cursor * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="%23000" stroke="%23fff" stroke-width="3"/></svg>') 24 24, auto !important;
+        }
+
+        body.big-cursor a,
+        body.big-cursor button,
+        body.big-cursor input,
+        body.big-cursor select,
+        body.big-cursor textarea,
+        body.big-cursor .item-card {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="%2328a745" stroke="%23fff" stroke-width="3"/></svg>') 24 24, pointer !important;
+        }
+
+        /* Foco Visível */
+        body.visible-focus *:focus {
+            outline: 3px solid var(--accent) !important;
+            outline-offset: 3px !important;
+        }
+
+        /* --- ESTILOS DO NOVO SELETOR DE IDIOMA --- */
+        .lang-dropdown .dropdown-toggle {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-dropdown .dropdown-toggle:hover, 
+        .lang-dropdown .dropdown-toggle:focus {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .lang-dropdown .dropdown-menu {
+            background-color: var(--primary-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-width: 160px;
+            padding: 0.5rem;
+        }
+
+        .lang-dropdown .dropdown-item {
+            color: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-dropdown .dropdown-item:hover,
+        .lang-dropdown .dropdown-item:active {
+            background-color: var(--accent);
+            color: #fff;
+        }
+
+        .lang-dropdown .lang-flag {
+            font-size: 1.2rem;
+        }
+
+        /* Ajuste do dropdown para modo escuro e alto contraste se necessário, 
+           embora o estilo acima já use variáveis escuras por padrão na navbar */
+        body.high-contrast .lang-dropdown .dropdown-menu {
+            background-color: #000;
+            border: 2px solid #fff;
+        }
+        
+        body.high-contrast .lang-dropdown .dropdown-item {
+            color: #fff;
+        }
+
+        /* --- FIM DOS ESTILOS DO SELETOR --- */
+
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            box-shadow: var(--shadow-lg);
+            padding: 0.75rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: #fff !important;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.85) !important;
+            margin: 0 3px;
+            border-radius: 8px;
+            padding: 8px 14px !important;
+            transition: all var(--transition-speed) ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: rgba(255,255,255,0.15);
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            background: rgba(255,255,255,0.25);
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link i {
+            margin-right: 6px;
+        }
+
+        .navbar-toggler {
+            border: none;
+            color: white;
+        }
+
+        .navbar-toggler {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-toggler:focus,
+        .navbar-toggler:active {
+            outline: none !important;
+            box-shadow: none !important;
+            background-color: transparent !important;
+        }
+
+        .navbar-toggler i {
+            font-size: 1.5rem;
+        }
+
+        /* Main Container */
+        .main-container {
+            padding: 2rem 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary) 100%);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(52, 73, 94, 0.3);
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(87, 197, 182, 0.3) 0%, transparent 70%);
+            animation: floatBlob 8s ease-in-out infinite;
+        }
+
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 40%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(21, 152, 149, 0.2) 0%, transparent 70%);
+            animation: floatBlob 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatBlob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -20px) scale(1.1); }
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .welcome-text {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            max-width: 500px;
+        }
+
+        .welcome-illustration {
+            display: flex;
+            gap: 1rem;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Rótulo da contagem regressiva */
+        .countdown-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 8px 20px;
+            border: 1px solid rgba(255,255,255,0.25);
+            margin-bottom: 12px;
+            width: 100%;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        .countdown-label i {
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+
+        .countdown-label-text {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .countdown-label.inscricoes {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .countdown-label.inscricoes i {
+            color: var(--success);
+        }
+
+        .countdown-label.provas {
+            border-color: rgba(245, 158, 11, 0.4);
+        }
+
+        .countdown-label.provas i {
+            color: var(--warning);
+        }
+
+        .countdown-label.encerrada {
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .countdown-label.encerrada i {
+            color: var(--danger);
+        }
+
+        .countdown-bubbles {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-bubble {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: bubbleFloat 3s ease-in-out infinite;
+            min-width: 80px;
+        }
+
+        .stat-bubble:nth-child(2) { animation-delay: 0.5s; }
+        .stat-bubble:nth-child(3) { animation-delay: 1s; }
+        .stat-bubble:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .stat-bubble-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #ffffff;
+            display: block;
+        }
+
+        .stat-bubble-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Content Cards Section */
+        .content-section {
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .content-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .content-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--card-accent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+            border-color: var(--card-accent);
+        }
+
+        .content-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .content-card:active {
+            transform: translateY(-8px) scale(0.98);
+        }
+
+        .content-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            background: var(--card-bg);
+            color: var(--card-accent);
+            transition: all 0.4s ease;
+        }
+
+        .content-card:hover .content-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--card-accent);
+            color: white;
+        }
+
+        .content-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .content-count {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .content-count i {
+            color: var(--card-accent);
+        }
+
+        /* Card Colors - Matérias */
+        .content-card.matematica { --card-accent: #3b82f6; --card-bg: rgba(59, 130, 246, 0.1); }
+        .content-card.portugues { --card-accent: #ef4444; --card-bg: rgba(239, 68, 68, 0.1); }
+        .content-card.historia { --card-accent: #f59e0b; --card-bg: rgba(245, 158, 11, 0.1); }
+        .content-card.geografia { --card-accent: #10b981; --card-bg: rgba(16, 185, 129, 0.1); }
+        .content-card.ciencias { --card-accent: #8b5cf6; --card-bg: rgba(139, 92, 246, 0.1); }
+
+        /* Resources Section */
+        .resources-section {
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--resource-accent);
+        }
+
+        .resource-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--resource-bg);
+            color: var(--resource-accent);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover .resource-icon {
+            background: var(--resource-accent);
+            color: white;
+            transform: rotate(-5deg);
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .resource-description {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .resource-arrow {
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover .resource-arrow {
+            color: var(--resource-accent);
+            transform: translateX(5px);
+        }
+
+        /* Resource Colors */
+        .resource-card.biblioteca { --resource-accent: #3b82f6; --resource-bg: rgba(59, 130, 246, 0.1); }
+        .resource-card.links { --resource-accent: #10b981; --resource-bg: rgba(16, 185, 129, 0.1); }
+        .resource-card.guia { --resource-accent: #f59e0b; --resource-bg: rgba(245, 158, 11, 0.1); }
+        .resource-card.dicas { --resource-accent: #ec4899; --resource-bg: rgba(236, 72, 153, 0.1); }
+        .resource-card.provas { --resource-accent: #8b5cf6; --resource-bg: rgba(139, 92, 246, 0.1); }
+        .resource-card.suporte { --resource-accent: #ef4444; --resource-bg: rgba(239, 68, 68, 0.1); }
+
+        /* Content Modal */
+        .content-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .content-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 24px;
+            width: 95%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(80px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary));
+            color: white;
+            padding: 1.75rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #000000;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-title i {
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .content-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .content-option {
+            background: var(--bg-light);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .content-option:hover {
+            border-color: var(--option-accent);
+            background: var(--option-bg);
+            transform: translateY(-4px);
+        }
+
+        .content-option.selected {
+            border-color: var(--option-accent);
+            background: var(--option-bg);
+        }
+
+        .content-option-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            background: var(--option-accent);
+            color: white;
+        }
+
+        .content-option-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .content-option-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Option Colors - Tipos de Conteúdo */
+        .content-option.videoaula { --option-accent: #3b82f6; --option-bg: rgba(59, 130, 246, 0.1); }
+        .content-option.apostilas { --option-accent: #10b981; --option-bg: rgba(16, 185, 129, 0.1); }
+        .content-option.exercicios { --option-accent: #f59e0b; --option-bg: rgba(245, 158, 11, 0.1); }
+        .content-option.simulados { --option-accent: #8b5cf6; --option-bg: rgba(139, 92, 246, 0.1); }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .btn-cancel {
+            padding: 0.85rem 1.75rem;
+            border: 2px solid var(--border-color);
+            background: transparent;
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            border-color: var(--text-dark);
+            color: var(--text-dark);
+        }
+
+        .btn-continue {
+            padding: 0.85rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(21, 152, 149, 0.4);
+        }
+
+        .btn-continue:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            transition: color var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.3rem;
+            margin: 0 8px;
+            transition: all var(--transition-speed);
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-2px);
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Modal de Acessibilidade */
+        .btn-accessibility {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(21, 152, 149, 0.4);
+            transition: all var(--transition-speed);
+            cursor: pointer;
+        }
+
+        .btn-accessibility:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(21, 152, 149, 0.5);
+        }
+
+        .btn-accessibility:focus {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .btn-accessibility.active {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+        }
+
+        /* Modal Overlay */
+        .accessibility-modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .accessibility-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Modal Content */
+        .accessibility-modal-content {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            width: 95%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Modal Header */
+        .accessibility-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accessibility-modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            background-size: 60px 60px;
+            opacity: 0.5;
+        }
+
+        .accessibility-modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .accessibility-modal-title i {
+            font-size: 1.6rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .accessibility-modal-close {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            font-size: 1.3rem;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 12px;
+            transition: all var(--transition-speed);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .accessibility-modal-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: rotate(90deg);
+        }
+
+        /* Modal Body */
+        .accessibility-modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* Tabs Navigation */
+        .accessibility-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            background: #f1f5f9;
+            padding: 6px;
+            border-radius: 14px;
+        }
+
+        .accessibility-tab {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .accessibility-tab i {
+            font-size: 1.1rem;
+        }
+
+        .accessibility-tab:hover {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text-dark);
+        }
+
+        .accessibility-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Tab Content */
+        .accessibility-tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .accessibility-tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Section */
+        .accessibility-section {
+            margin-bottom: 24px;
+        }
+
+        .accessibility-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .accessibility-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .accessibility-section-title i {
+            color: var(--accent);
+        }
+
+        /* Options Grid */
+        .accessibility-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        /* Option Card */
+        .accessibility-option {
+            background: white;
+            border-radius: 14px;
+            padding: 16px;
+            transition: all var(--transition-speed);
+            border: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accessibility-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            transform: scaleX(0);
+            transition: transform var(--transition-speed);
+        }
+
+        .accessibility-option:hover {
+            border-color: rgba(21, 152, 149, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .accessibility-option:hover::before {
+            transform: scaleX(1);
+        }
+
+        .accessibility-option.active {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(21, 152, 149, 0.05), rgba(87, 197, 182, 0.05));
+        }
+
+        .accessibility-option.active::before {
+            transform: scaleX(1);
+        }
+
+        .accessibility-option-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .accessibility-option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .accessibility-option-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .accessibility-option-description {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-left: 52px;
+        }
+
+        /* Toggle Switch */
+        .accessibility-toggle {
+            display: flex;
+            align-items: center;
+            margin-top: 12px;
+            margin-left: 52px;
+        }
+
+        .accessibility-toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+
+        .accessibility-toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .accessibility-toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e2e8f0;
+            transition: var(--transition-speed);
+            border-radius: 26px;
+        }
+
+        .accessibility-toggle-slider::before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: var(--transition-speed);
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .accessibility-toggle-switch input:checked+.accessibility-toggle-slider {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+        }
+
+        .accessibility-toggle-switch input:checked+.accessibility-toggle-slider::before {
+            transform: translateX(22px);
+        }
+
+        .accessibility-toggle-switch input:focus+.accessibility-toggle-slider {
+            box-shadow: 0 0 0 3px rgba(21, 152, 149, 0.3);
+        }
+
+        .accessibility-toggle-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        /* Range Control */
+        .accessibility-range-control {
+            margin-top: 12px;
+            margin-left: 52px;
+        }
+
+        .accessibility-range-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .accessibility-range-label span:last-child {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .accessibility-range {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #e2e8f0, #e2e8f0);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .accessibility-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(21, 152, 149, 0.4);
+            transition: transform var(--transition-speed);
+        }
+
+        .accessibility-range::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .accessibility-range::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(21, 152, 149, 0.4);
+        }
+
+        /* Color Blind Options */
+        .colorblind-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .colorblind-option {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .colorblind-option:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .colorblind-option.active {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(21, 152, 149, 0.05), rgba(87, 197, 182, 0.05));
+        }
+
+        .colorblind-preview {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .colorblind-preview span {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .colorblind-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Modal Footer */
+        .accessibility-modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 28px;
+            background: #f8fafb;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .accessibility-reset-btn {
+            background: white;
+            border: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .accessibility-reset-btn:hover {
+            background: var(--bg-light);
+            border-color: var(--text-muted);
+            color: var(--text-dark);
+        }
+
+        .accessibility-save-btn {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(21, 152, 149, 0.3);
+        }
+
+        .accessibility-save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(21, 152, 149, 0.4);
+        }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            z-index: 1100;
+        }
+
+        .custom-toast {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideInLeft 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 350px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-toast i {
+            font-size: 1.4rem;
+            color: var(--secondary);
+        }
+
+        .custom-toast-message {
+            font-weight: 500;
+        }
+
+        /* Status Badge */
+        .accessibility-status {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+        .accessibility-option.active .accessibility-status {
+            opacity: 1;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .welcome-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .welcome-text {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .welcome-illustration {
+                width: 100%;
+                justify-content: center;
+                margin-top: 1.5rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+                padding-bottom: 140px;
+            }
+
+            .navbar {
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .navbar-brand img {
+                height: 32px;
+            }
+
+            .main-container {
+                padding: 1rem 0.75rem;
+            }
+
+            .welcome-banner {
+                padding: 2rem 1.5rem;
+                border-radius: 16px;
+            }
+
+            .welcome-title {
+                font-size: 1.75rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .resource-card {
+                padding: 1.25rem;
+            }
+
+            .content-options {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .btn-cancel, .btn-continue {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer {
+                padding: 10px 0;
+            }
+            .footer .container .row {
+                text-align: center;
+            }
+            .footer-links {
+                margin-bottom: 10px;
+            }
+            .footer-links a {
+                margin: 0 8px;
+                font-size: 0.8rem;
+            }
+            
+            .social-icons {
+                text-align: center !important;
+            }
+
+            .btn-accessibility {
+                bottom: 20px; 
+                right: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            .accessibility-modal-content {
+                max-height: 85vh;
+                width: 98%;
+            }
+
+            .accessibility-modal-header, 
+            .accessibility-modal-footer {
+                padding: 16px 20px;
+            }
+
+            .accessibility-tabs {
+                flex-wrap: wrap;
+            }
+
+            .accessibility-tab {
+                flex: 1 1 calc(50% - 4px);
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+
+            .accessibility-options {
+                grid-template-columns: 1fr;
+            }
+
+            .accessibility-modal-footer {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .accessibility-reset-btn,
+            .accessibility-save-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .countdown-label {
+                padding: 6px 16px;
+            }
+
+            .countdown-label-text {
+                font-size: 0.8rem;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .welcome-banner {
+                padding: 1.5rem 1rem;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+
+            .stat-bubble {
+                padding: 1rem 1.0rem;
+                min-width: 70px;
+            }
+            .stat-bubble-value {
+                font-size: 1.25rem;
+            }
+
+            .content-cards-grid {
+                gap: 1rem;
+            }
+
+            .content-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .content-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                border-radius: 16px;
+            }
+
+            .colorblind-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.25rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .section-title i {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus States */
+        *:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--secondary);
+            outline-offset: 2px;
+        }
+
+        /* Font Size Classes (Expandido) */
+        body.font-size-1 { font-size: 0.85rem; } /* Muito Pequeno */
+        body.font-size-2 { font-size: 1.0rem; }  /* Pequeno */
+        body.font-size-3 { font-size: 1.15rem; } /* Normal */
+        body.font-size-4 { font-size: 1.3rem; }  /* Grande */
+        body.font-size-5 { font-size: 1.5rem; }  /* Muito Grande */
+        body.font-size-6 { font-size: 1.7rem; }  /* Gigante */
+
+        /* Line Height Classes (Expandido) */
+        body.line-height-1 { line-height: 1.4; }  /* Compacto */
+        body.line-height-2 { line-height: 1.6; }  /* Normal */
+        body.line-height-3 { line-height: 1.8; }  /* Espaçado */
+        body.line-height-4 { line-height: 2.2; }  /* Muito Espaçado */
+
+        /* SVG Filters para Daltonismo (hidden) */
+        .svg-filters {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .no-transition {
+            transition: none !important;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Elemento: Guia de Leitura (Ruler) -->
+    <div id="reading-ruler"></div>
+
+    <!-- SVG Filters para Daltonismo -->
+    <svg class="svg-filters">
+        <defs>
+            <filter id="protanopia-filter">
+                <feColorMatrix type="matrix" values="0.567,0.433,0,0,0 0.558,0.442,0,0,0 0,0.242,0.758,0,0 0,0,0,1,0" />
+            </filter>
+            <filter id="deuteranopia-filter">
+                <feColorMatrix type="matrix" values="0.625,0.375,0,0,0 0.7,0.3,0,0,0 0,0.3,0.7,0,0 0,0,0,1,0" />
+            </filter>
+            <filter id="tritanopia-filter">
+                <feColorMatrix type="matrix" values="0.95,0.05,0,0,0 0,0.433,0.567,0,0 0,0.475,0.525,0,0 0,0,0,1,0" />
+            </filter>
+            <!-- Filtro: Acromatopsia (Escala de Cinza/Luminância) -->
+            <filter id="achromatopsia-filter">
+                <feColorMatrix type="matrix" values="0.299,0.587,0.114,0,0 0.299,0.587,0.114,0,0 0.299,0.587,0.114,0,0 0,0,0,1,0" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Botão de Acessibilidade -->
+    <button class="btn-accessibility" id="accessibilityBtn" aria-label="Abrir configurações de acessibilidade"
+        title="Acessibilidade">
+        <i class="bi bi-universal-access"></i>
+    </button>
+
+    <!-- Modal de Acessibilidade -->
+    <div class="accessibility-modal" id="accessibilityModal" role="dialog" aria-modal="true"
+        aria-labelledby="accessibilityModalTitle">
+        <div class="accessibility-modal-content">
+            <div class="accessibility-modal-header">
+                <h3 class="accessibility-modal-title" id="accessibilityModalTitle">
+                    <i class="bi bi-universal-access"></i>
+                    Configurações de Acessibilidade
+                </h3>
+                <button class="accessibility-modal-close" id="accessibilityModalClose" aria-label="Fechar">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="accessibility-modal-body">
+                <!-- Tabs Navigation -->
+                <div class="accessibility-tabs" role="tablist">
+                    <button class="accessibility-tab active" data-tab="visual" role="tab" aria-selected="true"
+                        aria-controls="tab-visual">
+                        <i class="bi bi-eye"></i>
+                        Visual
+                    </button>
+                    <button class="accessibility-tab" data-tab="content" role="tab" aria-selected="false"
+                        aria-controls="tab-content">
+                        <i class="bi bi-fonts"></i>
+                        Conteúdo
+                    </button>
+                    <button class="accessibility-tab" data-tab="navigation" role="tab" aria-selected="false"
+                        aria-controls="tab-navigation">
+                        <i class="bi bi-cursor"></i>
+                        Navegação
+                    </button>
+                    <button class="accessibility-tab" data-tab="colorblind" role="tab" aria-selected="false"
+                        aria-controls="tab-colorblind">
+                        <i class="bi bi-palette"></i>
+                        Daltonismo
+                    </button>
+                </div>
+
+                <!-- Tab Visual -->
+                <div class="accessibility-tab-content active" id="tab-visual" role="tabpanel">
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-circle-half"></i>
+                            Aparência Geral
+                        </h4>
+                        <div class="accessibility-options">
+                            
+                            <!-- Modo Escuro -->
+                            <div class="accessibility-option" data-option="dark-mode">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-moon-stars"></i></div>
+                                    <div class="accessibility-option-title">Modo Escuro</div>
+                                </div>
+                                <div class="accessibility-option-description">Ativa tema escuro para reduzir brilho da tela.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="darkModeToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Ativar modo escuro</span>
+                                </div>
+                            </div>
+
+                            <!-- Alto Contraste -->
+                            <div class="accessibility-option" data-option="high-contrast">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-brightness-high"></i></div>
+                                    <div class="accessibility-option-title">Alto Contraste</div>
+                                </div>
+                                <div class="accessibility-option-description">Aumenta contraste entre texto e fundo (Dark).</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="highContrastToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Ativar alto contraste</span>
+                                </div>
+                            </div>
+
+                            <!-- Espaçamento de Letras -->
+                            <div class="accessibility-option" data-option="letter-spacing">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-text-indent-left"></i></div>
+                                    <div class="accessibility-option-title">Espaçamento de Letras</div>
+                                </div>
+                                <div class="accessibility-option-description">Aumenta o espaço entre os caracteres para leitura.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="letterSpacingToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Ativar espaçamento</span>
+                                </div>
+                            </div>
+
+                            <!-- NOVO: Fonte Amigável para Dislexia -->
+                            <div class="accessibility-option" data-option="dyslexia-font">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-type"></i></div>
+                                    <div class="accessibility-option-title">Fonte para Dislexia</div>
+                                </div>
+                                <div class="accessibility-option-description">Altera para fonte com pesos ponderados (OpenDyslexic).</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="dyslexiaFontToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Ativar fonte especial</span>
+                                </div>
+                            </div>
+
+                             <!-- NOVO: Guia de Leitura (Ruler) -->
+                             <div class="accessibility-option" data-option="reading-ruler">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-distribute-vertical"></i></div>
+                                    <div class="accessibility-option-title">Guia de Leitura</div>
+                                </div>
+                                <div class="accessibility-option-description">Barra que segue o mouse para auxiliar o foco.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="readingRulerToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Ativar guia</span>
+                                </div>
+                            </div>
+
+                            <!-- SUBSTITUIÇÃO REALIZADA AQUI: Antigo Modo Leitura virou Ocultar Imagens -->
+                            <div class="accessibility-option" data-option="hide-images">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-image"></i></div>
+                                    <div class="accessibility-option-title">Ocultar Imagens</div>
+                                </div>
+                                <div class="accessibility-option-description">Remove distrações visuais (ícones e fotos).</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="hideImagesToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Ativar ocultar</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Conteúdo -->
+                <div class="accessibility-tab-content" id="tab-content" role="tabpanel">
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-type"></i>
+                            Tamanho do Texto
+                        </h4>
+                        <div class="accessibility-options">
+                            <div class="accessibility-option">
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-textarea-resize"></i></div>
+                                    <div class="accessibility-option-title">Tamanho da Fonte</div>
+                                </div>
+                                <div class="accessibility-option-description">Ajuste o tamanho do texto na página.</div>
+                                <div class="accessibility-range-control">
+                                    <div class="accessibility-range-label">
+                                        <span>A-</span>
+                                        <span id="fontSizeValue">Normal</span>
+                                        <span>A+</span>
+                                    </div>
+                                    <input type="range" min="1" max="6" value="3" class="accessibility-range" id="fontSizeRange">
+                                </div>
+                            </div>
+                            <div class="accessibility-option">
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-text-paragraph"></i></div>
+                                    <div class="accessibility-option-title">Espaçamento de Linha</div>
+                                </div>
+                                <div class="accessibility-option-description">Ajuste o espaço entre linhas.</div>
+                                <div class="accessibility-range-control">
+                                    <div class="accessibility-range-label">
+                                        <span>Compacto</span>
+                                        <span id="lineHeightValue">Normal</span>
+                                        <span>Largo</span>
+                                    </div>
+                                    <input type="range" min="1" max="4" value="2" class="accessibility-range" id="lineHeightRange">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-link-45deg"></i>
+                            Links e Elementos
+                        </h4>
+                        <div class="accessibility-options">
+                            <div class="accessibility-option" data-option="highlight-links">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-link"></i></div>
+                                    <div class="accessibility-option-title">Realçar Links</div>
+                                </div>
+                                <div class="accessibility-option-description">Destaca todos os links com fundo azul e sublinhado.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="highlightLinksToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Realçar links</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Navegação -->
+                <div class="accessibility-tab-content" id="tab-navigation" role="tabpanel">
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-mouse"></i>
+                            Cursor e Foco
+                        </h4>
+                        <div class="accessibility-options">
+                            <div class="accessibility-option" data-option="big-cursor">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-hand-index"></i></div>
+                                    <div class="accessibility-option-title">Cursor Grande</div>
+                                </div>
+                                <div class="accessibility-option-description">Aumenta o tamanho do cursor.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="bigCursorToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Cursor grande</span>
+                                </div>
+                            </div>
+                            <div class="accessibility-option" data-option="visible-focus">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-bullseye"></i></div>
+                                    <div class="accessibility-option-title">Foco Visível</div>
+                                </div>
+                                <div class="accessibility-option-description">Destaca elementos em foco pelo teclado.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="visibleFocusToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Foco visível</span>
+                                </div>
+                            </div>
+                            <div class="accessibility-option" data-option="reduce-motion">
+                                <span class="accessibility-status">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-pause-circle"></i></div>
+                                    <div class="accessibility-option-title">Reduzir Animações</div>
+                                </div>
+                                <div class="accessibility-option-description">Desativa animações e transições.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="reduceMotionToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label">Reduzir animações</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Daltonismo -->
+                <div class="accessibility-tab-content" id="tab-colorblind" role="tabpanel">
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-palette"></i>
+                            Ajustes de Cor para Daltonismo
+                        </h4>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
+                            Selecione uma opção para ajustar as cores da página de acordo com seu tipo de visão.
+                        </p>
+                        <div class="colorblind-options">
+                            <div class="colorblind-option active" data-type="normal">
+                                <div class="colorblind-preview">
+                                    <span style="background: #e74c3c;"></span>
+                                    <span style="background: #2ecc71;"></span>
+                                    <span style="background: #3498db;"></span>
+                                    <span style="background: #f1c40f;"></span>
+                                </div>
+                                <div class="colorblind-name">Visão Normal</div>
+                            </div>
+                            <div class="colorblind-option" data-type="protanopia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #8b4513;"></span>
+                                    <span style="background: #228b22;"></span>
+                                    <span style="background: #1e90ff;"></span>
+                                    <span style="background: #ffd700;"></span>
+                                </div>
+                                <div class="colorblind-name">Protanopia</div>
+                            </div>
+                            <div class="colorblind-option" data-type="deuteranopia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #a0522d;"></span>
+                                    <span style="background: #6b8e23;"></span>
+                                    <span style="background: #4682b4;"></span>
+                                    <span style="background: #daa520;"></span>
+                                </div>
+                                <div class="colorblind-name">Deuteranopia</div>
+                            </div>
+                            <div class="colorblind-option" data-type="tritanopia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #ff6b6b;"></span>
+                                    <span style="background: #51cf66;"></span>
+                                    <span style="background: #74c0fc;"></span>
+                                    <span style="background: #fcc419;"></span>
+                                </div>
+                                <div class="colorblind-name">Tritanopia</div>
+                            </div>
+                            <!-- Acromatopsia -->
+                            <div class="colorblind-option" data-type="achromatopsia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #808080;"></span>
+                                    <span style="background: #808080;"></span>
+                                    <span style="background: #808080;"></span>
+                                    <span style="background: #808080;"></span>
+                                </div>
+                                <div class="colorblind-name">Acromatopsia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accessibility-modal-footer">
+                <button class="accessibility-reset-btn" id="resetAccessibility">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    Restaurar Padrões
+                </button>
+                <button class="accessibility-save-btn" id="saveAccessibility">
+                    <i class="bi bi-check-lg"></i>
+                    Salvar Configurações
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Content Selection Modal -->
+    <div class="content-modal" id="contentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="bi bi-collection" id="modalIcon"></i>
+                    <span id="modalTitle">Escolha o tipo de conteúdo</span>
+                </h3>
+                <button class="modal-close" id="modalClose" aria-label="Fechar">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">Selecione o que você deseja estudar:</p>
+                <div class="content-options" id="contentOptions">
+                    <div class="content-option videoaula" data-type="videoaula">
+                        <div class="content-option-icon">
+                            <i class="bi bi-play-circle-fill"></i>
+                        </div>
+                        <div class="content-option-title">Videoaulas</div>
+                        <div class="content-option-count">6 Vídeos Disponíveis</div>
+                    </div>
+                    <div class="content-option apostilas" data-type="apostila">
+                        <div class="content-option-icon">
+                            <i class="bi bi-file-earmark-text-fill"></i>
+                        </div>
+                        <div class="content-option-title">Apostilas</div>
+                        <div class="content-option-count">6 Apostilas Disponíveis</div>
+                    </div>
+                    <div class="content-option exercicios" data-type="exercicio">
+                        <div class="content-option-icon">
+                            <i class="bi bi-pencil-fill"></i>
+                        </div>
+                        <div class="content-option-title">Exercícios</div>
+                        <div class="content-option-count">6 Questões Disponíveis</div>
+                    </div>
+                    <div class="content-option simulados" data-type="simulado">
+                        <div class="content-option-icon">
+                            <i class="bi bi-clipboard-check-fill"></i>
+                        </div>
+                        <div class="content-option-title">Simulados</div>
+                        <div class="content-option-count">6 Simulados Disponíveis</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="btnCancel">Cancelar</button>
+                <button class="btn-continue" id="btnContinue" disabled>
+                    Continuar <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="plataforma.html">
+                <img src="Logo 3.0.png" alt="Logo Auxilio Encceja">
+                Auxílio Encceja
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="plataforma.html">
+                            <i class="bi bi-house"></i> <span data-i18n="nav.home">Início</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="conteudos.html">
+                            <i class="bi bi-collection"></i> <span data-i18n="nav.content">Conteúdos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="acompanhamento.html">
+                            <i class="bi bi-graph-up"></i> <span data-i18n="nav.progress">Acompanhamento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="config.html">
+                            <i class="bi bi-gear"></i> <span data-i18n="nav.settings">Configurações</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Seletor de Idioma -->
+                    <li class="nav-item dropdown lang-dropdown ms-lg-2">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-translate"></i>
+                            <span id="currentLangLabel">Português</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="#" data-lang="pt"><span class="lang-flag">🇧🇷</span> Português</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="en"><span class="lang-flag">🇺🇸</span> English</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="es"><span class="lang-flag">🇪🇸</span> Español</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <div class="welcome-content">
+                <div class="welcome-text">
+                    <h1 class="welcome-title" data-i18n="welcome.title">Bem-vindo de volta, Estudante!</h1>
+                    <p class="welcome-subtitle" id="welcomeSubtitle" data-i18n="welcome.subtitle">Continue sua jornada de estudos para o ENCCEJA. Escolha uma matéria abaixo para começar a estudar agora mesmo.</p>
+                </div>
+                <!-- Contagem Regressiva -->
+                <div class="welcome-illustration">
+                    <div class="countdown-label inscricoes" id="countdownLabel">
+                        <i class="bi bi-pencil-square"></i>
+                        <span class="countdown-label-text" id="countdownLabelText" data-i18n="countdown.label">Inscrições Encceja</span>
+                    </div>
+                    <div class="countdown-bubbles">
+                        <div class="stat-bubble">
+                            <div class="stat-bubble-value" id="days">00</div>
+                            <div class="stat-bubble-label" data-i18n="time.days">Dias</div>
+                        </div>
+                        <div class="stat-bubble">
+                            <div class="stat-bubble-value" id="hours">00</div>
+                            <div class="stat-bubble-label" data-i18n="time.hours">Horas</div>
+                        </div>
+                        <div class="stat-bubble">
+                            <div class="stat-bubble-value" id="minutes">00</div>
+                            <div class="stat-bubble-label" data-i18n="time.minutes">Minutos</div>
+                        </div>
+                        <div class="stat-bubble">
+                            <div class="stat-bubble-value" id="seconds">00</div>
+                            <div class="stat-bubble-label" data-i18n="time.seconds">Segundos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Cards Section -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="bi bi-book"></i> <span data-i18n="section.subjects">O que você quer estudar hoje?</span>
+                </h2>
+            </div>
+            <div class="content-cards-grid">
+                <div class="content-card matematica" data-type="matematica">
+                    <div class="content-icon">
+                        <i class="bi bi-calculator-fill"></i>
+                    </div>
+                    <h3 class="content-title">Matemática</h3> 
+                    <p class="content-count">
+                        <i class="bi bi-graph-up-arrow"></i> <span data-i18n="card.access">Acessar matéria</span>
+                    </p>
+                </div>
+                <div class="content-card portugues" data-type="portugues">
+                    <div class="content-icon">
+                        <i class="bi bi-book-half"></i>
+                    </div>
+                    <h3 class="content-title">Português</h3>
+                    <p class="content-count">
+                        <i class="bi bi-pencil"></i> <span data-i18n="card.access">Acessar matéria</span>
+                    </p>
+                </div>
+                <div class="content-card historia" data-type="historia">
+                    <div class="content-icon">
+                        <i class="bi bi-clock-history"></i>
+                    </div>
+                    <h3 class="content-title">História</h3>
+                    <p class="content-count">
+                        <i class="bi bi-hourglass-split"></i> <span data-i18n="card.access">Acessar matéria</span>
+                    </p>
+                </div>
+                <div class="content-card geografia" data-type="geografia">
+                    <div class="content-icon">
+                        <i class="bi bi-globe-americas"></i>
+                    </div>
+                    <h3 class="content-title">Geografia</h3>
+                    <p class="content-count">
+                        <i class="bi bi-map"></i> <span data-i18n="card.access">Acessar matéria</span>
+                    </p>
+                </div>
+                <div class="content-card ciencias" data-type="ciencias">
+                    <div class="content-icon">
+                        <i class="bi bi-lightning-fill"></i>
+                    </div>
+                    <h3 class="content-title">Ciências</h3>
+                    <p class="content-count">
+                        <i class="bi bi-lightbulb"></i> <span data-i18n="card.access">Acessar matéria</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Resources Section -->
+        <div class="resources-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="bi bi-star"></i> <span data-i18n="section.resources">Recursos Recomendados</span>
+                </h2>
+            </div>
+            <div class="resources-grid">
+                <a href="biblioteca.html" class="resource-card biblioteca" data-resource="biblioteca">
+                    <div class="resource-icon">
+                        <i class="bi bi-book"></i>
+                    </div>
+                    <div class="resource-info">
+                        <h4 class="resource-title">Biblioteca de Estudos</h4>
+                        <p class="resource-description" data-i18n="res.library">Acesse materiais complementares e documentos de apoio.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="links.html" class="resource-card links" data-resource="links">
+                    <div class="resource-icon">
+                        <i class="bi bi-link-45deg"></i>
+                    </div>
+                    <div class="resource-info">
+                        <h4 class="resource-title">Links Úteis</h4>
+                        <p class="resource-description" data-i18n="res.links">Sites e recursos externos para aprofundar seus estudos.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="guia.html" class="resource-card guia" data-resource="guia">
+                    <div class="resource-icon">
+                        <i class="bi bi-map-fill"></i>
+                    </div>
+                    <div class="resource-info">
+                        <h4 class="resource-title">Guia Completo do ENCCEJA</h4>
+                        <p class="resource-description" data-i18n="res.guide">Tudo que você precisa saber sobre o exame.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="dicas.html" class="resource-card dicas" data-resource="dicas">
+                    <div class="resource-icon">
+                        <i class="bi bi-lightbulb-fill"></i>
+                    </div>
+                    <div class="resource-info">
+                        <h4 class="resource-title">Dicas de Estudo</h4>
+                        <p class="resource-description" data-i18n="res.tips">Técnicas e métodos para otimizar seu aprendizado.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="provas.html" class="resource-card provas" data-resource="provas">
+                    <div class="resource-icon">
+                        <i class="bi bi-file-earmark-ruled-fill"></i>
+                    </div>
+                    <div class="resource-info">
+                        <h4 class="resource-title">Provas Anteriores</h4>
+                        <p class="resource-description" data-i18n="res.exams">Pratique com provas de edições anteriores do ENCCEJA.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="suporte.html" class="resource-card suporte" data-resource="suporte">
+                    <div class="resource-icon">
+                        <i class="bi bi-headset"></i>
+                    </div>
+                    <div class="resource-info">
+                        <h4 class="resource-title">Suporte</h4>
+                        <p class="resource-description" data-i18n="res.support">Tire suas dúvidas e obtenha ajuda da equipe.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-links">
+                        <a href="termos.html" data-i18n="footer.terms">Termos de Uso</a>
+                        <a href="politica.html" data-i18n="footer.privacy">Política de Privacidade</a>
+                        <a href="contato.html" data-i18n="footer.contact">Contato</a>
+                        <a href="sobre.html" data-i18n="footer.about">Sobre</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-icons">
+                        <a href="#" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; <span id="anoAtual"></span> Auxílio Encceja. <span data-i18n="footer.rights">Todos os Direitos Reservados.</span>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('anoAtual').textContent = new Date().getFullYear();
+
+        // Elemento do Ruler
+        const readingRuler = document.getElementById('reading-ruler');
+
+        // ==========================================
+        // SISTEMA DE TRADUÇÃO (NOVO)
+        // ==========================================
+        const translations = {
+            pt: {
+                "currentLangLabel": "Português",
+                "nav.home": "Início",
+                "nav.content": "Conteúdos",
+                "nav.progress": "Acompanhamento",
+                "nav.settings": "Configurações",
+                "welcome.title": "Bem-vindo de volta, Estudante!",
+                "welcome.subtitle": "Continue sua jornada de estudos para o ENCCEJA. Escolha uma matéria abaixo para começar a estudar agora mesmo.",
+                "countdown.label": "Inscrições Encceja",
+                "time.days": "Dias",
+                "time.hours": "Horas",
+                "time.minutes": "Minutos",
+                "time.seconds": "Segundos",
+                "section.subjects": "O que você quer estudar hoje?",
+                "card.access": "Acessar matéria",
+                "section.resources": "Recursos Recomendados",
+                "res.library": "Acesse materiais complementares e documentos de apoio.",
+                "res.links": "Sites e recursos externos para aprofundar seus estudos.",
+                "res.guide": "Tudo que você precisa saber sobre o exame.",
+                "res.tips": "Técnicas e métodos para otimizar seu aprendizado.",
+                "res.exams": "Pratique com provas de edições anteriores do ENCCEJA.",
+                "res.support": "Tire suas dúvidas e obtenha ajuda da equipe.",
+                "footer.terms": "Termos de Uso",
+                "footer.privacy": "Política de Privacidade",
+                "footer.contact": "Contato",
+                "footer.about": "Sobre",
+                "footer.rights": "Todos os Direitos Reservados.",
+                "toast.langChanged": "Idioma alterado para Português"
+            },
+            en: {
+                "currentLangLabel": "English",
+                "nav.home": "Home",
+                "nav.content": "Contents",
+                "nav.progress": "Progress",
+                "nav.settings": "Settings",
+                "welcome.title": "Welcome back, Student!",
+                "welcome.subtitle": "Continue your study journey for the ENCCEJA. Choose a subject below to start studying right now.",
+                "countdown.label": "ENCCEJA Registration",
+                "time.days": "Days",
+                "time.hours": "Hours",
+                "time.minutes": "Minutes",
+                "time.seconds": "Seconds",
+                "section.subjects": "What do you want to study today?",
+                "card.access": "Access subject",
+                "section.resources": "Recommended Resources",
+                "res.library": "Access supplementary materials and support documents.",
+                "res.links": "Websites and external resources to deepen your studies.",
+                "res.guide": "Everything you need to know about the exam.",
+                "res.tips": "Techniques and methods to optimize your learning.",
+                "res.exams": "Practice with exams from previous ENCCEJA editions.",
+                "res.support": "Get your questions answered and get help from the team.",
+                "footer.terms": "Terms of Use",
+                "footer.privacy": "Privacy Policy",
+                "footer.contact": "Contact",
+                "footer.about": "About",
+                "footer.rights": "All Rights Reserved.",
+                "toast.langChanged": "Language changed to English"
+            },
+            es: {
+                "currentLangLabel": "Español",
+                "nav.home": "Inicio",
+                "nav.content": "Contenidos",
+                "nav.progress": "Progreso",
+                "nav.settings": "Configuración",
+                "welcome.title": "¡Bienvenido de nuevo, Estudiante!",
+                "welcome.subtitle": "Continúa tu viaje de estudios para el ENCCEJA. Elige una materia abajo para comenzar a estudar ahora mismo.",
+                "countdown.label": "Inscripciones ENCCEJA",
+                "time.days": "Días",
+                "time.hours": "Horas",
+                "time.minutes": "Minutos",
+                "time.seconds": "Segundos",
+                "section.subjects": "¿Qué quieres estudar hoy?",
+                "card.access": "Acceder a materia",
+                "section.resources": "Recursos Recomendados",
+                "res.library": "Accede a materiales complementarios y documentos de apoyo.",
+                "res.links": "Sitios web y recursos externos para profundizar tus estudios.",
+                "res.guide": "Todo lo que necesitas saber sobre el examen.",
+                "res.tips": "Técnicas y métodos para optimizar tu aprendizaje.",
+                "res.exams": "Practica con exámenes de ediciones anteriores del ENCCEJA.",
+                "res.support": "Resuelve tus dudas y obtén ayuda del equipo.",
+                "footer.terms": "Términos de Uso",
+                "footer.privacy": "Política de Privacidad",
+                "footer.contact": "Contacto",
+                "footer.about": "Acerca de",
+                "footer.rights": "Todos los Derechos Reservados.",
+                "toast.langChanged": "Idioma cambiado a Español"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            
+            // Atualiza o rótulo atual no dropdown
+            document.getElementById('currentLangLabel').textContent = translations[lang]['currentLangLabel'];
+            
+            // Salva preferência (opcional)
+            localStorage.setItem('selectedLang', lang);
+
+            // Feedback visual
+            showToast(translations[lang]['toast.langChanged']);
+        }
+
+        // Inicializa listeners do seletor de idioma
+        document.querySelectorAll('.lang-dropdown .dropdown-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                changeLanguage(lang);
+            });
+        });
+
+        // Restaura idioma salvo (opcional)
+        const savedLang = localStorage.getItem('selectedLang');
+        if (savedLang && translations[savedLang]) {
+            changeLanguage(savedLang);
+        }
+
+        // ==========================================
+        // FIM DO SISTEMA DE TRADUÇÃO
+        // ==========================================
+
+
+        // Lógica do Modal de Conteúdo
+        const contentModal = document.getElementById('contentModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalClose = document.getElementById('modalClose');
+        const btnCancel = document.getElementById('btnCancel');
+        const btnContinue = document.getElementById('btnContinue');
+        const contentOptions = document.querySelectorAll('.content-option');
+        const contentCards = document.querySelectorAll('.content-card');
+
+        let selectedOption = null;
+        let currentSubject = null;
+
+        const subjectTypes = {
+            matematica: { title: 'Matemática', icon: 'bi-calculator-fill' },
+            portugues: { title: 'Português', icon: 'bi-book-half' },
+            historia: { title: 'História', icon: 'bi-clock-history' },
+            geografia: { title: 'Geografia', icon: 'bi-globe-americas' },
+            ciencias: { title: 'Ciências', icon: 'bi-lightning-fill' }
+        };
+
+        contentCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const type = this.dataset.type;
+                openContentModal(type);
+            });
+        });
+
+        function openContentModal(subjectKey) {
+            const subject = subjectTypes[subjectKey];
+            if (!subject) return;
+            currentSubject = subjectKey;
+            modalTitle.textContent = `${subject.title} - Escolha o tipo de conteúdo`;
+            modalIcon.className = 'bi ' + subject.icon;
+            selectedOption = null;
+            contentOptions.forEach(opt => opt.classList.remove('selected'));
+            btnContinue.disabled = true;
+            contentModal.classList.add('show');
+        }
+
+        contentOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                contentOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedOption = this.dataset.type;
+                btnContinue.disabled = false;
+            });
+        });
+
+        function closeModal() {
+            contentModal.classList.remove('show');
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        btnCancel.addEventListener('click', closeModal);
+
+        contentModal.addEventListener('click', function(e) {
+            if (e.target === contentModal) closeModal();
+        });
+
+        btnContinue.addEventListener('click', function() {
+            if (selectedOption && currentSubject) {
+                window.location.href = `conteudos.html?materia=${currentSubject}&tipo=${selectedOption}`;
+            }
+        });
+
+        const resourceCards = document.querySelectorAll('.resource-card');
+        resourceCards.forEach(card => {
+            card.addEventListener('click', function() {
+                showToast(`Abrindo ${this.querySelector('.resource-title').textContent}...`);
+            });
+        });
+
+        // ======================================================
+        // CONFIGURAÇÕES DE ACESSIBILIDADE (ATUALIZADAS)
+        // ======================================================
+        let accessibilitySettings = {
+            darkMode: false,
+            highContrast: false,
+            letterSpacing: false,
+            dyslexiaFont: false,
+            readingRuler: false,
+            hideImages: false, // Substituído readingMode por hideImages
+            highlightLinks: false,
+            bigCursor: false,
+            visibleFocus: false,
+            reduceMotion: false,
+            fontSize: 3, 
+            lineHeight: 2, 
+            colorBlindType: 'normal'
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initAccessibilityModal();
+            loadAccessibilitySettings();
+            startCountdown();
+            initRuler();
+        });
+
+        // Lógica da Régua de Leitura (Ruler)
+        function initRuler() {
+            // Atualiza a posição da régua com base no mouse
+            document.addEventListener('mousemove', (e) => {
+                if (accessibilitySettings.readingRuler) {
+                    // Centraliza a régua verticalmente em relação ao cursor
+                    // 15px é metade da altura definida no CSS
+                    readingRuler.style.top = (e.clientY - 15) + 'px';
+                }
+            });
+
+            // Esconde a régua se o mouse sair da janela
+            document.addEventListener('mouseleave', () => {
+                if(accessibilitySettings.readingRuler) {
+                    readingRuler.style.opacity = '0';
+                }
+            });
+
+            // Mostra a régua quando o mouse entra na janela
+            document.addEventListener('mouseenter', () => {
+                if(accessibilitySettings.readingRuler) {
+                    readingRuler.style.opacity = '1';
+                }
+            });
+        }
+
+        // Contagem Regressiva
+        function startCountdown() {
+            const dataInscricoes = new Date("2026-06-15T23:59:59").getTime();
+            const dataProvas = new Date("2026-08-23T07:00:00").getTime();
+
+            const daysEl = document.getElementById("days");
+            const hoursEl = document.getElementById("hours");
+            const minutesEl = document.getElementById("minutes");
+            const secondsEl = document.getElementById("seconds");
+            const labelEl = document.getElementById("countdownLabel");
+            const labelTextEl = document.getElementById("countdownLabelText");
+            const subtitleEl = document.getElementById("welcomeSubtitle");
+
+            function atualizarFase() {
+                const now = new Date().getTime();
+
+                if (now < dataInscricoes) {
+                    labelEl.className = 'countdown-label inscricoes';
+                    labelEl.querySelector('i').className = 'bi bi-pencil-square';
+                    // Nota: O texto do label é gerenciado pelo i18n, mas o ícone e estilo precisam ser manuais
+                    // Restaura texto original do i18n se necessário
+                    const lang = localStorage.getItem('selectedLang') || 'pt';
+                    labelTextEl.textContent = translations[lang]["countdown.label"];
+                    
+                    subtitleEl.textContent = translations[lang]["welcome.subtitle"];
+                    return dataInscricoes;
+                } else if (now < dataProvas) {
+                    labelEl.className = 'countdown-label provas';
+                    labelEl.querySelector('i').className = 'bi bi-journal-check';
+                    labelTextEl.textContent = "Provas Encceja"; // Exemplo estático para fase diferente
+                    subtitleEl.textContent = "As inscrições foram encerradas. Prepare-se, as provas do ENCCEJA se aproximam!";
+                    return dataProvas;
+                } else {
+                    labelEl.className = 'countdown-label encerrada';
+                    labelEl.querySelector('i').className = 'bi bi-check-circle';
+                    labelTextEl.textContent = "Encceja Encerrado";
+                    subtitleEl.textContent = "O período do ENCCEJA foi encerrado. Acompanhe o site oficial para informações sobre a próxima edição.";
+                    return null;
+                }
+            }
+
+            function atualizarDisplay(distance) {
+                if (distance === null) {
+                    daysEl.textContent = '--';
+                    hoursEl.textContent = '--';
+                    minutesEl.textContent = '--';
+                    secondsEl.textContent = '--';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                daysEl.textContent = String(days).padStart(2, '0');
+                hoursEl.textContent = String(hours).padStart(2, '0');
+                minutesEl.textContent = String(minutes).padStart(2, '0');
+                secondsEl.textContent = String(seconds).padStart(2, '0');
+            }
+
+            const firstTarget = atualizarFase();
+            if (firstTarget !== null) {
+                const now = new Date().getTime();
+                const distance = firstTarget - now;
+                atualizarDisplay(distance > 0 ? distance : 0);
+            } else {
+                atualizarDisplay(null);
+            }
+
+            setInterval(function () {
+                const targetDate = atualizarFase();
+
+                if (targetDate === null) {
+                    atualizarDisplay(null);
+                    return;
+                }
+
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    atualizarDisplay(0);
+                } else {
+                    atualizarDisplay(distance);
+                }
+            }, 1000);
+        }
+
+        
+        // Modal de Acessibilidade
+        function initAccessibilityModal() {
+            const modal = document.getElementById('accessibilityModal');
+            const btn = document.getElementById('accessibilityBtn');
+            const closeBtn = document.getElementById('accessibilityModalClose');
+            const tabs = document.querySelectorAll('.accessibility-tab');
+            const tabContents = document.querySelectorAll('.accessibility-tab-content');
+
+            btn.addEventListener('click', () => {
+                modal.classList.add('show');
+                btn.classList.add('active');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('show');
+                btn.classList.remove('active');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                    btn.classList.remove('active');
+                }
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
+                    document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
+                });
+            });
+
+            // Mapeamento atualizado dos toggles (Substituição realizada aqui)
+            const toggles = {
+                darkModeToggle: 'dark-mode',
+                highContrastToggle: 'high-contrast',
+                letterSpacingToggle: 'letter-spacing',
+                dyslexiaFontToggle: 'dyslexia-font',
+                readingRulerToggle: 'ruler-active', // Classe controlada pelo body
+                hideImagesToggle: 'hide-images', // Substituído readingModeToggle
+                highlightLinksToggle: 'highlight-links',
+                bigCursorToggle: 'big-cursor',
+                visibleFocusToggle: 'visible-focus',
+                reduceMotionToggle: 'reduce-motion'
+            };
+
+            Object.entries(toggles).forEach(([toggleId, className]) => {
+                const toggle = document.getElementById(toggleId);
+                if (toggle) {
+                    toggle.addEventListener('change', function () {
+                        // Aplica classe ao body
+                        document.body.classList.toggle(className, this.checked);
+                        
+                        // Atualiza estado interno se necessário
+                        if(toggleId === 'readingRulerToggle') {
+                            accessibilitySettings.readingRuler = this.checked;
+                        }
+                        if(toggleId === 'hideImagesToggle') {
+                            accessibilitySettings.hideImages = this.checked;
+                        }
+
+                        const option = this.closest('.accessibility-option');
+                        if (option) option.classList.toggle('active', this.checked);
+                        updateButtonState();
+                    });
+                }
+            });
+
+            // Font Size
+            const fontSizeRange = document.getElementById('fontSizeRange');
+            const fontSizeValue = document.getElementById('fontSizeValue');
+            const fontSizes = ['Muito Pequeno', 'Pequeno', 'Normal', 'Grande', 'Muito Grande', 'Gigante'];
+            
+            fontSizeRange.addEventListener('input', function () {
+                const val = parseInt(this.value);
+                fontSizeValue.textContent = fontSizes[val - 1];
+                document.body.classList.remove('font-size-1', 'font-size-2', 'font-size-3', 'font-size-4', 'font-size-5', 'font-size-6');
+                document.body.classList.add(`font-size-${val}`);
+                accessibilitySettings.fontSize = val;
+            });
+
+            // Line Height
+            const lineHeightRange = document.getElementById('lineHeightRange');
+            const lineHeightValue = document.getElementById('lineHeightValue');
+            const lineHeights = ['Compacto', 'Normal', 'Espaçado', 'Muito Espaçado'];
+
+            lineHeightRange.addEventListener('input', function () {
+                const val = parseInt(this.value);
+                lineHeightValue.textContent = lineHeights[val - 1];
+                document.body.classList.remove('line-height-1', 'line-height-2', 'line-height-3', 'line-height-4');
+                document.body.classList.add(`line-height-${val}`);
+                accessibilitySettings.lineHeight = val;
+            });
+
+            const colorBlindOptions = document.querySelectorAll('.colorblind-option');
+            colorBlindOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    colorBlindOptions.forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    const type = this.dataset.type;
+                    document.body.classList.remove('protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia');
+                    if (type !== 'normal') document.body.classList.add(type);
+                    accessibilitySettings.colorBlindType = type;
+                });
+            });
+
+            document.getElementById('saveAccessibility').addEventListener('click', () => {
+                saveAccessibilitySettings();
+                modal.classList.remove('show');
+                btn.classList.remove('active');
+                showToast('Configurações salvas com sucesso!');
+            });
+
+            document.getElementById('resetAccessibility').addEventListener('click', resetAccessibilitySettings);
+        }
+
+        function updateButtonState() {
+            const hasActiveSettings = document.body.classList.contains('dark-mode') || 
+                                      document.body.classList.contains('high-contrast') || 
+                                      document.body.classList.contains('letter-spacing') ||
+                                      document.body.classList.contains('dyslexia-font') ||
+                                      document.body.classList.contains('ruler-active') || 
+                                      document.body.classList.contains('hide-images') || // Atualizado
+                                      false;
+            document.getElementById('accessibilityBtn').classList.toggle('active', hasActiveSettings);
+        }
+
+        function saveAccessibilitySettings() {
+            accessibilitySettings.darkMode = document.getElementById('darkModeToggle').checked;
+            accessibilitySettings.highContrast = document.getElementById('highContrastToggle').checked;
+            accessibilitySettings.letterSpacing = document.getElementById('letterSpacingToggle').checked;
+            accessibilitySettings.dyslexiaFont = document.getElementById('dyslexiaFontToggle').checked;
+            accessibilitySettings.readingRuler = document.getElementById('readingRulerToggle').checked;
+            accessibilitySettings.hideImages = document.getElementById('hideImagesToggle').checked; // Atualizado
+            accessibilitySettings.highlightLinks = document.getElementById('highlightLinksToggle').checked;
+            accessibilitySettings.bigCursor = document.getElementById('bigCursorToggle').checked;
+            accessibilitySettings.visibleFocus = document.getElementById('visibleFocusToggle').checked;
+            accessibilitySettings.reduceMotion = document.getElementById('reduceMotionToggle').checked;
+            
+            localStorage.setItem('accessibilitySettings', JSON.stringify(accessibilitySettings));
+        }
+
+        function loadAccessibilitySettings() {
+            const saved = localStorage.getItem('accessibilitySettings');
+            if (saved) {
+                accessibilitySettings = JSON.parse(saved);
+
+                // Aplicar classes (Atualizadas)
+                document.body.classList.toggle('dark-mode', accessibilitySettings.darkMode);
+                document.body.classList.toggle('high-contrast', accessibilitySettings.highContrast);
+                document.body.classList.toggle('letter-spacing', accessibilitySettings.letterSpacing);
+                document.body.classList.toggle('dyslexia-font', accessibilitySettings.dyslexiaFont);
+                document.body.classList.toggle('ruler-active', accessibilitySettings.readingRuler);
+                document.body.classList.toggle('hide-images', accessibilitySettings.hideImages); // Atualizado
+                document.body.classList.toggle('highlight-links', accessibilitySettings.highlightLinks);
+                document.body.classList.toggle('big-cursor', accessibilitySettings.bigCursor);
+                document.body.classList.toggle('visible-focus', accessibilitySettings.visibleFocus);
+                document.body.classList.toggle('reduce-motion', accessibilitySettings.reduceMotion);
+
+                if (accessibilitySettings.colorBlindType !== 'normal') {
+                    document.body.classList.add(accessibilitySettings.colorBlindType);
+                }
+
+                // Atualizar checkboxes (Atualizados)
+                document.getElementById('darkModeToggle').checked = accessibilitySettings.darkMode;
+                document.getElementById('highContrastToggle').checked = accessibilitySettings.highContrast;
+                document.getElementById('letterSpacingToggle').checked = accessibilitySettings.letterSpacing;
+                document.getElementById('dyslexiaFontToggle').checked = accessibilitySettings.dyslexiaFont;
+                document.getElementById('readingRulerToggle').checked = accessibilitySettings.readingRuler;
+                document.getElementById('hideImagesToggle').checked = accessibilitySettings.hideImages; // Atualizado
+                document.getElementById('highlightLinksToggle').checked = accessibilitySettings.highlightLinks;
+                document.getElementById('bigCursorToggle').checked = accessibilitySettings.bigCursor;
+                document.getElementById('visibleFocusToggle').checked = accessibilitySettings.visibleFocus;
+                document.getElementById('reduceMotionToggle').checked = accessibilitySettings.reduceMotion;
+
+                // Atualizar ranges
+                const fontSizeVal = accessibilitySettings.fontSize || 3;
+                document.getElementById('fontSizeRange').value = fontSizeVal;
+                document.getElementById('fontSizeRange').dispatchEvent(new Event('input'));
+
+                const lineHeightVal = accessibilitySettings.lineHeight || 2;
+                document.getElementById('lineHeightRange').value = lineHeightVal;
+                document.getElementById('lineHeightRange').dispatchEvent(new Event('input'));
+
+                // Atualizar UI visual dos cards de opção
+                const toggles = ['darkModeToggle', 'highContrastToggle', 'letterSpacingToggle', 'dyslexiaFontToggle', 'readingRulerToggle', 'hideImagesToggle', 'highlightLinksToggle', 'bigCursorToggle', 'visibleFocusToggle', 'reduceMotionToggle'];
+                toggles.forEach(id => {
+                    const toggle = document.getElementById(id);
+                    if (toggle && toggle.checked) toggle.closest('.accessibility-option')?.classList.add('active');
+                });
+
+                const colorBlindOptions = document.querySelectorAll('.colorblind-option');
+                colorBlindOptions.forEach(option => {
+                    option.classList.toggle('active', option.dataset.type === accessibilitySettings.colorBlindType);
+                });
+
+                updateButtonState();
+            } else {
+                // Inicializar com padrões
+                document.getElementById('fontSizeRange').value = 3;
+                document.getElementById('fontSizeRange').dispatchEvent(new Event('input'));
+                document.getElementById('lineHeightRange').value = 2;
+                document.getElementById('lineHeightRange').dispatchEvent(new Event('input'));
+            }
+        }
+
+        function resetAccessibilitySettings() {
+            // Remove classes antigas e novas
+            document.body.classList.remove('dark-mode', 'high-contrast', 'letter-spacing', 'dyslexia-font', 'ruler-active', 'hide-images', 'highlight-links', 'big-cursor', 'visible-focus', 'reduce-motion', 'protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia', 'font-size-1', 'font-size-2', 'font-size-3', 'font-size-4', 'font-size-5', 'font-size-6', 'line-height-1', 'line-height-2', 'line-height-3', 'line-height-4');
+            
+            document.body.classList.add('font-size-3', 'line-height-2'); 
+
+            // Uncheck novas opções
+            document.getElementById('darkModeToggle').checked = false;
+            document.getElementById('highContrastToggle').checked = false;
+            document.getElementById('letterSpacingToggle').checked = false;
+            document.getElementById('dyslexiaFontToggle').checked = false;
+            document.getElementById('readingRulerToggle').checked = false;
+            document.getElementById('hideImagesToggle').checked = false; // Atualizado
+            document.getElementById('highlightLinksToggle').checked = false;
+            document.getElementById('bigCursorToggle').checked = false;
+            document.getElementById('visibleFocusToggle').checked = false;
+            document.getElementById('reduceMotionToggle').checked = false;
+            
+            document.getElementById('fontSizeRange').value = 3;
+            document.getElementById('lineHeightRange').value = 2;
+            
+            document.getElementById('fontSizeRange').dispatchEvent(new Event('input'));
+            document.getElementById('lineHeightRange').dispatchEvent(new Event('input'));
+
+            document.querySelectorAll('.accessibility-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.colorblind-option').forEach(opt => { opt.classList.toggle('active', opt.dataset.type === 'normal'); });
+
+            localStorage.removeItem('accessibilitySettings');
+            updateButtonState();
+            showToast('Configurações restauradas!');
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+            toast.innerHTML = `<i class="bi bi-check-circle-fill"></i><span class="custom-toast-message">${message}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+
+    <!-- VLibras -->
+    <div vw="true" class="enabled">
+        <div vw-access-button="true" class="active"></div>
+        <div vw-plugin-wrapper="true">
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicas de Estudo - Auxílio Encceja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/dicas.css">
+
+</head>
+<body>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="plataforma.html">
+                <img src="Logo 3.0.png" alt="Logo Auxilio Encceja">
+                Auxílio Encceja
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list"></i>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-3">
+            <a class="btn-voltar" href="javascript:void(0)" onclick="history.back()">
+               <i class="bi bi-arrow-left"></i>
+               <span>Voltar</span>
+            </a>
+         </ul>
+    </div>
+</nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+
+        <div class="page-header">
+            <h1 class="page-title">Dicas de Estudo para o ENCCEJA</h1>
+            <p class="page-subtitle">Prepare-se para o Exame Nacional para Certificação de Competências de Jovens e Adultos</p>
+        </div>
+
+        <!-- Search -->
+        <div class="search-section">
+            <div class="search-wrapper">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" class="search-input" id="search-input" placeholder="Pesquise por dicas ou tópicos..." aria-label="Pesquisar dicas">
+                <button class="search-clear-btn" id="search-clear-btn" aria-label="Limpar busca"><i class="bi bi-x-lg"></i></button>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-section">
+            <div class="filter-tabs" id="filter-tabs">
+                <button class="filter-btn active" data-category="all">
+                    <i class="bi bi-grid-3x3-gap"></i> Todas
+                </button>
+                <button class="filter-btn" data-category="planning">
+                    <i class="bi bi-calendar3"></i> Planejamento
+                </button>
+                <button class="filter-btn" data-category="methods">
+                    <i class="bi bi-brain"></i> Métodos de Estudo
+                </button>
+                <button class="filter-btn" data-category="resources">
+                    <i class="bi bi-folder2-open"></i> Recursos
+                </button>
+                <button class="filter-btn" data-category="exam">
+                    <i class="bi bi-pencil-square"></i> Dicas para a Prova
+                </button>
+                <button class="filter-btn" data-category="mental">
+                    <i class="bi bi-heart"></i> Saúde Mental
+                </button>
+            </div>
+        </div>
+
+        <!-- Timer -->
+        <div class="timer-section">
+            <h3><i class="bi bi-stopwatch"></i> Controle seu Tempo de Estudo</h3>
+            <p class="timer-description">Use a Técnica Pomodoro: 25 minutos de foco + 5 minutos de descanso</p>
+            <div class="timer-display" id="timer">25:00</div>
+            <div class="timer-controls">
+                <button class="timer-btn" id="start-timer"><i class="bi bi-play-fill"></i> Iniciar</button>
+                <button class="timer-btn" id="reset-timer"><i class="bi bi-arrow-clockwise"></i> Reiniciar</button>
+            </div>
+        </div>
+
+        <!-- Tips Content -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="bi bi-lightbulb"></i> Dicas de Estudo</h2>
+                <span class="section-count" id="tips-count">14 dicas disponíveis</span>
+            </div>
+
+            <div class="tips-grid" id="tips-grid">
+
+                <!-- Planejamento 1 -->
+                <div class="tip-card" data-category="planning" data-search="crie um cronograma realista organize seu tempo criando um cronograma de estudos que inclua todas as matérias do encceja distribua os estudos de forma equilibrada e deixe espaço para revisões">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box planning"><i class="bi bi-calendar-check"></i></div>
+                        <span class="card-icon-label">Planejamento</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Crie um Cronograma Realista</div>
+                        <p class="item-text">Organize seu tempo criando um cronograma de estudos que inclua todas as matérias do ENCCEJA. Distribua os estudos de forma equilibrada e deixe espaço para revisões.</p>
+                        <div class="item-tags">
+                            <span class="tag category-planning"><i class="bi bi-tag"></i> Planejamento</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-download"></i><span>Baixar modelo de cronograma</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Planejamento 2 -->
+                <div class="tip-card" data-category="planning" data-search="defina metas diárias estabeleça metas pequenas e alcançáveis para cada dia isso te ajudará a manter o foco e a dar pequenos passos diários em direção ao seu objetivo">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box planning"><i class="bi bi-bullseye"></i></div>
+                        <span class="card-icon-label">Planejamento</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Defina Metas Diárias</div>
+                        <p class="item-text">Estabeleça metas pequenas e alcançáveis para cada dia. Isso te ajudará a manter o foco e a dar pequenos passos diários em direção ao seu objetivo.</p>
+                        <div class="item-tags">
+                            <span class="tag category-planning"><i class="bi bi-tag"></i> Planejamento</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Leia mais sobre metas SMART</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Métodos 1 -->
+                <div class="tip-card" data-category="methods" data-search="técnica pomodoro estude em intervalos de 25 minutos com 5 minutos de descanso após 4 sessões tome um descanso mais longo de 15 a 30 minutos isso mantém sua mente ativa e produtiva">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box methods"><i class="bi bi-stopwatch"></i></div>
+                        <span class="card-icon-label">Métodos de Estudo</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Técnica Pomodoro</div>
+                        <p class="item-text">Estude em intervalos de 25 minutos com 5 minutos de descanso. Após 4 sessões, tome um descanso mais longo de 15-30 minutos. Isso mantém sua mente ativa e produtiva.</p>
+                        <div class="item-tags">
+                            <span class="tag category-methods"><i class="bi bi-tag"></i> Métodos</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Saiba mais sobre a técnica</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Métodos 2 -->
+                <div class="tip-card" data-category="methods" data-search="aprendizado ativo em vez de apenas ler os materiais faça anotações crie mapas mentais explique os conceitos para alguém ou faça perguntas sobre o que você está estudando">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box methods"><i class="bi bi-lightbulb"></i></div>
+                        <span class="card-icon-label">Métodos de Estudo</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Aprendizado Ativo</div>
+                        <p class="item-text">Em vez de apenas ler os materiais, faça anotações, crie mapas mentais, explique os conceitos para alguém ou faça perguntas sobre o que você está estudando.</p>
+                        <div class="item-tags">
+                            <span class="tag category-methods"><i class="bi bi-tag"></i> Métodos</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Veja exemplos de aprendizado ativo</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Métodos 3 -->
+                <div class="tip-card" data-category="methods" data-search="método leituras múltiplas estude o mesmo material várias vezes em dias diferentes a primeira leitura deve ser geral a segunda mais detalhada e as seguintes focadas na memorização e compreensão">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box methods"><i class="bi bi-book-half"></i></div>
+                        <span class="card-icon-label">Métodos de Estudo</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Método Leituras Múltiplas</div>
+                        <p class="item-text">Estude o mesmo material várias vezes em dias diferentes. A primeira leitura deve ser geral, a segunda mais detalhada e as seguintes focadas na memorização e compreensão.</p>
+                        <div class="item-tags">
+                            <span class="tag category-methods"><i class="bi bi-tag"></i> Métodos</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Guia completo do método</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recursos 1 -->
+                <div class="tip-card" data-category="resources" data-search="banco de questões encceja use o banco de questões anteriores do encceja para praticar e se familiarizar com o formato das perguntas e o estilo do exame">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box resources"><i class="bi bi-database"></i></div>
+                        <span class="card-icon-label">Recursos</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Banco de Questões ENCCEJA</div>
+                        <p class="item-text">Use o banco de questões anteriores do ENCCEJA para praticar e se familiarizar com o formato das perguntas e o estilo do exame.</p>
+                        <div class="item-tags">
+                            <span class="tag category-resources"><i class="bi bi-tag"></i> Recursos</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Acesse o banco de questões</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recursos 2 -->
+                <div class="tip-card" data-category="resources" data-search="vídeos expositivos assista a vídeos explicativos sobre os temas do encceja plataformas como youtube têm muitos canais dedicados ao ensino e revisão para o exame">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box resources"><i class="bi bi-play-circle"></i></div>
+                        <span class="card-icon-label">Recursos</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Vídeos Expositivos</div>
+                        <p class="item-text">Assista a vídeos explicativos sobre os temas do ENCCEJA. Plataformas como YouTube têm muitos canais dedicados ao ensino e revisão para o exame.</p>
+                        <div class="item-tags">
+                            <span class="tag category-resources"><i class="bi bi-tag"></i> Recursos</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Lista de canais recomendados</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recursos 3 -->
+                <div class="tip-card" data-category="resources" data-search="estude em grupo formar um grupo de estudos com outros candidatos pode ajudar a esclarecer dúvidas compartilhar conhecimentos e manter a motivação">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box resources"><i class="bi bi-people"></i></div>
+                        <span class="card-icon-label">Recursos</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Estude em Grupo</div>
+                        <p class="item-text">Formar um grupo de estudos com outros candidatos pode ajudar a esclarecer dúvidas, compartilhar conhecimentos e manter a motivação.</p>
+                        <div class="item-tags">
+                            <span class="tag category-resources"><i class="bi bi-tag"></i> Recursos</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Dicas para formar um grupo de estudos</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prova 1 -->
+                <div class="tip-card" data-category="exam" data-search="gerencie seu tempo na prova reserve um tempo estimado para cada seção comece pelas questões que você sabe responder e volte para as difíceis no final não perca muito tempo em uma única questão">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box exam"><i class="bi bi-hourglass-split"></i></div>
+                        <span class="card-icon-label">Dicas para a Prova</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Gerencie seu Tempo</div>
+                        <p class="item-text">Na prova, reserve um tempo estimado para cada seção. Comece pelas questões que você sabe responder e volte para as difíceis no final. Não perca muito tempo em uma única questão.</p>
+                        <div class="item-tags">
+                            <span class="tag category-exam"><i class="bi bi-tag"></i> Prova</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Estratégias de gerenciamento de tempo</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prova 2 -->
+                <div class="tip-card" data-category="exam" data-search="anote o que lembre use folhas em branco para anotar fórmulas dados importantes ou qualquer coisa que você tem dificuldade de lembrar durante a prova">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box exam"><i class="bi bi-pencil"></i></div>
+                        <span class="card-icon-label">Dicas para a Prova</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Anote o Que Lembre</div>
+                        <p class="item-text">Use folhas em branco para anotar fórmulas, dados importantes ou qualquer coisa que você tem dificuldade de lembrar durante a prova.</p>
+                        <div class="item-tags">
+                            <span class="tag category-exam"><i class="bi bi-tag"></i> Prova</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Veja exemplos de anotações úteis</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prova 3 -->
+                <div class="tip-card" data-category="exam" data-search="entenda o enunciado leia atentamente cada enunciado antes de responder sublinhe palavras-chave e certifique-se de que você compreende exatamente o que é solicitado">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box exam"><i class="bi bi-eye"></i></div>
+                        <span class="card-icon-label">Dicas para a Prova</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Entenda o Enunciado</div>
+                        <p class="item-text">Leia atentamente cada enunciado antes de responder. Sublinhe palavras-chave e certifique-se de que você compreende exatamente o que é solicitado.</p>
+                        <div class="item-tags">
+                            <span class="tag category-exam"><i class="bi bi-tag"></i> Prova</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Dicas para entender melhor os enunciados</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saúde Mental 1 -->
+                <div class="tip-card" data-category="mental" data-search="faça pausas regulares estudar o tempo todo não é produtivo faça pausas para se distrair fazer uma caminhada curta ou praticar respiração profunda para recarregar suas energias">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box mental"><i class="bi bi-cup-hot"></i></div>
+                        <span class="card-icon-label">Saúde Mental</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Faça Pausas Regulares</div>
+                        <p class="item-text">Estudar o tempo todo não é produtivo. Faça pausas para se distrair, fazer uma caminhada curta ou praticar respiração profunda para recarregar suas energias.</p>
+                        <div class="item-tags">
+                            <span class="tag category-mental"><i class="bi bi-tag"></i> Saúde Mental</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Exercícios de respiração para foco</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saúde Mental 2 -->
+                <div class="tip-card" data-category="mental" data-search="priorize o sono descanse bem especialmente nos dias que antecedem a prova o sono é crucial para a memória e a capacidade de concentração">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box mental"><i class="bi bi-moon-stars"></i></div>
+                        <span class="card-icon-label">Saúde Mental</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Priorize o Sono</div>
+                        <p class="item-text">Descanse bem, especialmente nos dias que antecedem a prova. O sono é crucial para a memória e a capacidade de concentração.</p>
+                        <div class="item-tags">
+                            <span class="tag category-mental"><i class="bi bi-tag"></i> Saúde Mental</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Dicas para melhorar a qualidade do sono</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saúde Mental 3 -->
+                <div class="tip-card" data-category="mental" data-search="cuidado com a alimentação coma alimentos nutritivos que fornecem energia e nutrientes essenciais para o funcionamento do cérebro evite alimentos excessivamente processados ou açucarados">
+                    <div class="card-icon-header">
+                        <div class="card-icon-box mental"><i class="bi bi-apple"></i></div>
+                        <span class="card-icon-label">Saúde Mental</span>
+                    </div>
+                    <div class="card-body-content">
+                        <div class="item-title">Cuidado com a Alimentação</div>
+                        <p class="item-text">Coma alimentos nutritivos que fornecem energia e nutrientes essenciais para o funcionamento do cérebro. Evite alimentos excessivamente processados ou açucarados.</p>
+                        <div class="item-tags">
+                            <span class="tag category-mental"><i class="bi bi-tag"></i> Saúde Mental</span>
+                        </div>
+                        <div class="card-footer-action">
+                            <a href="#" class="btn-card" onclick="event.stopPropagation();">
+                                <i class="bi bi-box-arrow-up-right"></i><span>Receitas saudáveis para estudantes</span><i class="bi bi-arrow-right arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="empty-state">
+            <i class="bi bi-emoji-frown"></i>
+            <p>Nenhum resultado encontrado.</p>
+            <small>Tente usar termos diferentes ou mais genéricos em sua pesquisa.</small>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><i class="bi bi-mortarboard"></i> Auxílio ENCCEJA</h3>
+                    <ul>
+                        <li><a href="plataforma.html"><i class="bi bi-chevron-right"></i> Home</a></li>
+                        <li><a href="conteudos.html"><i class="bi bi-chevron-right"></i> Conteúdos</a></li>
+                        <li><a href="sobre.html"><i class="bi bi-chevron-right"></i> Sobre Nós</a></li>
+                        <li><a href="contato.html"><i class="bi bi-chevron-right"></i> Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><i class="bi bi-box-seam"></i> Recursos</h3>
+                    <ul>
+                        <li><a href="guia.html"><i class="bi bi-chevron-right"></i> Guia Completo do Encceja</a></li>
+                        <li><a href="biblioteca.html"><i class="bi bi-chevron-right"></i> Biblioteca Digital</a></li>
+                        <li><a href="links.html"><i class="bi bi-chevron-right"></i> Links Uteis</a></li>
+                        <li><a href="dicas.html"><i class="bi bi-chevron-right"></i> Dicas de Estudo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><i class="bi bi-shield-check"></i> Políticas</h3>
+                    <ul>
+                        <li><a href="termos.html"><i class="bi bi-chevron-right"></i> Termos de Uso</a></li>
+                        <li><a href="politica.html"><i class="bi bi-chevron-right"></i> Política de Privacidade</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Acessibilidade</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Certificação</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><i class="bi bi-share"></i> Redes Sociais</h3>
+                    <ul>
+                        <li><a href="#"><i class="bi bi-youtube"></i> YouTube</a></li>
+                        <li><a href="#"><i class="bi bi-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="bi bi-facebook"></i> Facebook</a></li>        
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="anoAtual"></span> Auxílio Encceja. Todos os Direitos Reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/dicas.js"></script>
+
+</body>
+</html>

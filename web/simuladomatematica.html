@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Matemática ENCCEJA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/simulados-base.css">
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SRNKXZCX54"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SRNKXZCX54');
+</script>
+
+</head>
+<body>
+
+    <!-- Navbar padrão -->
+    <nav class="sim-navbar">
+        <a class="sim-navbar-brand" href="plataforma.html">
+            <img src="Logo 3.0.png" alt="Logo Auxílio Encceja">
+            <span>Auxílio Encceja</span>
+        </a>
+        <button class="sim-navbar-back" onclick="history.back()">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+    </nav>
+
+    <div class="sim-container">
+
+        <!-- Hero banner -->
+        <div class="sim-hero sim-animate">
+            <div class="sim-hero-content">
+                <span class="sim-hero-badge"><i class="bi bi-calculator-fill"></i> Simulado</span>
+                <h1>Simulado de Matemática ENCCEJA</h1>
+                <p>Prepare-se para o Encceja com nosso simulado de matemática. Este teste contém 10 questões que cobrem os principais tópicos do exame. Boa sorte!</p>
+            </div>
+        </div>
+
+        <!-- Card principal -->
+        <div class="sim-card sim-animate sim-animate-delay-1">
+
+            <!-- Regras -->
+            <div class="sim-rules">
+                <h4><i class="bi bi-exclamation-triangle-fill"></i> Regras do Simulado</h4>
+                <ul>
+                    <li>Não é permitido abrir outras abas ou janelas do navegador durante o simulado</li>
+                    <li>O simulado será encerrado automaticamente se você tentar sair desta página</li>
+                    <li>Você terá 60 minutos para concluir o teste</li>
+                    <li>As respostas são salvas automaticamente ao navegar entre as questões</li>
+                </ul>
+            </div>
+
+            <!-- Barra de status -->
+            <div class="sim-status-bar">
+                <div class="sim-timer">
+                    <i class="bi bi-clock-fill"></i>
+                    <span id="timer">00:00</span>
+                </div>
+                <div class="sim-counter">
+                    Questão <span id="current-question">0</span> de <span id="total-questions">10</span>
+                </div>
+            </div>
+
+            <!-- Tela de início -->
+            <div id="start-screen" class="sim-start-screen">
+                <p>Este simulado contém 10 questões de matemática que são comuns no Encceja. Você terá 60 minutos para concluir o teste. Ao final, receberá sua nota e um feedback detalhado.</p>
+                <button class="sim-btn sim-btn-accent sim-btn-block" id="start-btn">
+                    <i class="bi bi-play-fill"></i> Iniciar Simulado
+                </button>
+            </div>
+
+            <!-- Questões -->
+            <div id="question-container" class="sim-question-container">
+
+                <div id="question-1" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">1</span>
+                        <p class="sim-question-text">Uma loja oferece um desconto de 15% sobre o preço de um produto que custa R$ 120,00. Qual será o valor do desconto?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q1" value="A"> A) R$ 12,00</label>
+                        <label class="sim-option"><input type="radio" name="q1" value="B"> B) R$ 18,00</label>
+                        <label class="sim-option"><input type="radio" name="q1" value="C"> C) R$ 20,00</label>
+                        <label class="sim-option"><input type="radio" name="q1" value="D"> D) R$ 22,50</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-1"></div>
+                </div>
+
+                <div id="question-2" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">2</span>
+                        <p class="sim-question-text">Qual é o valor de x na equação: 3x + 7 = 22?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q2" value="A"> A) 5</label>
+                        <label class="sim-option"><input type="radio" name="q2" value="B"> B) 3</label>
+                        <label class="sim-option"><input type="radio" name="q2" value="C"> C) 7</label>
+                        <label class="sim-option"><input type="radio" name="q2" value="D"> D) 9</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-2"></div>
+                </div>
+
+                <div id="question-3" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">3</span>
+                        <p class="sim-question-text">Um retângulo tem lados de 8 cm e 12 cm. Qual é a área desse retângulo?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q3" value="A"> A) 20 cm²</label>
+                        <label class="sim-option"><input type="radio" name="q3" value="B"> B) 32 cm²</label>
+                        <label class="sim-option"><input type="radio" name="q3" value="C"> C) 96 cm²</label>
+                        <label class="sim-option"><input type="radio" name="q3" value="D"> D) 100 cm²</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-3"></div>
+                </div>
+
+                <div id="question-4" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">4</span>
+                        <p class="sim-question-text">Qual é o valor de √(16 + 9)?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q4" value="A"> A) 5</label>
+                        <label class="sim-option"><input type="radio" name="q4" value="B"> B) 7</label>
+                        <label class="sim-option"><input type="radio" name="q4" value="C"> C) 25</label>
+                        <label class="sim-option"><input type="radio" name="q4" value="D"> D) 5,5</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-4"></div>
+                </div>
+
+                <div id="question-5" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">5</span>
+                        <p class="sim-question-text">Em uma urna há 5 bolas vermelhas, 3 bolas azuis e 2 bolas amarelas. Qual é a probabilidade de sacar uma bola azul?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q5" value="A"> A) 3/10</label>
+                        <label class="sim-option"><input type="radio" name="q5" value="B"> B) 1/3</label>
+                        <label class="sim-option"><input type="radio" name="q5" value="C"> C) 2/5</label>
+                        <label class="sim-option"><input type="radio" name="q5" value="D"> D) 3/5</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-5"></div>
+                </div>
+
+                <div id="question-6" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">6</span>
+                        <p class="sim-question-text">Qual é o valor de 23 × 5 + 12 ÷ 3?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q6" value="A"> A) 120</label>
+                        <label class="sim-option"><input type="radio" name="q6" value="B"> B) 115</label>
+                        <label class="sim-option"><input type="radio" name="q6" value="C"> C) 125</label>
+                        <label class="sim-option"><input type="radio" name="q6" value="D"> D) 130</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-6"></div>
+                </div>
+
+                <div id="question-7" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">7</span>
+                        <p class="sim-question-text">Um carro percorre 300 km em 4 horas. Qual é a velocidade média do carro?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q7" value="A"> A) 75 km/h</label>
+                        <label class="sim-option"><input type="radio" name="q7" value="B"> B) 80 km/h</label>
+                        <label class="sim-option"><input type="radio" name="q7" value="C"> C) 85 km/h</label>
+                        <label class="sim-option"><input type="radio" name="q7" value="D"> D) 90 km/h</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-7"></div>
+                </div>
+
+                <div id="question-8" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">8</span>
+                        <p class="sim-question-text">Qual é o valor de x no sistema de equações: 2x + y = 8 e x - y = 1?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q8" value="A"> A) 1</label>
+                        <label class="sim-option"><input type="radio" name="q8" value="B"> B) 2</label>
+                        <label class="sim-option"><input type="radio" name="q8" value="C"> C) 3</label>
+                        <label class="sim-option"><input type="radio" name="q8" value="D"> D) 4</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-8"></div>
+                </div>
+
+                <div id="question-9" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">9</span>
+                        <p class="sim-question-text">Qual é a soma dos ângulos internos de um triângulo?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q9" value="A"> A) 90°</label>
+                        <label class="sim-option"><input type="radio" name="q9" value="B"> B) 180°</label>
+                        <label class="sim-option"><input type="radio" name="q9" value="C"> C) 270°</label>
+                        <label class="sim-option"><input type="radio" name="q9" value="D"> D) 360°</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-9"></div>
+                </div>
+
+                <div id="question-10" class="sim-question">
+                    <div class="sim-question-header">
+                        <span class="sim-question-number">10</span>
+                        <p class="sim-question-text">Qual é o valor de 2³ + 4²?</p>
+                    </div>
+                    <div class="sim-options">
+                        <label class="sim-option"><input type="radio" name="q10" value="A"> A) 12</label>
+                        <label class="sim-option"><input type="radio" name="q10" value="B"> B) 20</label>
+                        <label class="sim-option"><input type="radio" name="q10" value="C"> C) 24</label>
+                        <label class="sim-option"><input type="radio" name="q10" value="D"> D) 32</label>
+                    </div>
+                    <div class="sim-feedback" id="feedback-10"></div>
+                </div>
+
+                <div class="sim-nav-buttons">
+                    <button id="prev-btn" class="sim-btn sim-btn-outline" disabled>
+                        <i class="bi bi-arrow-left"></i> Questão Anterior
+                    </button>
+                    <button id="next-btn" class="sim-btn sim-btn-primary">
+                        Próxima Questão <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resultado -->
+            <div id="result-container" class="sim-result">
+                <div class="sim-result-icon">🎉</div>
+                <h2>Resultado do Simulado</h2>
+                <div class="sim-result-score" id="score-display">0/10</div>
+                <p class="sim-result-msg">Veja como você se saiu e onde pode melhorar.</p>
+                <button class="sim-btn sim-btn-primary" id="retry-btn">
+                    <i class="bi bi-arrow-counterclockwise"></i> Tentar Novamente
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal de aviso -->
+    <div id="warning-modal" class="sim-warning-overlay">
+        <div class="sim-warning-box">
+            <h3><i class="bi bi-exclamation-triangle-fill"></i> Aviso Importante</h3>
+            <p id="warning-message">Você tentou sair da página do simulado. Esta ação não é permitida e o simulado será encerrado automaticamente.</p>
+            <button class="sim-btn sim-btn-primary" id="close-warning">OK</button>
+        </div>
+    </div>
+
+    <script src="JS/simuladomatematica.js"></script>
+
+</body>
+</html>

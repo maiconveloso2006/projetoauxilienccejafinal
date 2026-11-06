@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostilas para ENCCEJA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/apostilas-base.css">
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SRNKXZCX54"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SRNKXZCX54');
+</script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="ap-navbar">
+        <a class="ap-navbar-brand" href="plataforma.html">
+            <img src="Logo 3.0.png" alt="Logo Auxílio Encceja">
+            <span>Auxílio Encceja</span>
+        </a>
+        <div class="ap-navlinks"><a href="#matematica">Matemática</a><a href="#portugues">Português</a><a href="#ciencias">Ciências</a><a href="#historia">História</a><a href="#geografia">Geografia</a><a href="#contato">Contato</a></div>
+        <button class="ap-navbar-back" onclick="goBack()">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+    </nav>
+
+    <div class="ap-container">
+
+        <!-- Hero -->
+        <div class="ap-hero ap-animate">
+            <div class="ap-hero-content">
+                <span class="ap-hero-badge"><i class="bi bi-journal-bookmark-fill"></i> Apostilas</span>
+                <h1>Apostilas do Ensino Fundamental</h1>
+                <p>Acesse nossas apostilas gratuitas para o Ensino Fundamental e prepare-se para o Exame Nacional para Certificação de Competências de Jovens e Adultos.</p>
+                <div class="ap-hero-actions">
+                    <a href="#apostilas" class="ap-btn ap-btn-light">Ver Apostilas</a>
+                    <a href="#contato" class="ap-btn ap-btn-ghost">Fale Conosco</a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="ap-chips" aria-label="Matérias"><a class="ap-chip" href="#matematica">Matemática</a><a class="ap-chip" href="#portugues">Português</a><a class="ap-chip" href="#ciencias">Ciências</a><a class="ap-chip" href="#historia">História</a><a class="ap-chip" href="#geografia">Geografia</a><a class="ap-chip" href="#contato">Contato</a></nav>
+
+        <!-- Apostilas -->
+        <section id="apostilas" class="ap-section">
+            <h2 class="ap-title"><i class="bi bi-journal-text"></i> Nossas Apostilas</h2>
+            <div id="matematica" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-calculator-fill"></i> Matemática</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-calculator"></i></span>
+                            <h3>Aritmética Básica</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos da aritmética para o ENCCEJA, incluindo números inteiros, frações e operações básicas.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Números inteiros e suas operações</span></li><li><i class="bi bi-check-circle-fill"></i><span>Frações e suas operações</span></li><li><i class="bi bi-check-circle-fill"></i><span>Decimais e porcentagens</span></li><li><i class="bi bi-check-circle-fill"></i><span>Razões e proporções</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Matemática', 'Aritmética Básica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Matemática', 'Aritmética Básica')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-pentagon"></i></span>
+                            <h3>Geometria Plana</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Conceitos de geometria plana para o ENCCEJA, incluindo polígonos, círculos e cálculo de áreas.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Polígonos e suas propriedades</span></li><li><i class="bi bi-check-circle-fill"></i><span>Círculos e suas relações</span></li><li><i class="bi bi-check-circle-fill"></i><span>Cálculo de áreas e perímetros</span></li><li><i class="bi bi-check-circle-fill"></i><span>Teorema de Pitágoras</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Matemática', 'Geometria Plana')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Matemática', 'Geometria Plana')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-graph-up"></i></span>
+                            <h3>Estatística e Probabilidade</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos de estatística e probabilidade para o ENCCEJA, com foco na análise de dados.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Coleta e organização de dados</span></li><li><i class="bi bi-check-circle-fill"></i><span>Gráficos e tabelas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Medidas de centralidade</span></li><li><i class="bi bi-check-circle-fill"></i><span>Conceitos básicos de probabilidade</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Matemática', 'Estatística e Probabilidade')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Matemática', 'Estatística e Probabilidade')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="portugues" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-book-fill"></i> Português</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-journal-text"></i></span>
+                            <h3>Gramática Básica</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos da gramática para o ENCCEJA, incluindo fonética, morfologia e sintaxe.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Fonética e fonologia</span></li><li><i class="bi bi-check-circle-fill"></i><span>Classes de palavras</span></li><li><i class="bi bi-check-circle-fill"></i><span>Concordância verbal e nominal</span></li><li><i class="bi bi-check-circle-fill"></i><span>Regência verbal e nominal</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Português', 'Gramática Básica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Português', 'Gramática Básica')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-book"></i></span>
+                            <h3>Literatura Brasileira</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Principais movimentos literários e autores brasileiros para o ENCCEJA, com foco na compreensão dos contextos históricos e culturais.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Período colonial</span></li><li><i class="bi bi-check-circle-fill"></i><span>Romantismo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Realismo e Naturalismo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Modernismo</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Português', 'Literatura Brasileira')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Português', 'Literatura Brasileira')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-pencil-square"></i></span>
+                            <h3>Redação e Texto Argumentativo</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Técnicas e estratégias para elaborar textos argumentativos para o ENCCEJA.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Tipos de texto</span></li><li><i class="bi bi-check-circle-fill"></i><span>Estrutura do texto argumentativo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Argumentação e persuasão</span></li><li><i class="bi bi-check-circle-fill"></i><span>Revisão e correção</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Português', 'Redação e Texto Argumentativo')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Português', 'Redação e Texto Argumentativo')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="ciencias" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-virus"></i> Ciências</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-flask"></i></span>
+                            <h3>Biologia Básica</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos de biologia para o ENCCEJA, com foco nos sistemas vivos.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Células e tecidos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Sistema digestivo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Sistema circulatório</span></li><li><i class="bi bi-check-circle-fill"></i><span>Reprodução e desenvolvimento</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Ciências', 'Biologia Básica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Ciências', 'Biologia Básica')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-atom"></i></span>
+                            <h3>Física e Química</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos de física e química para o ENCCEJA, com foco nos conceitos básicos.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Leis de Newton</span></li><li><i class="bi bi-check-circle-fill"></i><span>Energia e transformações</span></li><li><i class="bi bi-check-circle-fill"></i><span>Estados da matéria</span></li><li><i class="bi bi-check-circle-fill"></i><span>Reações químicas</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Ciências', 'Física e Química')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Ciências', 'Física e Química')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-tree"></i></span>
+                            <h3>Ecologia e Meio Ambiente</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos de ecologia e preservação ambiental para o ENCCEJA.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Ecossistemas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Ciclos biogeoquímicos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Biodiversidade</span></li><li><i class="bi bi-check-circle-fill"></i><span>Poluição e sustentabilidade</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Ciências', 'Ecologia e Meio Ambiente')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Ciências', 'Ecologia e Meio Ambiente')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="historia" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-hourglass-split"></i> História</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-clock-history"></i></span>
+                            <h3>História Antiga e Medieval</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Principais civilizações e períodos da história antiga e medieval para o ENCCEJA.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Civilizações mesopotâmicas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Egito antigo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Grécia antiga</span></li><li><i class="bi bi-check-circle-fill"></i><span>Império Romano</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('História', 'História Antiga e Medieval')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('História', 'História Antiga e Medieval')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-globe-americas"></i></span>
+                            <h3>Idade Moderna e Contemporânea</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Principais eventos e movimentos da Idade Moderna e Contemporânea para o ENCCEJA.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Descobrimento da América</span></li><li><i class="bi bi-check-circle-fill"></i><span>Revoluções burguesas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Guerras mundiais</span></li><li><i class="bi bi-check-circle-fill"></i><span>Guerra Fria</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('História', 'Idade Moderna e Contemporânea')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('História', 'Idade Moderna e Contemporânea')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-building"></i></span>
+                            <h3>História do Brasil</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Principais períodos e eventos da história do Brasil para o ENCCEJA.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Período colonial</span></li><li><i class="bi bi-check-circle-fill"></i><span>Império</span></li><li><i class="bi bi-check-circle-fill"></i><span>República Velha</span></li><li><i class="bi bi-check-circle-fill"></i><span>Ditadura militar</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('História', 'História do Brasil')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('História', 'História do Brasil')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="geografia" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-globe-americas"></i> Geografia</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-map"></i></span>
+                            <h3>Geografia Física</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos de geografia física para o ENCCEJA, com foco nos processos naturais.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Formações geológicas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Climas do mundo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Hidrografia</span></li><li><i class="bi bi-check-circle-fill"></i><span>Populações e densidades</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Geografia', 'Geografia Física')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Geografia', 'Geografia Física')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-buildings"></i></span>
+                            <h3>Geografia Humana</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos de geografia humana para o ENCCEJA, com foco nos processos sociais.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Urbanização</span></li><li><i class="bi bi-check-circle-fill"></i><span>Agricultura</span></li><li><i class="bi bi-check-circle-fill"></i><span>Indústria</span></li><li><i class="bi bi-check-circle-fill"></i><span>Transporte e comunicação</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Geografia', 'Geografia Humana')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Geografia', 'Geografia Humana')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-geo-alt"></i></span>
+                            <h3>Regiões Geográficas</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Principais regiões geográficas do Brasil e do mundo para o ENCCEJA.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Regiões do Brasil</span></li><li><i class="bi bi-check-circle-fill"></i><span>América Latina</span></li><li><i class="bi bi-check-circle-fill"></i><span>Europa</span></li><li><i class="bi bi-check-circle-fill"></i><span>Ásia</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Geografia', 'Regiões Geográficas')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Geografia', 'Regiões Geográficas')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre -->
+        <section id="sobre" class="ap-section">
+            <div class="ap-card ap-about">
+                <div>
+                    <h2 class="ap-title">Sobre Nossas Apostilas</h2>
+                    <p>As apostilas de matemática para o ENCCEJA foram desenvolvidas por especialistas em educação com foco no conteúdo programático do exame. Cada apostila foi cuidadosamente estruturada para proporcionar uma aprendizagem eficaz e direta.</p>
+                    <p>As apostilas contêm:</p>
+                    <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Explicações claras e concisas dos conceitos matemáticos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Exemplos práticos e resolvidos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Exercícios para fixação do conteúdo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Dicas e estratégias para resolver as questões do ENCCEJA</span></li></ul>
+                    <p>Nossa metodologia é baseada na experiência de professores que já atuaram como corretores e elaboradores de questões para o ENCCEJA, garantindo que o conteúdo esteja alinhado com o que realmente cai na prova.</p>
+                </div>
+                <div class="ap-features">
+                    <h3>Por que escolher nossas apostilas?</h3>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-collection-fill"></i></span><div><h4>Conteúdo Completo</h4><p>Cobrimos todos os tópicos das matérias que podem ser cobrados no ENCCEJA.</p></div></div>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-diagram-3-fill"></i></span><div><h4>Metodologia Eficaz</h4><p>Organização do conteúdo que facilita a absorção dos conceitos de cada matéria.</p></div></div>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-clipboard-check-fill"></i></span><div><h4>Preparação para a Prova</h4><p>Foco nos tipos de questões e formatos que realmente cai na prova do ENCCEJA.</p></div></div>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-arrow-repeat"></i></span><div><h4>Atualização Constante</h4><p>Nossas apostilas são atualizadas regularmente para acompanhar as mudanças no formato do ENCCEJA.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="ap-section">
+            <div class="ap-card ap-contact">
+                <h2 class="ap-title"><i class="bi bi-envelope-fill"></i> Fale Conosco</h2>
+                <form id="contactForm" class="ap-form">
+                    <div class="ap-field"><label for="name">Nome</label><input type="text" id="name" required></div>
+                    <div class="ap-field"><label for="email">E-mail</label><input type="email" id="email" required></div>
+                    <div class="ap-field ap-full"><label for="subject">Assunto</label><input type="text" id="subject" required></div>
+                    <div class="ap-field ap-full"><label for="message">Mensagem</label><textarea id="message" rows="4" required></textarea></div>
+                    <div class="ap-full ap-center">
+                        <button type="submit" class="ap-btn ap-btn-accent"><i class="bi bi-send-fill"></i> Enviar Mensagem</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toasts -->
+    <div class="toast-container"></div>
+
+    <!-- Modal de visualização -->
+    <div id="apostilaModal" class="ap-warning-overlay" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+        <div class="ap-warning-box ap-modal">
+            <div class="ap-modal-head">
+                <h3 id="previewTitle">Título da Apostila</h3>
+                <button type="button" class="ap-modal-x" data-close aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="ap-modal-body">
+                <div class="preview-content" id="previewContent"></div>
+                <p class="ap-note">Esta é uma visualização parcial da apostila. Baixe a versão completa para acessar todo o conteúdo.</p>
+            </div>
+            <div class="ap-modal-foot">
+                <button type="button" class="ap-btn ap-btn-outline" data-close>Fechar</button>
+                <button type="button" class="ap-btn ap-btn-primary" id="downloadFromModal"><i class="bi bi-download"></i> Baixar Apostila</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/apostilas-ui.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/contact-form-api.js"></script>
+    <script src="JS/apostilafundamental.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostilas de Geografia para ENCCEJA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/apostilas-base.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SRNKXZCX54"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SRNKXZCX54');
+    </script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="ap-navbar">
+        <a class="ap-navbar-brand" href="plataforma.html">
+            <img src="Logo 3.0.png" alt="Logo Auxílio Encceja">
+            <span>Auxílio Encceja</span>
+        </a>
+        <button class="ap-navbar-back" onclick="goBack()">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+    </nav>
+
+    <div class="ap-container">
+
+        <!-- Hero -->
+        <div class="ap-hero ap-animate">
+            <div class="ap-hero-content">
+                <span class="ap-hero-badge"><i class="bi bi-journal-bookmark-fill"></i> Apostilas de Geografia</span>
+                <h1>Preparação para o ENCCEJA</h1>
+                <p>Material completo do Ensino Fundamental: domine o espaço geográfico, cartografia e território brasileiro.</p>
+                <div class="ap-hero-actions">
+                    <a href="#apostilas" class="ap-btn ap-btn-light">Ver Apostilas</a>
+                    <a href="#contato" class="ap-btn ap-btn-ghost">Fale Conosco</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Apostilas -->
+        <section id="apostilas" class="ap-section">
+            <h2 class="ap-title"><i class="bi bi-journal-text"></i> Apostilas de Geografia</h2>
+            <div class="ap-grid">
+                <article class="ap-card ap-animate">
+                    <header class="ap-card-header">
+                        <span class="ap-card-icon"><i class="bi bi-map"></i></span>
+                        <h3>Cartografia Básica</h3>
+                    </header>
+                    <div class="ap-card-body">
+                        <p>Aprenda a ler e interpretar mapas, fundamentais para todas as questões de geografia.</p>
+                        <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Leitura de mapas e legendas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Coordenadas geográficas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Escalas e projeções</span></li><li><i class="bi bi-check-circle-fill"></i><span>Fusos horários e orientação</span></li></ul>
+                        <div class="ap-card-actions">
+                            <button class="ap-btn ap-btn-outline" onclick="showPreview('Cartografia Básica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                            <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Cartografia Básica')"><i class="bi bi-download"></i> Baixar</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="ap-card ap-animate">
+                    <header class="ap-card-header">
+                        <span class="ap-card-icon"><i class="bi bi-mountain"></i></span>
+                        <h3>Geografia Física</h3>
+                    </header>
+                    <div class="ap-card-body">
+                        <p>Entenda a formação da Terra, os climas, relevos e as águas do planeta.</p>
+                        <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Estrutura interna da Terra</span></li><li><i class="bi bi-check-circle-fill"></i><span>Tipos de relevo e rochas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Climas e vegetação mundial</span></li><li><i class="bi bi-check-circle-fill"></i><span>Hidrografia e bacias hidrográficas</span></li></ul>
+                        <div class="ap-card-actions">
+                            <button class="ap-btn ap-btn-outline" onclick="showPreview('Geografia Física')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                            <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Geografia Física')"><i class="bi bi-download"></i> Baixar</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="ap-card ap-animate">
+                    <header class="ap-card-header">
+                        <span class="ap-card-icon"><i class="bi bi-people"></i></span>
+                        <h3>Geografia Humana</h3>
+                    </header>
+                    <div class="ap-card-body">
+                        <p>Estudo da população, sua distribuição, dinâmicas e formação das cidades.</p>
+                        <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Crescimento e densidade demográfica</span></li><li><i class="bi bi-check-circle-fill"></i><span>Migrações e fluxos populacionais</span></li><li><i class="bi bi-check-circle-fill"></i><span>Urbanização e problemas urbanos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Indústria e espaço geográfico</span></li></ul>
+                        <div class="ap-card-actions">
+                            <button class="ap-btn ap-btn-outline" onclick="showPreview('Geografia Humana')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                            <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Geografia Humana')"><i class="bi bi-download"></i> Baixar</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="ap-card ap-animate">
+                    <header class="ap-card-header">
+                        <span class="ap-card-icon"><i class="bi bi-flag-fill"></i></span>
+                        <h3>Geografia do Brasil</h3>
+                    </header>
+                    <div class="ap-card-body">
+                        <p>Um mergulho no território nacional, regiões, economia e sociedade brasileira.</p>
+                        <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Domínios morfoclimáticos</span></li><li><i class="bi bi-check-circle-fill"></i><span>As regiões brasileiras e suas características</span></li><li><i class="bi bi-check-circle-fill"></i><span>Economia: agropecuária, indústria e serviços</span></li><li><i class="bi bi-check-circle-fill"></i><span>Desigualdades regionais e sociais</span></li></ul>
+                        <div class="ap-card-actions">
+                            <button class="ap-btn ap-btn-outline" onclick="showPreview('Geografia do Brasil')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                            <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Geografia do Brasil')"><i class="bi bi-download"></i> Baixar</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="ap-card ap-animate">
+                    <header class="ap-card-header">
+                        <span class="ap-card-icon"><i class="bi bi-globe-americas"></i></span>
+                        <h3>Globalização</h3>
+                    </header>
+                    <div class="ap-card-body">
+                        <p>Entenda as relações entre países, blocos econômicos e a geopolítica atual.</p>
+                        <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>O mundo globalizado</span></li><li><i class="bi bi-check-circle-fill"></i><span>Blocos econômicos (Mercosul, UE, etc.)</span></li><li><i class="bi bi-check-circle-fill"></i><span>Conflitos e fronteiras internacionais</span></li><li><i class="bi bi-check-circle-fill"></i><span>Fontes de energia e economia global</span></li></ul>
+                        <div class="ap-card-actions">
+                            <button class="ap-btn ap-btn-outline" onclick="showPreview('Globalização')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                            <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Globalização')"><i class="bi bi-download"></i> Baixar</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="ap-card ap-animate">
+                    <header class="ap-card-header">
+                        <span class="ap-card-icon"><i class="bi bi-tree"></i></span>
+                        <h3>Ambiente e Sustentabilidade</h3>
+                    </header>
+                    <div class="ap-card-body">
+                        <p>Questões ambientais, preservação e o impacto humano no planeta.</p>
+                        <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Biomas brasileiros e mundiais</span></li><li><i class="bi bi-check-circle-fill"></i><span>Poluição e aquecimento global</span></li><li><i class="bi bi-check-circle-fill"></i><span>Desenvolvimento sustentável</span></li><li><i class="bi bi-check-circle-fill"></i><span>Recursos naturais e gestão ambiental</span></li></ul>
+                        <div class="ap-card-actions">
+                            <button class="ap-btn ap-btn-outline" onclick="showPreview('Ambiente e Sustentabilidade')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                            <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Ambiente e Sustentabilidade')"><i class="bi bi-download"></i> Baixar</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Sobre -->
+        <section id="sobre" class="ap-section">
+            <div class="ap-card ap-about">
+                <div>
+                    <h2 class="ap-title">Sobre Nossas Apostilas</h2>
+                    <p>As apostilas de Geografia para o ENCCEJA foram desenvolvidas por pedagogos e geógrafos, focando especificamente no conteúdo do Ensino Fundamental exigido no exame.</p>
+                    <p>O material foi estruturado para facilitar a leitura de mapas e a compreensão dos fenômenos espaciais.</p>
+                    <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Mapas e ilustrações de alta qualidade</span></li><li><i class="bi bi-check-circle-fill"></i><span>Resumos dos pontos-chave do ENEM e ENCCEJA</span></li><li><i class="bi bi-check-circle-fill"></i><span>Questões comentadas de provas anteriores</span></li><li><i class="bi bi-check-circle-fill"></i><span>Dicas de interpretação de texto e gráficos</span></li></ul>
+                    <p>Nossa abordagem conecta a teoria geográfica com o cotidiano do aluno, tornando o aprendizado mais significativo e prático para a prova.</p>
+                </div>
+                <div class="ap-features">
+                    <h3>Por que estudar Geografia para o ENCCEJA?</h3>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-geo-alt-fill"></i></span><div><h4>Compreensão Espacial</h4><p>Desenvolva a capacidade de localizar e entender fenômenos no espaço.</p></div></div>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-people-fill"></i></span><div><h4>Cidadania Crítica</h4><p>Entenda as relações sociais, econômicas e ambientais ao seu redor.</p></div></div>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-newspaper"></i></span><div><h4>Atualidades</h4><p>Conecte o conteúdo teórico com os fatos atuais do Brasil e do Mundo.</p></div></div>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-star-fill"></i></span><div><h4>Approvação Garantida</h4><p>Foco total nos descritores da matriz de referência do exame.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="ap-section">
+            <div class="ap-card ap-contact">
+                <h2 class="ap-title"><i class="bi bi-envelope-fill"></i> Fale Conosco</h2>
+                <form id="contactForm" class="ap-form">
+                    <div class="ap-field"><label for="name">Nome</label><input type="text" id="name" required></div>
+                    <div class="ap-field"><label for="email">E-mail</label><input type="email" id="email" required></div>
+                    <div class="ap-field ap-full"><label for="subject">Assunto</label><select id="subject" required><option value="" selected disabled>Selecione um assunto</option><option value="duvida">Dúvida sobre conteúdo</option><option value="erro">Erro no material</option><option value="parceria">Parcerias</option><option value="outro">Outro</option></select></div>
+                    <div class="ap-field ap-full"><label for="message">Mensagem</label><textarea id="message" rows="4" required></textarea></div>
+                    <div class="ap-full ap-center">
+                        <button type="submit" class="ap-btn ap-btn-accent"><i class="bi bi-send-fill"></i> Enviar Mensagem</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toasts -->
+    <div class="toast-container"></div>
+
+    <!-- Modal de visualização -->
+    <div id="apostilaModal" class="ap-warning-overlay" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+        <div class="ap-warning-box ap-modal">
+            <div class="ap-modal-head">
+                <h3 id="previewTitle">Título da Apostila</h3>
+                <button type="button" class="ap-modal-x" data-close aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="ap-modal-body">
+                <div class="preview-content" id="previewContent"></div>
+                <p class="ap-note">Esta é uma prévia dos primeiros tópicos. Baixe a versão completa para ter acesso a exercícios e mapas em alta resolução.</p>
+            </div>
+            <div class="ap-modal-foot">
+                <button type="button" class="ap-btn ap-btn-outline" data-close>Fechar</button>
+                <button type="button" class="ap-btn ap-btn-primary" id="downloadFromModal"><i class="bi bi-download"></i> Baixar Apostila Completa</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/apostilas-ui.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/contact-form-api.js"></script>
+    <script src="JS/apostilageografia.js"></script>
+
+</body>
+</html>

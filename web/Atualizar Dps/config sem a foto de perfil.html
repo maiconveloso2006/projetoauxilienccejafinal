@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.title">Configurações - Auxílio Encceja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/config.css">
+    
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="plataforma.html">
+                <img src="Logo 3.0.png" alt="Logo Auxilio Encceja">
+                <span data-i18n="nav.brand">Auxílio Encceja</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    
+                    <!-- Seletor de Idiomas -->
+                    <li class="nav-item dropdown lang-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="lang-btn-content">
+                                <i class="bi bi-translate"></i>
+                                <span class="lang-btn-flag" id="currentLangFlag">🇧🇷</span>
+                                <span class="lang-btn-code" id="currentLangCode">PT</span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item active" href="#" data-lang="pt-BR">
+                                <span class="lang-flag">🇧🇷</span> Português
+                                <i class="bi bi-check-lg lang-check"></i>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="en">
+                                <span class="lang-flag">🇺🇸</span> English
+                                <i class="bi bi-check-lg lang-check"></i>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="es">
+                                <span class="lang-flag">🇪🇸</span> Español
+                                <i class="bi bi-check-lg lang-check"></i>
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="plataforma.html">
+                            <i class="bi bi-house"></i> <span data-i18n="nav.home">Início</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="conteudos.html">
+                            <i class="bi bi-collection"></i> <span data-i18n="nav.contents">Conteúdos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="acompanhamento.html">
+                            <i class="bi bi-graph-up"></i> <span data-i18n="nav.progress">Acompanhamento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="config.html">
+                            <i class="bi bi-gear"></i> <span data-i18n="nav.settings">Configurações</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title" data-i18n="settings.title">Configurações</h1>
+            <p class="page-subtitle" data-i18n="settings.subtitle">Personalize sua experiência na plataforma</p>
+        </div>
+
+        <!-- Settings Layout -->
+        <div class="settings-layout">
+            <!-- Sidebar Tabs -->
+            <div class="settings-tabs" role="tablist">
+                <button class="tab-btn active" data-tab="perfil" role="tab" aria-selected="true">
+                    <i class="bi bi-person-circle"></i>
+                    <span data-i18n="tabs.profile">Perfil</span>
+                </button>
+                <button class="tab-btn" data-tab="aparencia" role="tab" aria-selected="false">
+                    <i class="bi bi-palette"></i>
+                    <span data-i18n="tabs.appearance">Aparência</span>
+                </button>
+                <button class="tab-btn" data-tab="acessibilidade" role="tab" aria-selected="false">
+                    <i class="bi bi-universal-access"></i>
+                    <span data-i18n="tabs.accessibility">Acessibilidade</span>
+                </button>
+                <button class="tab-btn" data-tab="notificacoes" role="tab" aria-selected="false">
+                    <i class="bi bi-bell"></i>
+                    <span data-i18n="tabs.notifications">Notificações</span>
+                </button>
+                <div class="tab-divider"></div>
+                <button class="tab-btn" data-tab="privacidade" role="tab" aria-selected="false">
+                    <i class="bi bi-shield-lock"></i>
+                    <span data-i18n="tabs.privacy">Privacidade</span>
+                </button>
+                <button class="tab-btn" data-tab="conta" role="tab" aria-selected="false">
+                    <i class="bi bi-key"></i>
+                    <span data-i18n="tabs.account">Conta</span>
+                </button>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Tab Perfil -->
+                <div class="settings-panel active" id="panel-perfil" role="tabpanel">
+                    <h2 class="section-title-settings">
+                        <i class="bi bi-person-circle"></i>
+                        <span data-i18n="profile.title">Meu Perfil</span>
+                    </h2>
+                    <p class="section-description" data-i18n="profile.desc">Gerencie suas informações pessoais e como elas aparecem na plataforma.</p>
+
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <div class="profile-avatar-wrapper">
+                            <div class="profile-avatar" id="profileAvatar"> 
+                                <div class="avatar-fallback" id="avatarFallback">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <img id="avatarImage" src="" alt="Foto de perfil" style="display: none;">
+                            </div>
+                            <label class="profile-avatar-edit" for="avatarInput" data-i18n="profile.changePhoto" title="Alterar foto de perfil">
+                                <i class="bi bi-camera"></i>
+                                <span>Alterar</span>
+                            </label>
+                            <button type="button" class="profile-avatar-remove" id="avatarRemoveBtn"
+                                title="Remover foto">
+                                <i class="bi bi-x"></i>
+                            </button>
+                            <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="profileDisplayName">Estudante Encceja</h3>
+                            <p id="profileDisplayEmail">estudante@email.com</p>
+                            <div class="profile-badge">
+                                <i class="bi bi-patch-check-fill"></i>
+                                <span data-i18n="profile.badge">Estudante</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Fields -->
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label class="input-label" data-i18n="profile.fullName">Nome Completo</label>
+                            <input type="text" class="input-field" value="Estudante Encceja"
+                                data-i18n-placeholder="profile.fullNamePlaceholder" placeholder="Seu nome completo">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" data-i18n="profile.nickname">Apelido</label>
+                            <input type="text" class="input-field" value="Estudante"
+                                data-i18n-placeholder="profile.nicknamePlaceholder" placeholder="Como prefere ser chamado">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label class="input-label" data-i18n="profile.email">E-mail</label>
+                            <input type="email" class="input-field" value="estudante@email.com"
+                                data-i18n-placeholder="profile.emailPlaceholder" placeholder="seu@email.com">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" data-i18n="profile.phone">Telefone</label>
+                            <input type="tel" class="input-field" data-i18n-placeholder="profile.phonePlaceholder" placeholder="(00) 00000-0000">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label class="input-label" data-i18n="profile.dob">Data de Nascimento</label>
+                            <input type="date" class="input-field">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" data-i18n="profile.state">Estado</label>
+                            <select class="select-field">
+                                <option value="" data-i18n="profile.selectState">Selecione...</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" onclick="showToast(t('toast.profileSaved'))">
+                            <i class="bi bi-check-lg"></i> <span data-i18n="btn.save">Salvar Alterações</span>
+                        </button>
+                        <button class="btn-secondary-custom">
+                            <i class="bi bi-arrow-counterclockwise"></i> <span data-i18n="btn.cancel">Cancelar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Aparência -->
+                <div class="settings-panel" id="panel-aparencia" role="tabpanel">
+                    <h2 class="section-title-settings">
+                        <i class="bi bi-palette"></i> <span data-i18n="appearance.title">Aparência</span>
+                    </h2>
+                    <p class="section-description" data-i18n="appearance.desc">Personalize a aparência visual da plataforma.</p>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title" data-i18n="appearance.theme">Tema</div>
+                            <div class="setting-description" data-i18n="appearance.themeDesc">Escolha entre o modo claro, escuro ou automático.</div>
+                        </div>
+                        <div class="setting-control">
+                            <select class="select-field" id="themeSelect" onchange="handleThemeChange(this.value)">
+                                <option value="light" data-i18n="theme.light">Claro</option>
+                                <option value="dark" data-i18n="theme.dark">Escuro</option>
+                                <option value="auto" data-i18n="theme.auto">Automático (Sistema)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title" data-i18n="appearance.accentColor">Cor de Destaque</div>
+                            <div class="setting-description" data-i18n="appearance.accentColorDesc">Escolha a cor principal da plataforma.</div>
+                        </div>
+                        <div class="setting-control">
+                            <div class="color-options">
+                                <div class="color-option active"
+                                    style="background: linear-gradient(135deg, #159895, #57c5b6);" data-color="teal"
+                                    data-i18n-title="color.teal" title="Verde-azulado"></div>
+                                <div class="color-option" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);"
+                                    data-color="blue" data-i18n-title="color.blue" title="Azul"></div>
+                                <div class="color-option" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);"
+                                    data-color="purple" data-i18n-title="color.purple" title="Roxo"></div>
+                                <div class="color-option" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"
+                                    data-color="amber" data-i18n-title="color.amber" title="Âmbar"></div>
+                                <div class="color-option" style="background: linear-gradient(135deg, #ef4444, #f87171);"
+                                    data-color="red" data-i18n-title="color.red" title="Vermelho"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title" data-i18n="appearance.cardStyle">Estilo dos Cards</div>
+                            <div class="setting-description" data-i18n="appearance.cardStyleDesc">Define o estilo visual dos cards de conteúdo.</div>
+                        </div>
+                        <div class="setting-control">
+                            <select class="select-field">
+                                <option value="rounded" data-i18n="style.rounded">Arredondado</option>
+                                <option value="square" data-i18n="style.square">Quadrado</option>
+                                <option value="minimal" data-i18n="style.minimal">Minimalista</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title" data-i18n="appearance.animations">Animações</div>
+                            <div class="setting-description" data-i18n="appearance.animationsDesc">Ativa animações e transições suaves na interface.</div>
+                        </div>
+                        <div class="setting-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked id="animationsToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title" data-i18n="appearance.parallax">Efeitos de Paralaxe</div>
+                            <div class="setting-description" data-i18n="appearance.parallaxDesc">Efeito de profundidade ao rolar a página.</div>
+                        </div>
+                        <div class="setting-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="parallaxToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" onclick="showToast(t('toast.appearanceSaved'))">
+                            <i class="bi bi-check-lg"></i> <span data-i18n="btn.savePreferences">Salvar Preferências</span>
+                        </button>
+                        <button class="btn-secondary-custom" onclick="resetAppearance()">
+                            <i class="bi bi-arrow-counterclockwise"></i> <span data-i18n="btn.restoreDefault">Restaurar Padrão</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Acessibilidade -->
+                <div class="settings-panel" id="panel-acessibilidade" role="tabpanel">
+                    <h2 class="section-title-settings">
+                        <i class="bi bi-universal-access"></i> <span data-i18n="accessibility.title">Acessibilidade</span>
+                    </h2>
+                    <p class="section-description" data-i18n="accessibility.desc">Configure opções de acessibilidade para uma melhor experiência.</p>
+
+                    <!-- Visual Settings -->
+                    <div class="notification-group">
+                        <div class="notification-group-title">
+                            <i class="bi bi-eye"></i> <span data-i18n="accessibility.visual">Configurações Visuais</span>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="accessibility.highContrast">Alto Contraste</div>
+                                <div class="setting-description" data-i18n="accessibility.highContrastDesc">Aumenta o contraste entre texto e fundo para melhor legibilidade.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="highContrastToggle" onchange="toggleHighContrast()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="accessibility.monochrome">Modo Monocromático</div>
+                                <div class="setting-description" data-i18n="accessibility.monochromeDesc">Remove todas as cores da tela.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="monochromeToggle" onchange="toggleMonochrome()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="accessibility.invertColors">Inverter Cores</div>
+                                <div class="setting-description" data-i18n="accessibility.invertColorsDesc">Inverte as cores da tela.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="invertColorsToggle" onchange="toggleInvertColors()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text Settings -->
+                    <div class="notification-group">
+                        <div class="notification-group-title">
+                            <i class="bi bi-type"></i> <span data-i18n="accessibility.text">Configurações de Texto</span>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="accessibility.fontSize">Tamanho da Fonte</div>
+                                <div class="setting-description" data-i18n="accessibility.fontSizeDesc">Ajuste o tamanho do texto na plataforma.</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="range-control">
+                                    <input type="range" min="1" max="4" value="2" class="range-slider"
+                                        id="fontSizeRange" onchange="changeFontSize(this.value)">
+                                    <div class="range-label">
+                                        <span data-i18n="accessibility.smaller">Menor</span>
+                                        <span class="range-value" id="fontSizeValue">Normal</span>
+                                        <span data-i18n="accessibility.larger">Maior</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="accessibility.lineHeight">Espaçamento de Linha</div>
+                                <div class="setting-description" data-i18n="accessibility.lineHeightDesc">Ajuste o espaço entre as linhas de texto.</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="range-control">
+                                    <input type="range" min="1" max="3" value="2" class="range-slider"
+                                        id="lineHeightRange" onchange="changeLineHeight(this.value)">
+                                    <div class="range-label">
+                                        <span data-i18n="accessibility.compact">Compacto</span>
+                                        <span class="range-value" id="lineHeightValue">Normal</span>
+                                        <span data-i18n="accessibility.spaced">Espaçado</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Settings -->
+                    <div class="notification-group">
+                        <div class="notification-group-title">
+                            <i class="bi bi-cursor"></i> <span data-i18n="accessibility.navigation">Navegação</span>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="accessibility.bigCursor">Cursor Grande</div>
+                                <div class="setting-description" data-i18n="accessibility.bigCursorDesc">Aumenta o tamanho do cursor do mouse.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="bigCursorToggle" onchange="toggleBigCursor()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="accessibility.highlightLinks">Realçar Links</div>
+                                <div class="setting-description" data-i18n="accessibility.highlightLinksDesc">Destaca todos os links clicáveis na página.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="highlightLinksToggle" onchange="toggleHighlightLinks()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="accessibility.visibleFocus">Foco Visível</div>
+                                <div class="setting-description" data-i18n="accessibility.visibleFocusDesc">Destaca elementos quando navegados pelo teclado.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="visibleFocusToggle" onchange="toggleVisibleFocus()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" onclick="saveAccessibilitySettings()">
+                            <i class="bi bi-check-lg"></i> <span data-i18n="btn.saveSettings">Salvar Configurações</span>
+                        </button>
+                        <button class="btn-secondary-custom" onclick="resetAccessibility()">
+                            <i class="bi bi-arrow-counterclockwise"></i> <span data-i18n="btn.restoreDefaults">Restaurar Padrões</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Notificações -->
+                <div class="settings-panel" id="panel-notificacoes" role="tabpanel">
+                    <h2 class="section-title-settings">
+                        <i class="bi bi-bell"></i> <span data-i18n="notifications.title">Notificações</span>
+                    </h2>
+                    <p class="section-description" data-i18n="notifications.desc">Configure como e quando deseja receber notificações.</p>
+
+                    <div class="notification-group">
+                        <div class="notification-group-title">
+                            <i class="bi bi-envelope"></i> <span data-i18n="notifications.email">Notificações por E-mail</span>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="notifications.weeklySummary">Resumo Semanal</div>
+                                <div class="setting-description" data-i18n="notifications.weeklySummaryDesc">Receba um resumo semanal do seu progresso e novos conteúdos.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="notifications.newContent">Novos Conteúdos</div>
+                                <div class="setting-description" data-i18n="notifications.newContentDesc">Seja notificado quando novos materiais forem adicionados.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="notifications.studyReminders">Lembretes de Estudo</div>
+                                <div class="setting-description" data-i18n="notifications.studyRemindersDesc">Receba lembretes para manter sua rotina de estudos.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notification-group">
+                        <div class="notification-group-title">
+                            <i class="bi bi-device-hdd"></i> <span data-i18n="notifications.browser">Notificações no Navegador</span>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="notifications.allowBrowser">Permitir Notificações</div>
+                                <div class="setting-description" data-i18n="notifications.allowBrowserDesc">Receba notificações push no seu navegador.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="browserNotifications">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title" data-i18n="notifications.sound">Som de Notificação</div>
+                                <div class="setting-description" data-i18n="notifications.soundDesc">Reproduz um som ao receber notificações.</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" onclick="showToast(t('toast.notificationsSaved'))">
+                            <i class="bi bi-check-lg"></i> <span data-i18n="btn.savePreferences">Salvar Preferências</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Privacidade -->
+                <div class="settings-panel" id="panel-privacidade" role="tabpanel">
+                    <h2 class="section-title-settings">
+                        <i class="bi bi-shield-lock"></i> <span data-i18n="privacy.title">Privacidade</span>
+                    </h2>
+                    <p class="section-description" data-i18n="privacy.desc">Controle suas configurações de privacidade e dados.</p>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title" data-i18n="privacy.publicProfile">Perfil Público</div>
+                            <div class="setting-description" data-i18n="privacy.publicProfileDesc">Permitir que outros usuários vejam seu perfil e progresso.</div>
+                        </div>
+                        <div class="setting-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title" data-i18n="privacy.showRanking">Mostrar no Ranking</div>
+                            <div class="setting-description" data-i18n="privacy.showRankingDesc">Aparecer nas tabelas de classificação e ranking.</div>
+                        </div>
+                        <div class="setting-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" onclick="showToast(t('toast.privacySaved'))">
+                            <i class="bi bi-check-lg"></i> <span data-i18n="btn.saveSettings">Salvar Configurações</span>
+                        </button>
+                        <button class="btn-secondary-custom" onclick="window.location.href='politica.html'">
+                            <i class="bi bi-file-text"></i> <span data-i18n="privacy.viewPolicy">Ver Política de Privacidade</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Conta -->
+                <div class="settings-panel" id="panel-conta" role="tabpanel">
+                    <h2 class="section-title-settings">
+                        <i class="bi bi-key"></i> <span data-i18n="account.title">Conta e Segurança</span>
+                    </h2>
+                    <p class="section-description" data-i18n="account.desc">Gerencie sua conta, senha e configurações de segurança.</p>
+
+                    <div class="notification-group">
+                        <div class="notification-group-title">
+                            <i class="bi bi-lock"></i> <span data-i18n="account.changePass">Alterar Senha</span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="input-label" data-i18n="account.currentPass">Senha Atual</label>
+                                <input type="password" class="input-field" data-i18n-placeholder="account.currentPassPlaceholder" placeholder="Digite sua senha atual">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="input-label" data-i18n="account.newPass">Nova Senha</label>
+                                <input type="password" class="input-field" data-i18n-placeholder="account.newPassPlaceholder" placeholder="Digite a nova senha">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label" data-i18n="account.confirmPass">Confirmar Nova Senha</label>
+                                <input type="password" class="input-field" data-i18n-placeholder="account.confirmPassPlaceholder" placeholder="Confirme a nova senha">
+                            </div>
+                        </div>
+
+                        <button class="btn-secondary-custom" onclick="showToast(t('toast.passwordChanged'))">
+                            <i class="bi bi-arrow-repeat"></i> <span data-i18n="account.changePassBtn">Alterar Senha</span>
+                        </button>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="danger-zone">
+                        <div class="danger-zone-title">
+                            <i class="bi bi-exclamation-triangle"></i> <span data-i18n="account.dangerZone">Zona de Perigo</span>
+                        </div>
+                        <p data-i18n="account.dangerZoneDesc">Uma vez que você exclua sua conta, não há como voltar atrás. Por favor, tenha certeza.</p>
+                        <button class="btn-danger-custom" onclick="confirmDeleteAccount()">
+                            <i class="bi bi-trash"></i> <span data-i18n="account.deleteAccount">Excluir Minha Conta</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-links">
+                        <a href="termos.html" data-i18n="footer.terms">Termos de Uso</a>
+                        <a href="politica.html" data-i18n="footer.privacy">Política de Privacidade</a>
+                        <a href="contato.html" data-i18n="footer.contact">Contato</a>
+                        <a href="sobre.html" data-i18n="footer.about">Sobre</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-icons">
+                        <img src="Logo Fatec1.png">
+                        <a href="#" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; <span id="anoAtual"></span> <span data-i18n="nav.brand">Auxílio Encceja</span>. <span data-i18n="footer.rights">Todos os Direitos Reservados.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/config.js"></script>
+
+</body>
+</html>

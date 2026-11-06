@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.title">Central de Conteúdos - Auxílio Encceja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/conteudos.css">
+    <link rel="stylesheet" href="CSS/profile-popover.css">
+
+</head>
+<body>
+
+    <!-- SVG Filters para Daltonismo -->
+    <svg class="svg-filters">
+        <defs>
+            <filter id="protanopia-filter">
+                <feColorMatrix type="matrix" values="0.567,0.433,0,0,0 0.558,0.442,0,0,0 0,0.242,0.758,0,0 0,0,0,1,0" />
+            </filter>
+            <filter id="deuteranopia-filter">
+                <feColorMatrix type="matrix" values="0.625,0.375,0,0,0 0.7,0.3,0,0,0 0,0.3,0.7,0,0 0,0,0,1,0" />
+            </filter>
+            <filter id="tritanopia-filter">
+                <feColorMatrix type="matrix" values="0.95,0.05,0,0,0 0,0.433,0.567,0,0 0,0.475,0.525,0,0 0,0,0,1,0" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Botão de Acessibilidade -->
+    <button class="btn-accessibility" id="accessibilityBtn" aria-label="Abrir configurações de acessibilidade"
+        title="Acessibilidade" data-i18n-attr='{"aria-label": "a11y.open_settings", "title": "a11y.title"}'>
+        <i class="bi bi-universal-access"></i>
+    </button>
+
+    <!-- Modal de Acessibilidade -->
+    <div class="accessibility-modal" id="accessibilityModal" role="dialog" aria-modal="true" aria-labelledby="accessibilityModalTitle">
+        <div class="accessibility-modal-content">
+            <div class="accessibility-modal-header">
+                <h3 class="accessibility-modal-title" id="accessibilityModalTitle">
+                    <i class="bi bi-universal-access"></i>
+                    <span data-i18n="a11y.settings_title">Configurações de Acessibilidade</span>
+                </h3>
+                <button class="accessibility-modal-close" id="accessibilityModalClose" aria-label="Fechar" data-i18n-attr='{"aria-label": "a11y.close"}'>
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+        <div class="accessibility-modal-body">
+
+        <!-- Tabs Navigation -->
+        <div class="accessibility-tabs" role="tablist">
+            <button class="accessibility-tab active" data-tab="visual" role="tab" aria-selected="true" aria-controls="tab-visual">
+                <i class="bi bi-eye"></i>
+                <span data-i18n="a11y.tab_visual">Visual</span>
+            </button>
+            <button class="accessibility-tab" data-tab="content" role="tab" aria-selected="false" aria-controls="tab-content">
+                <i class="bi bi-fonts"></i>
+                <span data-i18n="a11y.tab_content">Conteúdo</span>
+            </button>
+            <button class="accessibility-tab" data-tab="navigation" role="tab" aria-selected="false" aria-controls="tab-navigation">
+                <i class="bi bi-cursor"></i>
+                <span data-i18n="a11y.tab_navigation">Navegação</span>
+            </button>
+            <button class="accessibility-tab" data-tab="colorblind" role="tab" aria-selected="false" aria-controls="tab-colorblind">
+                <i class="bi bi-palette"></i>
+                <span data-i18n="a11y.tab_colorblind">Daltonismo</span>
+            </button>
+        </div>
+
+        <!-- Tab Visual -->
+        <div class="accessibility-tab-content active" id="tab-visual" role="tabpanel">
+            <div class="accessibility-section">
+                <h4 class="accessibility-section-title">
+                    <i class="bi bi-circle-half"></i>
+                    <span data-i18n="a11y.visual_appearance">Aparência Geral</span>
+                </h4>
+            <div class="accessibility-options">
+                <div class="accessibility-option" data-option="dark-mode">
+                    <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                    <div class="accessibility-option-header">
+                        <div class="accessibility-option-icon"><i class="bi bi-moon-stars"></i></div>
+                        <div class="accessibility-option-title" data-i18n="a11y.dark_mode">Modo Escuro</div>
+                    </div>
+            <div class="accessibility-option-description" data-i18n="a11y.dark_mode_desc">Ativa tema escuro para reduzir brilho da tela.</div>
+                <div class="accessibility-toggle">
+                    <label class="accessibility-toggle-switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="accessibility-toggle-slider"></span>
+                    </label>
+                        <span class="accessibility-toggle-label" data-i18n="a11y.activate_dark_mode">Ativar modo escuro</span>
+                    </div>
+                </div>
+            <div class="accessibility-option" data-option="high-contrast">
+                <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                <div class="accessibility-option-header">
+                    <div class="accessibility-option-icon"><i class="bi bi-brightness-high"></i></div>
+                    <div class="accessibility-option-title" data-i18n="a11y.high_contrast">Alto Contraste</div>
+                </div>
+                    <div class="accessibility-option-description" data-i18n="a11y.high_contrast_desc">Aumenta contraste entre texto e fundo.</div>
+                    <div class="accessibility-toggle">
+                        <label class="accessibility-toggle-switch">
+                            <input type="checkbox" id="highContrastToggle">
+                            <span class="accessibility-toggle-slider"></span>
+                        </label>
+                            <span class="accessibility-toggle-label" data-i18n="a11y.activate_high_contrast">Ativar alto contraste</span>
+                        </div>
+                    </div>
+            <div class="accessibility-option" data-option="monochrome">
+                <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                <div class="accessibility-option-header">
+                    <div class="accessibility-option-icon"><i class="bi bi-palette2"></i></div>
+                    <div class="accessibility-option-title" data-i18n="a11y.monochrome">Monocromático</div>
+                </div>
+                    <div class="accessibility-option-description" data-i18n="a11y.monochrome_desc">Remove todas as cores da tela.</div>
+                    <div class="accessibility-toggle">
+                        <label class="accessibility-toggle-switch">
+                            <input type="checkbox" id="monochromeToggle">
+                            <span class="accessibility-toggle-slider"></span>
+                        </label>
+                            <span class="accessibility-toggle-label" data-i18n="a11y.activate_monochrome">Ativar monocromático</span>
+                        </div>
+                    </div>
+            <div class="accessibility-option" data-option="low-saturation">
+                <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                <div class="accessibility-option-header">
+                    <div class="accessibility-option-icon"><i class="bi bi-droplet-half"></i></div>
+                    <div class="accessibility-option-title" data-i18n="a11y.low_saturation">Baixa Saturação</div>
+                </div>
+                    <div class="accessibility-option-description" data-i18n="a11y.low_saturation_desc">Reduz intensidade das cores.</div>
+                    <div class="accessibility-toggle">
+                        <label class="accessibility-toggle-switch">
+                            <input type="checkbox" id="lowSaturationToggle">
+                            <span class="accessibility-toggle-slider"></span>
+                        </label>
+                            <span class="accessibility-toggle-label" data-i18n="a11y.activate_low_saturation">Ativar baixa saturação</span>
+                        </div>
+                    </div>
+            <div class="accessibility-option" data-option="invert-colors">
+                <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                <div class="accessibility-option-header">
+                    <div class="accessibility-option-icon"><i class="bi bi-arrow-repeat"></i></div>
+                    <div class="accessibility-option-title" data-i18n="a11y.invert_colors">Inverter Cores</div>
+                </div>
+                    <div class="accessibility-option-description" data-i18n="a11y.invert_colors_desc">Inverte as cores da tela.</div>
+                    <div class="accessibility-toggle">
+                        <label class="accessibility-toggle-switch">
+                            <input type="checkbox" id="invertColorsToggle">
+                            <span class="accessibility-toggle-slider"></span>
+                        </label>
+                            <span class="accessibility-toggle-label" data-i18n="a11y_activate_invert">Ativar inversão</span>
+                        </div>
+                    </div>
+            <div class="accessibility-option" data-option="reading-mode">
+                <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                <div class="accessibility-option-header">
+                    <div class="accessibility-option-icon"><i class="bi bi-book"></i></div>
+                    <div class="accessibility-option-title" data-i18n="a11y.reading_mode">Modo Leitura</div>
+                </div>
+                    <div class="accessibility-option-description" data-i18n="a11y.reading_mode_desc">Otimiza interface para leitura.</div>
+                    <div class="accessibility-toggle">
+                        <label class="accessibility-toggle-switch">
+                            <input type="checkbox" id="readingModeToggle">
+                            <span class="accessibility-toggle-slider"></span>
+                        </label>
+                            <span class="accessibility-toggle-label" data-i18n="a11y.activate_reading_mode">Ativar modo leitura</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Conteúdo -->
+        <div class="accessibility-tab-content" id="tab-content" role="tabpanel">
+            <div class="accessibility-section">
+                <h4 class="accessibility-section-title">
+                    <i class="bi bi-type"></i>
+                    <span data-i18n="a11y.text_size">Tamanho do Texto</span>
+                </h4>
+            <div class="accessibility-options">
+                <div class="accessibility-option">
+                    <div class="accessibility-option-header">
+                        <div class="accessibility-option-icon"><i class="bi bi-textarea-resize"></i></div>
+                        <div class="accessibility-option-title" data-i18n="a11y.font_size">Tamanho da Fonte</div>
+                    </div>
+            <div class="accessibility-option-description" data-i18n="a11y.font_size_desc">Ajuste o tamanho do texto na página.</div>
+                <div class="accessibility-range-control">
+                    <div class="accessibility-range-label">
+                        <span data-i18n="a11y.smaller">A- (Menor)</span>
+                        <span id="fontSizeValue" data-i18n="a11y.normal">Normal</span>
+                        <span data-i18n="a11y.larger">A+ (Maior)</span>
+                    </div>
+                        <input type="range" min="1" max="4" value="2" class="accessibility-range" id="fontSizeRange">
+                    </div>
+                </div>
+            <div class="accessibility-option">
+                <div class="accessibility-option-header">
+                    <div class="accessibility-option-icon"><i class="bi bi-text-paragraph"></i></div>
+                    <div class="accessibility-option-title" data-i18n="a11y.line_height">Espaçamento de Linha</div>
+                </div>
+            <div class="accessibility-option-description" data-i18n="a11y.line_height_desc">Ajuste o espaço entre linhas.</div>
+                <div class="accessibility-range-control">
+                    <div class="accessibility-range-label">
+                        <span data-i18n="a11y.compact">Compacto</span>
+                        <span id="lineHeightValue" data-i18n="a11y.normal">Normal</span>
+                        <span data-i18n="a11y.spaced">Espaçado</span>
+                    </div>
+                        <input type="range" min="1" max="3" value="2" class="accessibility-range" id="lineHeightRange">
+                     </div>
+                </div>
+            </div>
+        </div>
+            <div class="accessibility-section">
+                <h4 class="accessibility-section-title">
+                    <i class="bi bi-link-45deg"></i>
+                    <span data-i18n="a11y.links_elements">Links e Elements</span>
+                </h4>
+            <div class="accessibility-options">
+                <div class="accessibility-option" data-option="highlight-links">
+                    <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                    <div class="accessibility-option-header">
+                        <div class="accessibility-option-icon"><i class="bi bi-link"></i></div>
+                        <div class="accessibility-option-title" data-i18n="a11y.highlight_links">Realçar Links</div>
+                    </div>
+            <div class="accessibility-option-description" data-i18n="a11y.highlight_links_desc">Destaca todos os links na página.</div>
+                    <div class="accessibility-toggle">
+                        <label class="accessibility-toggle-switch">
+                            <input type="checkbox" id="highlightLinksToggle">
+                            <span class="accessibility-toggle-slider"></span>
+                        </label>
+                            <span class="accessibility-toggle-label" data-i18n="a11y.highlight_links_action">Realçar links</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navegação -->
+        <div class="accessibility-tab-content" id="tab-navigation" role="tabpanel">
+            <div class="accessibility-section">
+                <h4 class="accessibility-section-title">
+                    <i class="bi bi-mouse"></i>
+                    <span data-i18n="a11y.cursor_focus">Cursor e Foco</span>
+                </h4>
+            <div class="accessibility-options">
+                <div class="accessibility-option" data-option="big-cursor">
+                    <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                    <div class="accessibility-option-header">
+                        <div class="accessibility-option-icon"><i class="bi bi-hand-index"></i></div>
+                        <div class="accessibility-option-title" data-i18n="a11y.big_cursor">Cursor Grande</div>
+                    </div>
+            <div class="accessibility-option-description" data-i18n="a11y.big_cursor_desc">Aumenta o tamanho do cursor.</div>
+                <div class="accessibility-toggle">
+                    <label class="accessibility-toggle-switch">
+                        <input type="checkbox" id="bigCursorToggle">
+                        <span class="accessibility-toggle-slider"></span>
+                    </label>
+                        <span class="accessibility-toggle-label" data-i18n="a11y.big_cursor_action">Cursor grande</span>
+                    </div>
+                </div>
+            <div class="accessibility-option" data-option="visible-focus">
+                    <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                    <div class="accessibility-option-header">
+                        <div class="accessibility-option-icon"><i class="bi bi-bullseye"></i></div>
+                        <div class="accessibility-option-title" data-i18n="a11y.visible_focus">Foco Visível</div>
+                    </div>
+                    <div class="accessibility-option-description" data-i18n="a11y.visible_focus_desc">Destaca elementos em foco pelo teclado.</div>
+                    <div class="accessibility-toggle">
+                        <label class="accessibility-toggle-switch">
+                            <input type="checkbox" id="visibleFocusToggle">
+                            <span class="accessibility-toggle-slider"></span>
+                        </label>
+                            <span class="accessibility-toggle-label" data-i18n="a11y.visible_focus_action">Foco visível</span>
+                        </div>
+                     </div>
+                <div class="accessibility-option" data-option="reduce-motion">
+                    <span class="accessibility-status" data-i18n="a11y.status_active">Ativo</span>
+                    <div class="accessibility-option-header">
+                        <div class="accessibility-option-icon"><i class="bi bi-pause-circle"></i></div>
+                        <div class="accessibility-option-title" data-i18n="a11y.reduce_motion">Reduzir Animações</div>
+                    </div>
+                        <div class="accessibility-option-description" data-i18n="a11y.reduce_motion_desc">Desativa animações e transições.</div>
+                        <div class="accessibility-toggle">
+                            <label class="accessibility-toggle-switch">
+                                <input type="checkbox" id="reduceMotionToggle">
+                                <span class="accessibility-toggle-slider"></span>
+                            </label>
+                                <span class="accessibility-toggle-label" data-i18n="a11y.reduce_motion_action">Reduzir animações</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Tab Daltonismo -->
+        <div class="accessibility-tab-content" id="tab-colorblind" role="tabpanel">
+            <div class="accessibility-section">
+                <h4 class="accessibility-section-title">
+                    <i class="bi bi-palette"></i>
+                    <span data-i18n="a11y.colorblind_adjust">Ajustes de Cor para Daltonismo</span>
+                </h4>
+                    <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;" data-i18n="a11y.colorblind_desc">Selecione uma opção para ajustar as cores da página de acordo com seu tipo de visão.</p>
+                        <div class="colorblind-options">
+                            <div class="colorblind-option active" data-type="normal">
+                                <div class="colorblind-preview">
+                                    <span style="background: #e74c3c;"></span>
+                                    <span style="background: #2ecc71;"></span>
+                                    <span style="background: #3498db;"></span>
+                                    <span style="background: #f1c40f;"></span>
+                                </div>
+                                <div class="colorblind-name" data-i18n="a11y.vision_normal">Visão Normal</div>
+                            </div>
+                            <div class="colorblind-option" data-type="protanopia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #8b4513;"></span>
+                                    <span style="background: #228b22;"></span>
+                                    <span style="background: #1e90ff;"></span>
+                                    <span style="background: #ffd700;"></span>
+                                </div>
+                                <div class="colorblind-name" data-i18n="a11y.protanopia">Protanopia</div>
+                            </div>
+                            <div class="colorblind-option" data-type="deuteranopia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #a0522d;"></span>
+                                    <span style="background: #6b8e23;"></span>
+                                    <span style="background: #4682b4;"></span>
+                                    <span style="background: #daa520;"></span>
+                                </div>
+                                <div class="colorblind-name" data-i18n="a11y.deuteranopia">Deuteranopia</div>
+                            </div>
+                            <div class="colorblind-option" data-type="tritanopia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #ff6b6b;"></span>
+                                    <span style="background: #51cf66;"></span>
+                                    <span style="background: #74c0fc;"></span>
+                                    <span style="background: #fcc419;"></span>
+                                </div>
+                                <div class="colorblind-name" data-i18n="a11y.tritanopia">Tritanopia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accessibility-modal-footer">
+                <button class="accessibility-reset-btn" id="resetAccessibility">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <span data-i18n="a11y.restore_defaults">Restaurar Padrões</span>
+                </button>
+                <button class="accessibility-save-btn" id="saveAccessibility">
+                    <i class="bi bi-check-lg"></i>
+                    <span data-i18n="a11y.save_settings">Salvar Configurações</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Modal de Vídeo -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h5 class="video-modal-title" id="videoModalTitle" data-i18n="video.title">Título do Vídeo</h5>
+                <button class="video-modal-close" id="videoModalClose"><i class="bi bi-x"></i></button>
+            </div>
+            <div class="video-wrapper">
+                <iframe id="videoFrame" src="" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="plataforma.html">
+                <img src="Logo 3.0.png" alt="Logo Auxilio Encceja" data-i18n-attr='{"alt": "nav.logo_alt"}'>
+                <span data-i18n="nav.brand">Auxílio Encceja</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    
+                    <!-- Seletor de Idiomas -->
+                    <li class="nav-item dropdown lang-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="lang-btn-content">
+                                <i class="bi bi-translate"></i>
+                                <span class="lang-btn-flag" id="currentLangFlag">🇧🇷</span>
+                                <span class="lang-btn-code" id="currentLangCode">PT</span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item active" href="#" data-lang="pt-BR">
+                                <span class="lang-flag">🇧🇷</span> Português
+                                <i class="bi bi-check-lg lang-check"></i>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="en">
+                                <span class="lang-flag">🇺🇸</span> English
+                                <i class="bi bi-check-lg lang-check"></i>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="es">
+                                <span class="lang-flag">🇪🇸</span> Español
+                                <i class="bi bi-check-lg lang-check"></i>
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="plataforma.html">
+                            <i class="bi bi-house"></i>
+                            <span data-i18n="nav.home">Início</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="conteudos.html">
+                            <i class="bi bi-collection"></i>
+                            <span data-i18n="nav.contents">Conteúdos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="acompanhamento.html">
+                            <i class="bi bi-graph-up"></i>
+                            <span data-i18n="nav.tracking">Acompanhamento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="config.html">
+                            <i class="bi bi-gear"></i>
+                            <span data-i18n="nav.settings">Configurações</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="page-title" data-i18n="content.center_title">Central de Conteúdos</h1>
+            <p class="page-subtitle" data-i18n="content.center_subtitle">Todos os materiais de estudo organizados em um só lugar</p>
+        </div>
+
+        <!-- Filtro de matérias -->
+        <div class="subject-section">
+            <div class="subject-section-label">
+                <i class="bi bi-book"></i> <span data-i18n="content.filter_subject">Filtrar por matéria</span>
+            </div>
+            <div class="subject-tabs" id="subjectTabs">
+                <button class="subject-btn active" data-subject="all">
+                    <i class="bi bi-grid-3x3-gap"></i> <span data-i18n="content.all">Todas</span>
+                </button>
+                <button class="subject-btn" data-subject="matematica">
+                    <span class="dot" style="background:#25717a"></span> 
+                        <span data-i18n="subject.math">Matemática</span> 
+                    <i class="bi bi-chevron-down dropdown-arrow"></i>
+                </button>
+                <button class="subject-btn" data-subject="portugues">
+                    <span class="dot" style="background:#25717a"></span> 
+                        <span data-i18n="subject.portuguese">Português</span> 
+                    <i class="bi bi-chevron-down dropdown-arrow"></i>
+                </button>
+                <button class="subject-btn" data-subject="historia">
+                    <span class="dot" style="background:#25717a"></span> 
+                        <span data-i18n="subject.history">História</span> 
+                    <i class="bi bi-chevron-down dropdown-arrow"></i>
+                </button>
+                <button class="subject-btn" data-subject="geografia"> 
+                    <span class="dot" style="background:#25717a"></span> 
+                        <span data-i18n="subject.geography">Geografia</span> 
+                    <i class="bi bi-chevron-down dropdown-arrow"></i>
+                </button>
+                <button class="subject-btn" data-subject="ciencias">
+                    <span class="dot" style="background:#25717a"></span>
+                        <span data-i18n="subject.science">Ciências</span> 
+                    <i class="bi bi-chevron-down dropdown-arrow"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dropdown -->
+        <div class="subject-dropdown" id="subjectDropdown"></div>
+
+        <!-- Banner de Filtro Ativo -->
+        <div class="selection-banner" id="selectionBanner">
+            <div class="selection-banner-text">
+                <i class="bi bi-funnel-fill"></i>
+                <span data-i18n="content.filtering_by">Filtrando por:</span>
+                <span class="filter-tag materia" id="bannerMateria" style="display:none"></span>
+                <span class="filter-tag tipo" id="bannerTipo" style="display:none"></span>
+            </div>
+            <button class="btn-clear-selection" id="btnClearSelection"><i class="bi bi-x-lg"></i> <span data-i18n="content.clear_filters">Limpar Filtros</span>
+            </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon videos"><i class="bi bi-play-circle"></i></div>
+                <div class="stat-value" id="videoCount">0</div>
+                <div class="stat-label" data-i18n="stats.video_classes">Videoaulas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon apostilas"><i class="bi bi-journal-text"></i></div>
+                <div class="stat-value" id="apostilaCount">0</div>
+                <div class="stat-label" data-i18n="stats.handouts">Apostilas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon exercises"><i class="bi bi-check2-square"></i></div>
+                <div class="stat-value" id="exerciseCount">0</div>
+                <div class="stat-label" data-i18n="stats.exercises">Exercícios</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon simulados"><i class="bi bi-award"></i></div>
+                <div class="stat-value" id="simuladoCount">0</div>
+                <div class="stat-label" data-i18n="stats.mock_exams">Simulados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon total"><i class="bi bi-collection"></i></div>
+                <div class="stat-value" id="totalCount">0</div>
+                <div class="stat-label" data-i18n="stats.total_contents">Total de Conteúdos</div>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="search-section">
+            <div class="search-wrapper">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Buscar conteúdos..."aria-label="Buscar conteúdos" data-i18n-attr='{"placeholder": "search.placeholder", "aria-label": "search.aria_label"}'>
+                <button class="search-clear-btn" id="searchClearBtn" aria-label="Limpar busca" data-i18n-attr='{"aria-label": "search.clear_aria_label"}'><i class="bi bi-x-lg"></i></button>
+            </div>
+        </div>
+
+        <!-- Filter Tabs (tipo) -->
+        <div class="filter-section">
+            <div class="filter-tabs" id="filterTabs">
+                <button class="filter-btn active" data-filter="all" aria-pressed="true">
+                    <i class="bi bi-grid-3x3-gap"></i> <span data-i18n="type.all">Todos</span> <span class="count">0</span>
+                </button>
+                <button class="filter-btn" data-filter="videoaula" aria-pressed="false">
+                    <i class="bi bi-play-circle"></i> <span data-i18n="type.video_classes">Videoaulas</span> <span class="count">0</span>
+                </button>
+                <button class="filter-btn" data-filter="apostila" aria-pressed="false">
+                    <i class="bi bi-journal-text"></i> <span data-i18n="type.handouts">Apostilas</span> <span class="count">0</span>
+                </button>
+                <button class="filter-btn" data-filter="exercicio" aria-pressed="false">
+                    <i class="bi bi-pencil-square"></i> <span data-i18n="type.exercises">Exercícios</span> <span class="count">0</span>
+                </button>
+                <button class="filter-btn" data-filter="simulado" aria-pressed="false">
+                    <i class="bi bi-controller"></i> <span data-i18n="type.mock_exams">Simulados</span> <span class="count">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div id="contentContainer">
+            <div class="content-section" data-type="videoaula">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="bi bi-play-circle"></i> <span data-i18n="type.video_classes">Videoaulas</span></h2><span class="section-count" id="videoSectionCount" data-i18n="content.available_videos">0 videoaulas disponíveis</span>
+                </div>
+                <div class="content-grid" id="videoaulasGrid"></div>
+            </div>
+            <div class="content-section" data-type="apostila">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="bi bi-journal-text"></i> <span data-i18n="type.handouts">Apostilas</span></h2><span class="section-count" id="apostilaSectionCount" data-i18n="content.available_handouts">0 apostilas disponíveis</span>
+                </div>
+                <div class="content-grid" id="apostilasGrid"></div>
+            </div>
+            <div class="content-section" data-type="exercicio">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="bi bi-pencil-square"></i> <span data-i18n="type.exercises">Exercícios</span></h2><span class="section-count" id="exercicioSectionCount" data-i18n="content.available_exercises">0 listas de exercícios</span>
+                </div>
+                <div class="content-grid" id="exerciciosGrid"></div>
+            </div>
+            <div class="content-section" data-type="simulado">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="bi bi-controller"></i> <span data-i18n="type.mock_exams">Simulados</span></h2><span class="section-count" id="simuladoSectionCount" data-i18n="content.available_mock_exams">0 simulados disponíveis</span>
+                </div>
+                <div class="content-grid" id="simuladosGrid"></div>
+            </div>
+        </div>
+        <div id="noResultsMessage" class="empty-state" style="display:none;">
+            <i class="bi bi-emoji-frown"></i>
+            <p data-i18n="content.no_results">Nenhum Resultado Encontrado.</p>
+            <small data-i18n="content.no_results_hint">Tente Buscar por Palavras-Chave Diferentes ou sem Acentos.</small>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-links">
+                        <a href="termos.html" data-i18n="footer.terms">Termos de Uso</a>
+                        <a href="politica.html" data-i18n="footer.privacy">Política de Privacidade</a>
+                        <a href="contato.html" data-i18n="footer.contact">Contato</a>
+                        <a href="sobre.html" data-i18n="footer.about">Sobre</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-icons">
+                        <img src="Logo Fatec1.png">
+                        <a href="#" title="YouTube" data-i18n-attr='{"title": "social.youtube"}'><i class="bi bi-youtube"></i></a>
+                        <a href="#" title="Instagram" data-i18n-attr='{"title": "social.instagram"}'><i class="bi bi-instagram"></i></a>
+                        <a href="#" title="Facebook" data-i18n-attr='{"title": "social.facebook"}'><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">&copy; <span id="anoAtual"></span> <span data-i18n="footer.rights">Auxílio Encceja. Todos os Direitos Reservados.</span></div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/user-settings.js"></script>
+    <script src="JS/profile-popover.js"></script>
+    <script src="JS/conteudos.js"></script>
+
+    <!-- VLibras -->
+    <div vw="true" class="enabled">
+        <div vw-access-button="true" class="active"></div>
+        <div vw-plugin-wrapper="true">
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+</body>
+</html>

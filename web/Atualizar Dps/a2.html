@@ -1,0 +1,2958 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Auxílio Encceja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #34495e;
+            --primary-dark: #344953;
+            --secondary: #57c5b6;
+            --accent: #159895;
+            --bg-light: #f8fafb;
+            --bg-card: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius: 16px;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 100px;
+            color: var(--text-dark);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            background: linear-gradient(135deg, #f0f4f3 0%, #e2e8f0 100%);
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%) !important;
+            color: #e0e0e0 !important;
+            --bg-card: #1e1e2e;
+            --bg-light: #16161e;
+            --text-dark: #e0e0e0;
+            --text-muted: #a0a0b0;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .navbar {
+            background: linear-gradient(135deg, #16162a 0%, #1e1e36 100%) !important;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+        }
+
+        body.dark-mode .navbar-brand {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .navbar-nav .nav-link {
+            color: rgba(224, 224, 224, 0.75) !important;
+        }
+
+        body.dark-mode .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .navbar-nav .nav-link.active {
+            background: linear-gradient(135deg, var(--accent), var(--secondary)) !important;
+            color: white !important;
+        }
+
+        body.dark-mode .page-title {
+            background: linear-gradient(135deg, #e0e0e0, #a0a0b0, #e0e0e0) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+        }
+
+        body.dark-mode .page-subtitle {
+            color: #a0a0b0 !important;
+        }
+
+        body.dark-mode .settings-tabs {
+            background: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        body.dark-mode .tab-btn {
+            color: #c0c0d0 !important;
+        }
+
+        body.dark-mode .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.06) !important;
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent), var(--secondary)) !important;
+            color: #fff !important;
+        }
+
+        body.dark-mode .tab-divider {
+            background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        body.dark-mode .settings-content {
+            background: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        body.dark-mode .settings-panel {
+            background: transparent !important;
+        }
+
+        body.dark-mode .section-title-settings {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .section-description {
+            color: #a0a0b0 !important;
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        body.dark-mode .setting-item {
+            border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        body.dark-mode .setting-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .setting-description {
+            color: #a0a0b0 !important;
+        }
+
+        body.dark-mode .input-field {
+            background-color: #16161e !important;
+            color: #e0e0e0 !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .input-field:focus {
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 4px rgba(21, 152, 149, 0.2) !important;
+        }
+
+        body.dark-mode .input-field::placeholder {
+            color: #707080 !important;
+        }
+
+        body.dark-mode .input-label {
+            color: #c0c0d0 !important;
+        }
+
+        body.dark-mode .select-field {
+            background-color: #16161e !important;
+            color: #e0e0e0 !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .select-field:focus {
+            border-color: var(--accent) !important;
+        }
+
+        body.dark-mode .select-field option {
+            background-color: #16161e !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .range-slider {
+            background: #2a2a3a !important;
+        }
+
+        body.dark-mode .range-label {
+            color: #a0a0b0 !important;
+        }
+
+        body.dark-mode .range-value {
+            color: var(--secondary) !important;
+        }
+
+        body.dark-mode .toggle-slider {
+            background-color: #2a2a3a !important;
+        }
+
+        body.dark-mode .toggle-slider::before {
+            background-color: #c0c0d0 !important;
+        }
+
+        body.dark-mode .notification-group-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .profile-header {
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        body.dark-mode .profile-avatar {
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            background: linear-gradient(135deg, #2a2a3a, var(--accent)) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        body.dark-mode #profileDisplayName {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode #profileDisplayEmail {
+            color: #a0a0b0 !important;
+        }
+
+        body.dark-mode .profile-badge {
+            background: rgba(21, 152, 149, 0.15) !important;
+            color: var(--secondary) !important;
+        }
+
+        body.dark-mode .profile-avatar-edit {
+            background: rgba(0, 0, 0, 0.8) !important;
+        }
+
+        body.dark-mode .profile-avatar-remove {
+            border-color: var(--bg-card) !important;
+        }
+
+        body.dark-mode .btn-secondary-custom {
+            background-color: #2a2a3a !important;
+            color: #e0e0e0 !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .btn-secondary-custom:hover {
+            border-color: var(--accent) !important;
+            background-color: #3a3a4a !important;
+        }
+
+        body.dark-mode .btn-group-settings {
+            border-top-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        body.dark-mode .danger-zone {
+            background: rgba(239, 68, 68, 0.08) !important;
+            border-color: rgba(239, 68, 68, 0.25) !important;
+        }
+
+        body.dark-mode .danger-zone p {
+            color: #a0a0b0 !important;
+        }
+
+        body.dark-mode .custom-toast {
+            background: linear-gradient(135deg, #1e1e36, #2a2a3e) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .footer {
+            background: linear-gradient(135deg, #16162a, #1e1e36) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+        }
+
+        body.dark-mode .footer-links a {
+            color: rgba(224, 224, 224, 0.75) !important;
+        }
+
+        body.dark-mode .footer-links a:hover {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .social-icons a {
+            color: #c0c0d0 !important;
+        }
+
+        body.dark-mode .social-icons a:hover {
+            color: var(--secondary) !important;
+        }
+
+        body.dark-mode .copyright {
+            color: rgba(224, 224, 224, 0.6) !important;
+            border-top-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        body.dark-mode .js-modal-overlay {
+            background: rgba(0, 0, 0, 0.75) !important;
+        }
+
+        body.dark-mode .js-modal-box {
+            background: #1e1e2e !important;
+            color: #e0e0e0 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        body.dark-mode .js-modal-box h3 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .js-modal-box p,
+        body.dark-mode .js-modal-box li {
+            color: #a0a0b0 !important;
+        }
+
+        body.dark-mode .js-modal-box label {
+            color: #c0c0d0 !important;
+        }
+
+        body.dark-mode .js-modal-box input[type="text"],
+        body.dark-mode .js-modal-box input[type="password"],
+        body.dark-mode .js-modal-box input[type="time"],
+        body.dark-mode .js-modal-box input[type="email"] {
+            background: #16161e !important;
+            color: #e0e0e0 !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
+
+        body.dark-mode .js-modal-box input::placeholder {
+            color: #707080 !important;
+        }
+
+        body.dark-mode .js-modal-box ol,
+        body.dark-mode .js-modal-box ul {
+            color: #a0a0b0 !important;
+        }
+
+        body.dark-mode .js-modal-box .js-modal-info-bg {
+            background: #16161e !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        body.dark-mode .js-modal-box .js-modal-qr {
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            background: #1e1e2e !important;
+        }
+
+        body.dark-mode .js-modal-box .js-modal-qr i {
+            color: #707080 !important;
+        }
+
+        body.dark-mode .js-modal-box .js-modal-session-label {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .js-modal-box .js-modal-session-sub {
+            color: #a0a0b0 !important;
+        }
+
+        body.dark-mode .js-modal-box .session-revoke-btn {
+            background: #2a2a3a !important;
+            color: #e0e0e0 !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .js-modal-box .session-revoke-btn:hover {
+            background: #3a3a4a !important;
+        }
+
+        body.dark-mode .js-modal-box .js-modal-history-label {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .js-modal-box .js-modal-history-sub {
+            color: #a0a0b0 !important;
+        }
+
+        body.dark-mode .js-modal-box .js-modal-border-bottom {
+            border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        body.dark-mode .password-strength div:first-child {
+            background: #2a2a3a !important;
+        }
+
+        body.high-contrast {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            --bg-card: #000000;
+            --bg-light: #000000;
+            --text-dark: #ffffff;
+            --text-muted: #e0e0e0;
+            --border-color: #ffffff;
+        }
+
+        body.high-contrast .navbar {
+            background: #000000 !important;
+            border-bottom: 3px solid #ffffff !important;
+            box-shadow: none !important;
+        }
+
+        body.high-contrast .navbar-brand,
+        body.high-contrast .navbar-nav .nav-link {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .navbar-nav .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        body.high-contrast .navbar-nav .nav-link.active {
+            background: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        body.high-contrast .page-title {
+            background: #ffffff !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: #000000 !important;
+        }
+
+        body.high-contrast .page-subtitle {
+            color: #000000 !important;
+        }
+
+        body.high-contrast .settings-tabs {
+            background: #000000 !important;
+            border: 3px solid #ffffff !important;
+            box-shadow: none !important;
+        }
+
+        body.high-contrast .tab-btn {
+            color: #ffffff !important;
+            border: 2px solid transparent;
+        }
+
+        body.high-contrast .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.15) !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .tab-btn.active {
+            background: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        body.high-contrast .tab-divider {
+            background: #ffffff !important;
+        }
+
+        body.high-contrast .settings-content {
+            background: #000000 !important;
+            border: 3px solid #ffffff !important;
+            box-shadow: none !important;
+        }
+
+        body.high-contrast .settings-panel {
+            background: transparent !important;
+        }
+
+        body.high-contrast .section-title-settings {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .section-description {
+            color: #ffffff !important;
+            border-bottom: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .setting-item {
+            border-bottom: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .setting-title {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .setting-description {
+            color: #e0e0e0 !important;
+        }
+
+        body.high-contrast .input-field {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .input-field:focus {
+            border-color: #ffff00 !important;
+            box-shadow: 0 0 0 4px rgba(255, 255, 0, 0.3) !important;
+        }
+
+        body.high-contrast .input-field::placeholder {
+            color: #cccccc !important;
+        }
+
+        body.high-contrast .input-label {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .select-field {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .select-field:focus {
+            border-color: #ffff00 !important;
+        }
+
+        body.high-contrast .select-field option {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .range-slider {
+            background: #ffffff !important;
+        }
+
+        body.high-contrast .range-slider::-webkit-slider-thumb {
+            background: #ffff00 !important;
+            border: 3px solid #000000 !important;
+        }
+
+        body.high-contrast .range-label {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .range-value {
+            color: #ffff00 !important;
+        }
+
+        body.high-contrast .toggle-slider {
+            background-color: #ffffff !important;
+            border: 2px solid #ffffff;
+        }
+
+        body.high-contrast .toggle-slider::before {
+            background-color: #000000 !important;
+        }
+
+        body.high-contrast .toggle-switch input:checked+.toggle-slider {
+            background: #ffff00 !important;
+            border: 2px solid #ffff00;
+        }
+
+        body.high-contrast .toggle-switch input:checked+.toggle-slider::before {
+            background-color: #000000 !important;
+        }
+
+        body.high-contrast .notification-group-title {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .profile-header {
+            border-bottom: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .profile-avatar {
+            background: #ffffff !important;
+            border: 3px solid #ffffff !important;
+            box-shadow: none !important;
+        }
+
+        body.high-contrast .profile-avatar i {
+            color: #000000 !important;
+        }
+
+        body.high-contrast #profileDisplayName {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast #profileDisplayEmail {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .profile-badge {
+            background: #ffff00 !important;
+            color: #000000 !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .profile-avatar-edit {
+            background: #000000 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffffff;
+            border-radius: 0 0 56px 56px;
+        }
+
+        body.high-contrast .profile-avatar-remove {
+            background: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #000000 !important;
+        }
+
+        body.high-contrast .btn-primary-custom {
+            background: #ffffff !important;
+            color: #000000 !important;
+            border: 3px solid #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .btn-primary-custom:hover {
+            background: #ffff00 !important;
+            border-color: #ffff00 !important;
+        }
+
+        body.high-contrast .btn-primary-custom i {
+            color: #000000 !important;
+        }
+
+        body.high-contrast .btn-secondary-custom {
+            background: #000000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .btn-secondary-custom:hover {
+            background: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        body.high-contrast .btn-danger-custom {
+            background: #ff0000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ff0000 !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .btn-danger-custom:hover {
+            background: #ffffff !important;
+            color: #ff0000 !important;
+            border-color: #ffffff !important;
+        }
+
+        body.high-contrast .btn-group-settings {
+            border-top: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .color-option {
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .color-option.active {
+            border-color: #ffff00 !important;
+        }
+
+        body.high-contrast .color-option.active::after {
+            color: #000000 !important;
+        }
+
+        body.high-contrast .danger-zone {
+            background: rgba(255, 0, 0, 0.15) !important;
+            border: 3px solid #ff0000 !important;
+        }
+
+        body.high-contrast .danger-zone-title {
+            color: #ff0000 !important;
+        }
+
+        body.high-contrast .danger-zone p {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .custom-toast {
+            background: #000000 !important;
+            border: 3px solid #ffffff !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .custom-toast i {
+            color: #ffff00 !important;
+        }
+
+        body.high-contrast .footer {
+            background: #000000 !important;
+            border-top: 3px solid #ffffff !important;
+            box-shadow: none !important;
+        }
+
+        body.high-contrast .footer-links a {
+            color: #ffffff !important;
+            text-decoration: underline !important;
+        }
+
+        body.high-contrast .social-icons a {
+            color: #ffffff !important;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.high-contrast .copyright {
+            color: #ffffff !important;
+            border-top: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-overlay {
+            background: rgba(0, 0, 0, 0.9) !important;
+        }
+
+        body.high-contrast .js-modal-box {
+            background: #000000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ffffff !important;
+            box-shadow: none !important;
+        }
+
+        body.high-contrast .js-modal-box h3 {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .js-modal-box p,
+        body.high-contrast .js-modal-box li {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box label {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .js-modal-box input[type="text"],
+        body.high-contrast .js-modal-box input[type="password"],
+        body.high-contrast .js-modal-box input[type="time"],
+        body.high-contrast .js-modal-box input[type="email"] {
+            background: #000000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box input::placeholder {
+            color: #cccccc !important;
+        }
+
+        body.high-contrast .js-modal-box ol,
+        body.high-contrast .js-modal-box ul {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-info-bg {
+            background: #000000 !important;
+            border-color: #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-qr {
+            border-color: #ffffff !important;
+            background: #000000 !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-qr i {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-session-label {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-session-sub {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box .session-revoke-btn {
+            background: #000000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast .js-modal-box .session-revoke-btn:hover {
+            background: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-history-label {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-history-sub {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-border-bottom {
+            border-bottom-color: #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-status-success {
+            background: rgba(0, 255, 0, 0.2) !important;
+            color: #00ff00 !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-status-fail {
+            background: rgba(255, 0, 0, 0.2) !important;
+            color: #ff0000 !important;
+        }
+
+        body.high-contrast .js-modal-box .js-modal-current-badge {
+            background: #ffff00 !important;
+            color: #000000 !important;
+        }
+
+        body.high-contrast .js-modal-box .btn-secondary-custom {
+            background: #000000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .js-modal-box .btn-danger-custom {
+            background: #ff0000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ff0000 !important;
+        }
+
+        body.high-contrast .js-modal-box .btn-primary-custom {
+            background: #ffffff !important;
+            color: #000000 !important;
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .password-strength div:first-child {
+            background: #ffffff !important;
+        }
+
+        body.reading-mode {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        body.reading-mode .item-card {
+            margin-bottom: 25px;
+        }
+
+        body.reading-mode .item-title {
+            font-size: 1.2rem;
+        }
+
+        body.monochrome::before,
+        body.monochrome .navbar,
+        body.monochrome .footer,
+        body.monochrome .main-container,
+        body.monochrome .settings-tabs,
+        body.monochrome .settings-content,
+        body.monochrome .btn-accessibility,
+        body.monochrome .item-card,
+        body.monochrome .stat-card {
+            filter: grayscale(100%);
+        }
+
+        body.low-saturation::before,
+        body.low-saturation .navbar,
+        body.low-saturation .main-container,
+        body.low-saturation .footer,
+        body.low-saturation .btn-accessibility,
+        body.low-saturation .settings-tabs,
+        body.low-saturation .settings-content {
+            filter: saturate(50%);
+        }
+
+        body.invert-colors::before,
+        body.invert-colors .navbar,
+        body.invert-colors .main-container,
+        body.invert-colors .footer,
+        body.invert-colors .btn-accessibility,
+        body.invert-colors .accessibility-modal-content {
+            filter: invert(100%) hue-rotate(180deg);
+        }
+
+        body.invert-colors .main-container img,
+        body.invert-colors .main-container video,
+        body.invert-colors .navbar img,
+        body.invert-colors .footer img {
+            filter: invert(100%) hue-rotate(180deg);
+        }
+
+        body.highlight-links a {
+            text-decoration: underline !important;
+            text-decoration-thickness: 2px !important;
+            text-underline-offset: 3px !important;
+        }
+
+        body.highlight-links .nav-link,
+        body.highlight-links .footer-links a {
+            background-color: rgba(255, 255, 0, 0.3) !important;
+            padding: 4px 8px !important;
+            border-radius: 4px !important;
+        }
+
+        body.protanopia::before,
+        body.protanopia .navbar,
+        body.protanopia .footer,
+        body.protanopia .main-container,
+        body.protanopia .settings-tabs,
+        body.protanopia .settings-content,
+        body.protanopia .btn-accessibility {
+            filter: url('#protanopia-filter');
+        }
+
+        body.deuteranopia::before,
+        body.deuteranopia .footer,
+        body.deuteranopia .navbar,
+        body.deuteranopia .main-container,
+        body.deuteranopia .settings-tabs,
+        body.deuteranopia .settings-content,
+        body.deuteranopia .btn-accessibility {
+            filter: url('#deuteranopia-filter');
+        }
+
+        body.tritanopia::before,
+        body.tritanopia .navbar,
+        body.tritanopia .footer,
+        body.tritanopia .main-container,
+        body.tritanopia .settings-tabs,
+        body.tritanopia .settings-content,
+        body.tritanopia .btn-accessibility {
+            filter: url('#tritanopia-filter');
+        }
+
+        body.big-cursor,
+        body.big-cursor * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="%23000" stroke="%23fff" stroke-width="3"/></svg>') 24 24, auto !important;
+        }
+
+        body.big-cursor a,
+        body.big-cursor button,
+        body.big-cursor input,
+        body.big-cursor select,
+        body.big-cursor textarea,
+        body.big-cursor .item-card,
+        body.big-cursor .tab-btn {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="%2328a745" stroke="%23fff" stroke-width="3"/></svg>') 24 24, pointer !important;
+        }
+
+        body.high-contrast.big-cursor,
+        body.high-contrast.big-cursor * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="%23ffff00" stroke="%23000" stroke-width="3"/></svg>') 24 24, auto !important;
+        }
+
+        body.high-contrast.big-cursor a,
+        body.high-contrast.big-cursor button,
+        body.high-contrast.big-cursor input,
+        body.high-contrast.big-cursor select,
+        body.high-contrast.big-cursor textarea,
+        body.high-contrast.big-cursor .tab-btn {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="%23ffff00" stroke="%23000" stroke-width="3"/></svg>') 24 24, pointer !important;
+        }
+
+        body.visible-focus *:focus {
+            outline: 3px solid var(--accent) !important;
+            outline-offset: 3px !important;
+        }
+
+        body.high-contrast.visible-focus *:focus {
+            outline: 3px solid #ffff00 !important;
+            outline-offset: 3px !important;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            box-shadow: var(--shadow-lg);
+            padding: 0.75rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: #fff !important;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            margin: 0 3px;
+            border-radius: 8px;
+            padding: 8px 14px !important;
+            transition: all var(--transition-speed) ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link i {
+            margin-right: 6px;
+        }
+
+        .navbar-toggler {
+            border: none;
+            color: white;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-toggler:focus,
+        .navbar-toggler:active {
+            outline: none !important;
+            box-shadow: none !important;
+            background-color: transparent !important;
+        }
+
+        .navbar-toggler i {
+            font-size: 1.5rem;
+        }
+
+        .main-container {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 1.5rem;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .settings-tabs {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 1rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .tab-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            text-align: left;
+            margin-bottom: 4px;
+        }
+
+        .tab-btn:hover {
+            background: var(--bg-light);
+            color: var(--accent);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(21, 152, 149, 0.3);
+        }
+
+        .tab-btn i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .tab-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 12px 0;
+        }
+
+        .settings-content {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .settings-panel {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .settings-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title-settings {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title-settings i {
+            color: var(--accent);
+        }
+
+        .section-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border-color);
+            gap: 1.5rem;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .setting-description {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .setting-control {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e2e8f0;
+            transition: var(--transition-speed);
+            border-radius: 28px;
+        }
+
+        .toggle-slider::before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: var(--transition-speed);
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-switch input:checked+.toggle-slider {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+        }
+
+        .toggle-switch input:checked+.toggle-slider::before {
+            transform: translateX(24px);
+        }
+
+        .toggle-switch input:focus+.toggle-slider {
+            box-shadow: 0 0 0 3px rgba(21, 152, 149, 0.3);
+        }
+
+        .input-field {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all var(--transition-speed);
+            background: var(--bg-card);
+            color: var(--text-dark);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(21, 152, 149, 0.15);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .select-field {
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            background: var(--bg-card);
+            color: var(--text-dark);
+            cursor: pointer;
+            min-width: 180px;
+            transition: all var(--transition-speed);
+        }
+
+        .select-field:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .range-control {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 200px;
+        }
+
+        .range-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            --webkit-appearance: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(21, 152, 149, 0.4);
+            transition: transform var(--transition-speed);
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .range-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .range-value {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(21, 152, 149, 0.4);
+        }
+
+        .btn-secondary-custom {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary-custom:hover {
+            border-color: var(--accent);
+            background: rgba(21, 152, 149, 0.05);
+        }
+
+        .btn-danger-custom {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-danger-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-group-settings {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-avatar-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            overflow: hidden;
+            border: 4px solid var(--border-color);
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-avatar:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 25px rgba(21, 152, 149, 0.3);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .profile-avatar .avatar-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .profile-avatar .avatar-fallback.hidden {
+            display: none;
+        }
+
+        .profile-avatar-edit {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            background: rgba(0, 0, 0, 0.65);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 6px 0;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 0 0 56px 56px;
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .profile-avatar-wrapper:hover .profile-avatar-edit {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .profile-avatar-remove {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--danger);
+            color: white;
+            border: 2px solid var(--bg-card);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .profile-avatar-remove.visible {
+            display: flex;
+        }
+
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(21, 152, 149, 0.1);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all var(--transition-speed);
+            position: relative;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.active {
+            border-color: var(--text-dark);
+        }
+
+        .color-option.active::after {
+            content: '\F272';
+            font-family: 'bootstrap-icons';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.2rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .notification-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .notification-group-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-group-title i {
+            color: var(--accent);
+        }
+
+        .danger-zone {
+            background: rgba(239, 68, 68, 0.05);
+            border: 2px solid rgba(239, 68, 68, 0.2);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .danger-zone-title {
+            color: var(--danger);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .danger-zone p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            transition: color var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.3rem;
+            margin: 0 8px;
+            transition: all var(--transition-speed);
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-2px);
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            z-index: 1100;
+        }
+
+        .custom-toast {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideInLeft 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 350px;
+            transition: background var(--transition-speed) ease, border var(--transition-speed) ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .custom-toast i {
+            font-size: 1.4rem;
+            color: var(--secondary);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body.font-size-small {
+            font-size: 0.9rem;
+        }
+
+        body.font-size-medium {
+            font-size: 1rem;
+        }
+
+        body.font-size-large {
+            font-size: 1.15rem;
+        }
+
+        body.font-size-xlarge {
+            font-size: 1.3rem;
+        }
+
+        body.line-height-normal {
+            line-height: 1.5;
+        }
+
+        body.line-height-medium {
+            line-height: 1.7;
+        }
+
+        body.line-height-large {
+            line-height: 2.0;
+        }
+
+        .btn-accessibility {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(21, 152, 149, 0.4);
+            transition: all var(--transition-speed);
+            cursor: pointer;
+        }
+
+        .btn-accessibility:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 992px) {
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-tabs {
+                position: static;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 12px;
+            }
+
+            .tab-btn {
+                flex: 1 1 auto;
+                min-width: calc(50% - 8px);
+                justify-content: center;
+                padding: 12px;
+            }
+
+            .tab-divider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+
+            .page-title {
+                font-size: 1.75rem;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .setting-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .setting-control {
+                width: 100%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group-settings {
+                flex-direction: column;
+            }
+
+            .btn-primary-custom,
+            .btn-secondary-custom,
+            .btn-danger-custom {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-container {
+                padding: 1rem 0.75rem;
+            }
+
+            .settings-panel {
+                padding: 1.25rem;
+            }
+
+            .tab-btn {
+                min-width: 100%;
+                font-size: 0.9rem;
+            }
+
+            .color-options {
+                justify-content: center;
+            }
+
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="plataforma.html">
+                <img src="Logo 3.0.png" alt="Logo Auxilio Encceja">
+                Auxílio Encceja
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="plataforma.html"><i
+                                class="bi bi-house"></i><span>Início</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="conteudos.html"><i
+                                class="bi bi-collection"></i><span>Conteúdos</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="acompanhamento.html"><i
+                                class="bi bi-graph-up"></i><span>Acompanhamento</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="config.html"><i
+                                class="bi bi-gear"></i><span>Configurações</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Configurações</h1>
+            <p class="page-subtitle">Personalize sua experiência na plataforma</p>
+        </div>
+
+        <div class="settings-layout">
+            <div class="settings-tabs" role="tablist">
+                <button class="tab-btn active" data-tab="perfil" role="tab" aria-selected="true"><i
+                        class="bi bi-person-circle"></i><span>Perfil</span></button>
+                <button class="tab-btn" data-tab="aparencia" role="tab" aria-selected="false"><i
+                        class="bi bi-palette"></i><span>Aparência</span></button>
+                <button class="tab-btn" data-tab="acessibilidade" role="tab" aria-selected="false"><i
+                        class="bi bi-universal-access"></i><span>Acessibilidade</span></button>
+                <button class="tab-btn" data-tab="notificacoes" role="tab" aria-selected="false"><i
+                        class="bi bi-bell"></i><span>Notificações</span></button>
+                <div class="tab-divider"></div>
+                <button class="tab-btn" data-tab="privacidade" role="tab" aria-selected="false"><i
+                        class="bi bi-shield-lock"></i><span>Privacidade</span></button>
+                <button class="tab-btn" data-tab="conta" role="tab" aria-selected="false"><i
+                        class="bi bi-key"></i><span>Conta</span></button>
+            </div>
+
+            <div class="settings-content">
+                <!-- Tab Perfil -->
+                <div class="settings-panel active" id="panel-perfil" role="tabpanel">
+                    <h2 class="section-title-settings"><i class="bi bi-person-circle"></i>Meu Perfil</h2>
+                    <p class="section-description">Gerencie suas informações pessoais e como elas aparecem na
+                        plataforma.</p>
+                    <div class="profile-header">
+                        <div class="profile-avatar-wrapper">
+                            <div class="profile-avatar" id="profileAvatar">
+                                <div class="avatar-fallback" id="avatarFallback"><i class="bi bi-person"></i></div>
+                                <img id="avatarImage" src="" alt="Foto de perfil" style="display: none;">
+                            </div>
+                            <label class="profile-avatar-edit" for="avatarInput" title="Alterar foto de perfil"><i
+                                    class="bi bi-camera"></i><span>Alterar</span></label>
+                            <button type="button" class="profile-avatar-remove" id="avatarRemoveBtn"
+                                title="Remover foto"><i class="bi bi-x"></i></button>
+                            <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="profileDisplayName">Estudante Encceja</h3>
+                            <p id="profileDisplayEmail">estudante@email.com</p>
+                            <div class="profile-badge"><i class="bi bi-patch-check-fill"></i>Estudante</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group"><label class="input-label">Nome Completo</label><input type="text"
+                                class="input-field" value="Estudante Encceja" placeholder="Seu nome completo"></div>
+                        <div class="input-group"><label class="input-label">Apelido</label><input type="text"
+                                class="input-field" value="Estudante" placeholder="Como prefere ser chamado"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group"><label class="input-label">E-mail</label><input type="email"
+                                class="input-field" value="estudante@email.com" placeholder="seu@email.com"></div>
+                        <div class="input-group"><label class="input-label">Telefone</label><input type="tel"
+                                class="input-field" placeholder="(00) 00000-0000"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group"><label class="input-label">Data de Nascimento</label><input type="date"
+                                class="input-field"></div>
+                        <div class="input-group">
+                            <label class="input-label">Estado</label>
+                            <select class="select-field">
+                                <option value="">Selecione...</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" id="btnSalvarPerfil"><i class="bi bi-check-lg"></i>Salvar
+                            Alterações</button>
+                        <button class="btn-secondary-custom" id="btnCancelarPerfil"><i
+                                class="bi bi-arrow-counterclockwise"></i>Cancelar</button>
+                    </div>
+                </div>
+
+                <!-- Tab Aparência -->
+                <div class="settings-panel" id="panel-aparencia" role="tabpanel">
+                    <h2 class="section-title-settings"><i class="bi bi-palette"></i>Aparência</h2>
+                    <p class="section-description">Personalize a aparência visual da plataforma.</p>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Tema</div>
+                            <div class="setting-description">Escolha entre o modo claro, escuro ou automático.</div>
+                        </div>
+                        <div class="setting-control"><select class="select-field" id="themeSelect">
+                                <option value="light">Claro</option>
+                                <option value="dark">Escuro</option>
+                                <option value="auto">Automático (Sistema)</option>
+                            </select></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Cor de Destaque</div>
+                            <div class="setting-description">Escolha a cor principal da plataforma.</div>
+                        </div>
+                        <div class="setting-control">
+                            <div class="color-options">
+                                <div class="color-option active"
+                                    style="background: linear-gradient(135deg, #159895, #57c5b6);" data-color="teal"
+                                    title="Verde-azulado"></div>
+                                <div class="color-option" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);"
+                                    data-color="blue" title="Azul"></div>
+                                <div class="color-option" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);"
+                                    data-color="purple" title="Roxo"></div>
+                                <div class="color-option" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"
+                                    data-color="amber" title="Âmbar"></div>
+                                <div class="color-option" style="background: linear-gradient(135deg, #ef4444, #f87171);"
+                                    data-color="red" title="Vermelho"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Estilo dos Cards</div>
+                            <div class="setting-description">Define o estilo visual dos cards de conteúdo.</div>
+                        </div>
+                        <div class="setting-control"><select class="select-field" id="cardStyleSelect">
+                                <option value="rounded">Arredondado</option>
+                                <option value="square">Quadrado</option>
+                                <option value="minimal">Minimalista</option>
+                            </select></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Animações</div>
+                            <div class="setting-description">Ativa animações e transições suaves na interface.</div>
+                        </div>
+                        <div class="setting-control"><label class="toggle-switch"><input type="checkbox" checked
+                                    id="animationsToggle"><span class="toggle-slider"></span></label></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Efeitos de Paralaxe</div>
+                            <div class="setting-description">Efeito de profundidade ao rolar a página.</div>
+                        </div>
+                        <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                    id="parallaxToggle"><span class="toggle-slider"></span></label></div>
+                    </div>
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" id="btnSalvarAparencia"><i
+                                class="bi bi-check-lg"></i>Aplicar</button>
+                        <button class="btn-secondary-custom" id="btnRestaurarAparencia"><i
+                                class="bi bi-arrow-counterclockwise"></i>Restaurar Padrão</button>
+                    </div>
+                </div>
+
+                <!-- Tab Acessibilidade -->
+                <div class="settings-panel" id="panel-acessibilidade" role="tabpanel">
+                    <h2 class="section-title-settings"><i class="bi bi-universal-access"></i>Acessibilidade</h2>
+                    <p class="section-description">Configure opções de acessibilidade para uma melhor experiência.</p>
+                    <div class="notification-group">
+                        <div class="notification-group-title"><i class="bi bi-eye"></i>Configurações Visuais</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Alto Contraste</div>
+                                <div class="setting-description">Aumenta o contraste entre texto e fundo para melhor
+                                    legibilidade.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        id="highContrastToggle"><span class="toggle-slider"></span></label></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Modo Monocromático</div>
+                                <div class="setting-description">Remove todas as cores da tela.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        id="monochromeToggle"><span class="toggle-slider"></span></label></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Inverter Cores</div>
+                                <div class="setting-description">Inverte as cores da tela.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        id="invertColorsToggle"><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="notification-group">
+                        <div class="notification-group-title"><i class="bi bi-type"></i>Configurações de Texto</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Tamanho da Fonte</div>
+                                <div class="setting-description">Ajuste o tamanho do texto na plataforma.</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="range-control">
+                                    <input type="range" min="1" max="4" value="2" class="range-slider"
+                                        id="fontSizeRange">
+                                    <div class="range-label"><span>Menor</span><span class="range-value"
+                                            id="fontSizeValue">Normal</span><span>Maior</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Espaçamento de Linha</div>
+                                <div class="setting-description">Ajuste o espaço entre as linhas de texto.</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="range-control">
+                                    <input type="range" min="1" max="3" value="2" class="range-slider"
+                                        id="lineHeightRange">
+                                    <div class="range-label"><span>Compacto</span><span class="range-value"
+                                            id="lineHeightValue">Normal</span><span>Espaçado</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification-group">
+                        <div class="notification-group-title"><i class="bi bi-cursor"></i>Navegação</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Cursor Grande</div>
+                                <div class="setting-description">Aumenta o tamanho do cursor do mouse.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        id="bigCursorToggle"><span class="toggle-slider"></span></label></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Realçar Links</div>
+                                <div class="setting-description">Destaca todos os links clicáveis na página.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        id="highlightLinksToggle"><span class="toggle-slider"></span></label></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Foco Visível</div>
+                                <div class="setting-description">Destaca elementos quando navegados pelo teclado.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        id="visibleFocusToggle"><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" id="btnSalvarAcessibilidade"><i
+                                class="bi bi-check-lg"></i>Aplicar</button>
+                        <button class="btn-secondary-custom" id="btnRestaurarAcessibilidade"><i
+                                class="bi bi-arrow-counterclockwise"></i>Restaurar Padrões</button>
+                    </div>
+                </div>
+
+                <!-- Tab Notificações -->
+                <div class="settings-panel" id="panel-notificacoes" role="tabpanel">
+                    <h2 class="section-title-settings"><i class="bi bi-bell"></i>Notificações</h2>
+                    <p class="section-description">Configure como e quando deseja receber notificações.</p>
+                    <div class="notification-group">
+                        <div class="notification-group-title"><i class="bi bi-envelope"></i>Notificações por E-mail
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Resumo Semanal</div>
+                                <div class="setting-description">Receba um resumo semanal do seu progresso e novos
+                                    conteúdos.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Novos Conteúdos</div>
+                                <div class="setting-description">Seja notificado quando novos materiais forem
+                                    adicionados.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Lembretes de Estudo</div>
+                                <div class="setting-description">Receba lembretes para manter sua rotina de estudos.
+                                </div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="notification-group">
+                        <div class="notification-group-title"><i class="bi bi-device-hdd"></i>Notificações no Navegador
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Permitir Notificações</div>
+                                <div class="setting-description">Receba notificações push no seu navegador.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        id="browserNotifications"><span class="toggle-slider"></span></label></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Som de Notificação</div>
+                                <div class="setting-description">Reproduz um som ao receber notificações.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="notification-group">
+                        <div class="notification-group-title"><i class="bi bi-trophy"></i>Conquistas e Metas</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Novas Conquistas</div>
+                                <div class="setting-description">Notificar quando desbloquear uma nova conquista.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Metas Alcançadas</div>
+                                <div class="setting-description">Notificar quando atingir uma meta de estudo.</div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"
+                                        checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" id="btnSalvarNotificacoes"><i
+                                class="bi bi-check-lg"></i>Aplicar</button>
+                    </div>
+                </div>
+
+                <!-- Tab Privacidade -->
+                <div class="settings-panel" id="panel-privacidade" role="tabpanel">
+                    <h2 class="section-title-settings"><i class="bi bi-shield-lock"></i>Privacidade</h2>
+                    <p class="section-description">Controle suas configurações de privacidade e dados.</p>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Perfil Público</div>
+                            <div class="setting-description">Permitir que outros usuários vejam seu perfil e progresso.
+                            </div>
+                        </div>
+                        <div class="setting-control"><label class="toggle-switch"><input type="checkbox"><span
+                                    class="toggle-slider"></span></label></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Mostrar no Ranking</div>
+                            <div class="setting-description">Aparecer nas tabelas de classificação e ranking.</div>
+                        </div>
+                        <div class="setting-control"><label class="toggle-switch"><input type="checkbox" checked><span
+                                    class="toggle-slider"></span></label></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Compartilhar Progresso</div>
+                            <div class="setting-description">Permitir compartilhamento do seu progresso em redes
+                                sociais.</div>
+                        </div>
+                        <div class="setting-control"><label class="toggle-switch"><input type="checkbox"><span
+                                    class="toggle-slider"></span></label></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Cookies de Análise</div>
+                            <div class="setting-description">Permitir cookies para análise e melhoria da plataforma.
+                            </div>
+                        </div>
+                        <div class="setting-control"><label class="toggle-switch"><input type="checkbox" checked><span
+                                    class="toggle-slider"></span></label></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Histórico de Atividades</div>
+                            <div class="setting-description">Manter registro das suas atividades na plataforma.</div>
+                        </div>
+                        <div class="setting-control"><label class="toggle-switch"><input type="checkbox" checked><span
+                                    class="toggle-slider"></span></label></div>
+                    </div>
+                    <div class="btn-group-settings">
+                        <button class="btn-primary-custom" id="btnSalvarPrivacidade"><i
+                                class="bi bi-check-lg"></i>Aplicar</button>
+                        <button class="btn-secondary-custom" onclick="window.location.href='politica.html'"><i
+                                class="bi bi-file-text"></i>Ver Política de Privacidade</button>
+                    </div>
+                </div>
+
+                <!-- Tab Conta -->
+                <div class="settings-panel" id="panel-conta" role="tabpanel">
+                    <h2 class="section-title-settings"><i class="bi bi-key"></i>Conta e Segurança</h2>
+                    <p class="section-description">Gerencie sua conta, senha e configurações de segurança.</p>
+                    <div class="notification-group">
+                        <div class="notification-group-title"><i class="bi bi-lock"></i>Alterar Senha</div>
+                        <div class="form-row">
+                            <div class="input-group"><label class="input-label">Senha Atual</label><input
+                                    type="password" class="input-field" placeholder="Digite sua senha atual"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group"><label class="input-label">Nova Senha</label><input type="password"
+                                    class="input-field" id="newPwField" placeholder="Digite a nova senha"></div>
+                            <div class="input-group"><label class="input-label">Confirmar Nova Senha</label><input
+                                    type="password" class="input-field" id="confirmPwField"
+                                    placeholder="Confirme a nova senha"></div>
+                        </div>
+                        <button class="btn-secondary-custom" id="btnAlterarSenha"><i
+                                class="bi bi-arrow-repeat"></i>Alterar Senha</button>
+                    </div>
+                    <div class="notification-group">
+                        <div class="notification-group-title"><i class="bi bi-shield-check"></i>Segurança da Conta</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Verificação em Dois Fatores</div>
+                                <div class="setting-description">Adicione uma camada extra de segurança à sua conta.
+                                </div>
+                            </div>
+                            <div class="setting-control"><label class="toggle-switch"><input type="checkbox"><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Sessões Ativas</div>
+                                <div class="setting-description">Gerencie os dispositivos conectados à sua conta.</div>
+                            </div>
+                            <div class="setting-control"><button class="btn-secondary-custom" id="btnVerSessoes"
+                                    style="padding: 8px 16px; font-size: 0.85rem;"><i class="bi bi-device-hdd"></i>Ver
+                                    Sessões</button></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Histórico de Login</div>
+                                <div class="setting-description">Veja os acessos recentes à sua conta.</div>
+                            </div>
+                            <div class="setting-control"><button class="btn-secondary-custom" id="btnVerHistorico"
+                                    style="padding: 8px 16px; font-size: 0.85rem;"><i
+                                        class="bi bi-clock-history"></i>Ver Histórico</button></div>
+                        </div>
+                    </div>
+                    <div class="notification-group">
+                        <div class="notification-group-title"><i class="bi bi-download"></i>Seus Dados</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Exportar Dados</div>
+                                <div class="setting-description">Baixe uma cópia de todos os seus dados da plataforma.
+                                </div>
+                            </div>
+                            <div class="setting-control"><button class="btn-secondary-custom" id="btnExportarDados"
+                                    style="padding: 8px 16px; font-size: 0.85rem;"><i
+                                        class="bi bi-download"></i>Exportar</button></div>
+                        </div>
+                    </div>
+                    <div class="danger-zone">
+                        <div class="danger-zone-title"><i class="bi bi-exclamation-triangle"></i>Zona de Perigo</div>
+                        <p>Uma vez que você exclua sua conta, não há como voltar atrás. Por favor, tenha certeza.</p>
+                        <button class="btn-danger-custom" id="btnExcluirConta"><i class="bi bi-trash"></i>Excluir Minha
+                            Conta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-links"><a href="termos.html">Termos de Uso</a><a href="politica.html">Política de
+                            Privacidade</a><a href="contato.html">Contato</a><a href="sobre.html">Sobre</a></div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-icons"><a href="#" title="YouTube"><i class="bi bi-youtube"></i></a><a href="#"
+                            title="Instagram"><i class="bi bi-instagram"></i></a><a href="#" title="Facebook"><i
+                                class="bi bi-facebook"></i></a></div>
+                </div>
+            </div>
+            <div class="copyright">&copy; <span id="anoAtual"></span> Auxílio Encceja. Todos os Direitos Reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ============================================================
+        // PERSISTÊNCIA
+        // ============================================================
+        const Storage = {
+            get(key, defaultValue = null) {
+                try { const d = localStorage.getItem(key); return d ? JSON.parse(d) : defaultValue; }
+                catch { return defaultValue; }
+            },
+            set(key, value) {
+                try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { console.warn('Erro ao salvar:', e); }
+            },
+            remove(key) { localStorage.removeItem(key); }
+        };
+
+        // ============================================================
+        // TOAST — usado SOMENTE nos botões Aplicar/Salvar
+        // ============================================================
+        function showToast(message, type = 'success', duration = 3000) {
+            const container = document.getElementById('toastContainer');
+            const icons = { success: 'bi-check-circle-fill', error: 'bi-exclamation-circle-fill', warning: 'bi-exclamation-triangle-fill', info: 'bi-info-circle-fill' };
+            const colors = { success: '#10b981', error: '#ef4444', warning: '#f59e0b', info: '#3b82f6' };
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+            toast.innerHTML = `<i class="bi ${icons[type]}" style="color: ${colors[type]}"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0'; toast.style.transform = 'translateX(-50px)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
+        // ============================================================
+        // MODAIS
+        // ============================================================
+        function showConfirmModal(title, message, onConfirm, onCancel) {
+            const existing = document.getElementById('confirmModal');
+            if (existing) existing.remove();
+            const modal = document.createElement('div');
+            modal.id = 'confirmModal';
+            modal.className = 'js-modal-overlay';
+            modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:2000;display:flex;align-items:center;justify-content:center;animation:fadeIn 0.2s ease;';
+            modal.innerHTML = `
+                <div class="js-modal-box" style="background:var(--bg-card,#fff);border-radius:16px;padding:2rem;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                    <h3 style="margin:0 0 0.5rem;font-size:1.2rem;color:var(--text-dark,#1e293b);">${title}</h3>
+                    <div style="color:var(--text-muted,#64748b);margin:0 0 1.5rem;font-size:0.95rem;line-height:1.6;">${message}</div>
+                    <div style="display:flex;gap:12px;justify-content:flex-end;">
+                        <button class="btn-secondary-custom" id="modalCancelBtn" style="padding:10px 20px;">Cancelar</button>
+                        <button class="btn-danger-custom" id="modalConfirmBtn" style="padding:10px 20px;">Confirmar</button>
+                    </div>
+                </div>`;
+            document.body.appendChild(modal);
+            document.getElementById('modalCancelBtn').addEventListener('click', () => { modal.remove(); if (onCancel) onCancel(); });
+            document.getElementById('modalConfirmBtn').addEventListener('click', () => { modal.remove(); if (onConfirm) onConfirm(); });
+            modal.addEventListener('click', (e) => { if (e.target === modal) { modal.remove(); if (onCancel) onCancel(); } });
+        }
+
+        function showInfoModal(title, content, buttonText = 'Entendi') {
+            const existing = document.getElementById('infoModal');
+            if (existing) existing.remove();
+            const modal = document.createElement('div');
+            modal.id = 'infoModal';
+            modal.className = 'js-modal-overlay';
+            modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:2000;display:flex;align-items:center;justify-content:center;animation:fadeIn 0.2s ease;';
+            modal.innerHTML = `
+                <div class="js-modal-box" style="background:var(--bg-card,#fff);border-radius:16px;padding:2rem;max-width:500px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                    <h3 style="margin:0 0 1rem;font-size:1.2rem;color:var(--text-dark,#1e293b);">${title}</h3>
+                    <div style="color:var(--text-muted,#64748b);font-size:0.95rem;line-height:1.6;">${content}</div>
+                    <div style="margin-top:1.5rem;text-align:right;">
+                        <button class="btn-primary-custom" id="infoModalCloseBtn" style="padding:10px 24px;">${buttonText}</button>
+                    </div>
+                </div>`;
+            document.body.appendChild(modal);
+            document.getElementById('infoModalCloseBtn').addEventListener('click', () => modal.remove());
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+        }
+
+        // ============================================================
+        // TEMAS — sem toast, apenas aplica visualmente
+        // ============================================================
+        function handleThemeChange(value) {
+            const body = document.body;
+            body.classList.remove('dark-mode', 'high-contrast');
+            const hcToggle = document.getElementById('highContrastToggle');
+            if (hcToggle) hcToggle.checked = false;
+
+            if (value === 'dark') {
+                body.classList.add('dark-mode');
+            } else if (value === 'auto') {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    body.classList.add('dark-mode');
+                }
+            }
+            Storage.set('theme', value);
+        }
+
+        function toggleHighContrast() {
+            const enabled = document.getElementById('highContrastToggle').checked;
+            const body = document.body;
+            if (enabled) {
+                body.classList.add('high-contrast');
+                body.classList.remove('dark-mode');
+                const sel = document.getElementById('themeSelect');
+                if (sel) sel.value = 'light';
+                Storage.set('theme', 'light');
+            } else {
+                body.classList.remove('high-contrast');
+            }
+        }
+
+        // ============================================================
+        // APARÊNCIA — sem toast intermediário
+        // ============================================================
+        const themePresets = {
+            teal: { accent: '#159895', secondary: '#57c5b6', gradient: 'linear-gradient(135deg, #159895, #57c5b6)' },
+            blue: { accent: '#3b82f6', secondary: '#60a5fa', gradient: 'linear-gradient(135deg, #3b82f6, #60a5fa)' },
+            purple: { accent: '#8b5cf6', secondary: '#a78bfa', gradient: 'linear-gradient(135deg, #8b5cf6, #a78bfa)' },
+            amber: { accent: '#f59e0b', secondary: '#fbbf24', gradient: 'linear-gradient(135deg, #f59e0b, #fbbf24)' },
+            red: { accent: '#ef4444', secondary: '#f87171', gradient: 'linear-gradient(135deg, #ef4444, #f87171)' }
+        };
+
+        function changeAccentColor(colorName) {
+            const preset = themePresets[colorName];
+            if (!preset) return;
+            document.documentElement.style.setProperty('--accent', preset.accent);
+            document.documentElement.style.setProperty('--secondary', preset.secondary);
+            const style = document.createElement('style');
+            style.id = 'dynamic-accent-style';
+            style.textContent = `
+                .toggle-switch input:checked + .toggle-slider { background: ${preset.gradient} !important; }
+                .range-slider::-webkit-slider-thumb { background: ${preset.gradient} !important; }
+                .tab-btn.active { background: ${preset.gradient} !important; }
+                .btn-primary-custom { background: ${preset.gradient} !important; }
+                .btn-accessibility { background: ${preset.gradient} !important; }
+            `;
+            const existing = document.getElementById('dynamic-accent-style');
+            if (existing) existing.remove();
+            document.head.appendChild(style);
+            Storage.set('accentColor', colorName);
+        }
+
+        function resetAppearance() {
+            document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+            document.querySelectorAll('.color-option')[0].classList.add('active');
+            changeAccentColor('teal');
+            document.getElementById('themeSelect').value = 'light';
+            handleThemeChange('light');
+            const cs = document.getElementById('cardStyleSelect');
+            if (cs) cs.value = 'rounded';
+            document.getElementById('animationsToggle').checked = true;
+            toggleAnimations(true);
+            document.getElementById('parallaxToggle').checked = false;
+            toggleParallax(false);
+            Storage.remove('appearanceSettings');
+        }
+
+        function toggleAnimations(enabled) {
+            if (!enabled) {
+                document.documentElement.style.setProperty('--transition-speed', '0s');
+                const s = document.createElement('style');
+                s.id = 'no-animations-style';
+                s.textContent = '* { animation-duration: 0s !important; transition-duration: 0s !important; }';
+                document.head.appendChild(s);
+            } else {
+                document.documentElement.style.setProperty('--transition-speed', '0.3s');
+                const s = document.getElementById('no-animations-style');
+                if (s) s.remove();
+            }
+        }
+
+        function toggleParallax(enabled) {
+            if (enabled) { window.addEventListener('scroll', handleParallax); }
+            else { window.removeEventListener('scroll', handleParallax); document.querySelectorAll('[data-parallax]').forEach(el => { el.style.transform = ''; }); }
+        }
+
+        function handleParallax() {
+            const sy = window.scrollY;
+            document.querySelectorAll('[data-parallax]').forEach(el => { el.style.transform = `translateY(${sy * parseFloat(el.dataset.parallax || 0.5)}px)`; });
+        }
+
+        // ============================================================
+        // ACESSIBILIDADE — sem toast intermediário
+        // ============================================================
+        function toggleMonochrome() {
+            const on = document.getElementById('monochromeToggle').checked;
+            if (on) { document.body.classList.add('monochrome'); if (document.getElementById('invertColorsToggle').checked) { document.getElementById('invertColorsToggle').checked = false; document.body.classList.remove('invert-colors'); } }
+            else { document.body.classList.remove('monochrome'); }
+        }
+
+        function toggleInvertColors() {
+            const on = document.getElementById('invertColorsToggle').checked;
+            if (on) { document.body.classList.add('invert-colors'); if (document.getElementById('monochromeToggle').checked) { document.getElementById('monochromeToggle').checked = false; document.body.classList.remove('monochrome'); } }
+            else { document.body.classList.remove('invert-colors'); }
+        }
+
+        function toggleBigCursor() {
+            document.body.classList.toggle('big-cursor', document.getElementById('bigCursorToggle').checked);
+        }
+
+        function toggleHighlightLinks() {
+            document.body.classList.toggle('highlight-links', document.getElementById('highlightLinksToggle').checked);
+        }
+
+        function toggleVisibleFocus() {
+            document.body.classList.toggle('visible-focus', document.getElementById('visibleFocusToggle').checked);
+        }
+
+        function changeFontSize(value) {
+            const sizes = ['Pequeno', 'Normal', 'Grande', 'Muito Grande'];
+            const classes = ['font-size-small', 'font-size-medium', 'font-size-large', 'font-size-xlarge'];
+            document.getElementById('fontSizeValue').textContent = sizes[value - 1];
+            classes.forEach(c => document.body.classList.remove(c));
+            document.body.classList.add(classes[value - 1]);
+        }
+
+        function changeLineHeight(value) {
+            const labels = ['Compacto', 'Normal', 'Espaçado'];
+            const classes = ['line-height-normal', 'line-height-medium', 'line-height-large'];
+            document.getElementById('lineHeightValue').textContent = labels[value - 1];
+            classes.forEach(c => document.body.classList.remove(c));
+            document.body.classList.add(classes[value - 1]);
+        }
+
+        function resetAccessibility() {
+            ['high-contrast', 'monochrome', 'invert-colors', 'big-cursor', 'highlight-links', 'visible-focus', 'reading-mode', 'low-saturation', 'font-size-small', 'font-size-medium', 'font-size-large', 'font-size-xlarge', 'line-height-normal', 'line-height-medium', 'line-height-large'].forEach(c => document.body.classList.remove(c));
+            document.body.classList.add('font-size-medium', 'line-height-medium');
+            document.getElementById('highContrastToggle').checked = false;
+            document.getElementById('monochromeToggle').checked = false;
+            document.getElementById('invertColorsToggle').checked = false;
+            document.getElementById('bigCursorToggle').checked = false;
+            document.getElementById('highlightLinksToggle').checked = false;
+            document.getElementById('visibleFocusToggle').checked = false;
+            document.getElementById('fontSizeRange').value = 2;
+            document.getElementById('lineHeightRange').value = 2;
+            document.getElementById('fontSizeValue').textContent = 'Normal';
+            document.getElementById('lineHeightValue').textContent = 'Normal';
+            document.getElementById('themeSelect').value = 'light';
+            document.body.classList.remove('dark-mode');
+            Storage.remove('accessibilitySettings');
+            Storage.set('theme', 'light');
+        }
+
+        function loadAccessibilitySettings() {
+            const s = Storage.get('accessibilitySettings');
+            if (!s) return;
+            if (s.highContrast) { document.getElementById('highContrastToggle').checked = true; document.body.classList.add('high-contrast'); }
+            if (s.monochrome) { document.getElementById('monochromeToggle').checked = true; document.body.classList.add('monochrome'); }
+            if (s.invertColors) { document.getElementById('invertColorsToggle').checked = true; document.body.classList.add('invert-colors'); }
+            if (s.bigCursor) { document.getElementById('bigCursorToggle').checked = true; document.body.classList.add('big-cursor'); }
+            if (s.highlightLinks) { document.getElementById('highlightLinksToggle').checked = true; document.body.classList.add('highlight-links'); }
+            if (s.visibleFocus) { document.getElementById('visibleFocusToggle').checked = true; document.body.classList.add('visible-focus'); }
+            if (s.fontSize) { document.getElementById('fontSizeRange').value = s.fontSize; changeFontSize(s.fontSize); }
+            if (s.lineHeight) { document.getElementById('lineHeightRange').value = s.lineHeight; changeLineHeight(s.lineHeight); }
+        }
+
+        // ============================================================
+        // PERFIL
+        // ============================================================
+        function saveProfile() {
+            const textInputs = document.querySelectorAll('#panel-perfil input[type="text"]');
+            const emailInput = document.querySelector('#panel-perfil input[type="email"]');
+            const name = textInputs[0]?.value || '';
+            if (!name.trim()) { showToast('Por favor, preencha o nome completo.', 'error'); return false; }
+            if (emailInput?.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) { showToast('E-mail inválido.', 'error'); return false; }
+            Storage.set('userProfile', { nome: name, apelido: textInputs[1]?.value || '', email: emailInput?.value || '', telefone: document.querySelector('#panel-perfil input[type="tel"]')?.value || '' });
+            document.getElementById('profileDisplayName').textContent = textInputs[1]?.value || name || 'Estudante Encceja';
+            document.getElementById('profileDisplayEmail').textContent = emailInput?.value || 'estudante@email.com';
+            showToast('Perfil atualizado com sucesso!', 'success');
+            return true;
+        }
+
+        function initAvatarSystem() {
+            const input = document.getElementById('avatarInput');
+            const img = document.getElementById('avatarImage');
+            const fallback = document.getElementById('avatarFallback');
+            const removeBtn = document.getElementById('avatarRemoveBtn');
+            const saved = localStorage.getItem('userAvatar');
+            if (saved) { img.src = saved; img.style.display = 'block'; fallback.classList.add('hidden'); removeBtn.classList.add('visible'); }
+            input.addEventListener('change', function (e) {
+                const file = e.target.files[0]; if (!file) return;
+                if (!file.type.startsWith('image/')) { showToast('Selecione uma imagem válida.', 'error'); return; }
+                if (file.size > 5 * 1024 * 1024) { showToast('Imagem deve ter no máximo 5MB.', 'error'); return; }
+                const reader = new FileReader();
+                reader.onload = function (ev) {
+                    const i = new Image();
+                    i.onload = function () {
+                        const c = document.createElement('canvas'); const mx = 300;
+                        let w = i.width, h = i.height;
+                        if (w > h) { if (w > mx) { h = h * mx / w; w = mx; } } else { if (h > mx) { w = w * mx / h; h = mx; } }
+                        c.width = w; c.height = h;
+                        c.getContext('2d').drawImage(i, 0, 0, w, h);
+                        const data = c.toDataURL('image/jpeg', 0.85);
+                        img.src = data; img.style.display = 'block'; fallback.classList.add('hidden'); removeBtn.classList.add('visible');
+                        localStorage.setItem('userAvatar', data);
+                    };
+                    i.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+            removeBtn.addEventListener('click', function (e) {
+                e.preventDefault(); e.stopPropagation();
+                img.src = ''; img.style.display = 'none'; fallback.classList.remove('hidden'); removeBtn.classList.remove('visible'); input.value = '';
+                localStorage.removeItem('userAvatar');
+            });
+        }
+
+        function loadProfile() {
+            const s = Storage.get('userProfile');
+            if (!s) return;
+            const ti = document.querySelectorAll('#panel-perfil input[type="text"]');
+            if (ti[0]) ti[0].value = s.nome || '';
+            if (ti[1]) ti[1].value = s.apelido || '';
+            const ei = document.querySelector('#panel-perfil input[type="email"]');
+            if (ei) ei.value = s.email || '';
+            const pi = document.querySelector('#panel-perfil input[type="tel"]');
+            if (pi) pi.value = s.telefone || '';
+            document.getElementById('profileDisplayName').textContent = s.apelido || s.nome || 'Estudante Encceja';
+            document.getElementById('profileDisplayEmail').textContent = s.email || 'estudante@email.com';
+        }
+
+        function formatPhone(input) {
+            let v = input.value.replace(/\D/g, '');
+            if (v.length > 11) v = v.slice(0, 11);
+            if (v.length > 6) v = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+            else if (v.length > 2) v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+            else if (v.length > 0) v = `(${v}`;
+            input.value = v;
+        }
+
+        // ============================================================
+        // CONTA
+        // ============================================================
+        function validatePasswordStrength(pw) {
+            let score = 0;
+            if (pw.length >= 6) score++; if (pw.length >= 8) score++;
+            if (/[A-Z]/.test(pw)) score++; if (/[0-9]/.test(pw)) score++;
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(pw)) score++;
+            return score;
+        }
+
+        function showPasswordStrength(password, el) {
+            const ex = el.parentElement.querySelector('.password-strength');
+            if (ex) ex.remove();
+            if (!password) return;
+            const score = validatePasswordStrength(password);
+            const colors = ['#ef4444', '#f59e0b', '#f59e0b', '#10b981', '#10b981', '#10b981'];
+            const labels = ['Muito fraca', 'Fraca', 'Razoável', 'Forte', 'Muito forte', 'Excelente'];
+            const ind = document.createElement('div');
+            ind.className = 'password-strength';
+            ind.style.marginTop = '8px';
+            ind.innerHTML = `<div style="height:4px;border-radius:2px;background:#e2e8f0;overflow:hidden;margin-bottom:4px;"><div style="height:100%;width:${(score / 5) * 100}%;background:${colors[score]};border-radius:2px;transition:width 0.3s ease;"></div></div><span style="font-size:0.8rem;color:${colors[score]};font-weight:600;">${labels[score]}</span>`;
+            el.parentElement.appendChild(ind);
+        }
+
+        function changePassword() {
+            const pws = document.querySelectorAll('#panel-conta input[type="password"]');
+            if (!pws[0]?.value) { showToast('Digite sua senha atual.', 'error'); return; }
+            if (!pws[1]?.value) { showToast('Digite a nova senha.', 'error'); return; }
+            if (pws[1].value !== pws[2]?.value) { showToast('As senhas não coincidem.', 'error'); return; }
+            if (pws[0].value === pws[1].value) { showToast('A nova senha deve ser diferente.', 'error'); return; }
+            if (validatePasswordStrength(pws[1].value) < 3) { showToast('Senha muito fraca.', 'error'); return; }
+            pws.forEach(p => p.value = '');
+            document.querySelectorAll('.password-strength').forEach(e => e.remove());
+            showToast('Senha alterada com sucesso!', 'success');
+        }
+
+        function confirmDeleteAccount() {
+            showConfirmModal('Excluir Conta Permanentemente',
+                `<div style="margin-bottom:1rem;"><p style="color:var(--danger);font-weight:600;">⚠️ Esta ação é irreversível!</p><p>Todos os seus dados serão permanentemente excluídos.</p></div><div style="margin-top:1rem;"><label style="display:block;margin-bottom:8px;font-weight:600;">Digite "EXCLUIR" para confirmar:</label><input type="text" id="deleteConfirmInput" placeholder="EXCLUIR" style="padding:10px 14px;border:2px solid var(--border-color);border-radius:10px;font-size:1rem;width:100%;background:var(--bg-card);color:var(--text-dark);"></div>`,
+                () => {
+                    if (document.getElementById('deleteConfirmInput')?.value !== 'EXCLUIR') { showToast('Digite "EXCLUIR" para confirmar.', 'error'); return; }
+                    showToast('Conta excluída permanentemente.', 'success');
+                    setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+                }
+            );
+        }
+
+        function viewActiveSessions() {
+            const sessions = [
+                { device: 'Chrome - Windows', loc: 'São Paulo, Brasil', time: 'Agora', current: true },
+                { device: 'Safari - iPhone', loc: 'São Paulo, Brasil', time: 'Há 2 horas', current: false },
+                { device: 'Firefox - Linux', loc: 'Rio de Janeiro, Brasil', time: 'Há 1 dia', current: false }
+            ];
+            let html = sessions.map(s => `
+                <div class="js-modal-border-bottom" style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border-color);">
+                    <div>
+                        <div class="js-modal-session-label" style="font-weight:600;color:var(--text-dark);">${s.device} ${s.current ? '<span class="js-modal-current-badge" style="background:rgba(16,185,129,0.15);color:#10b981;padding:2px 8px;border-radius:4px;font-size:0.7rem;margin-left:8px;">Atual</span>' : ''}</div>
+                        <div class="js-modal-session-sub" style="font-size:0.85rem;color:var(--text-muted);">${s.loc} • ${s.time}</div>
+                    </div>
+                    ${!s.current ? `<button class="btn-secondary-custom session-revoke-btn" style="padding:6px 12px;font-size:0.8rem;" data-device="${s.device}">Encerrar</button>` : ''}
+                </div>`).join('');
+            showInfoModal('Sessões Ativas', `<p style="margin-bottom:1rem;">Dispositivos conectados:</p>${html}`, 'Fechar');
+            setTimeout(() => {
+                document.querySelectorAll('.session-revoke-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => { e.preventDefault(); btn.closest('.js-modal-border-bottom').remove(); showToast('Sessão encerrada.', 'success'); });
+                });
+            }, 100);
+        }
+
+        function viewLoginHistory() {
+            const hist = [
+                { date: 'Hoje, 14:32', device: 'Chrome - Windows', status: 'sucesso' },
+                { date: 'Hoje, 08:15', device: 'Safari - iPhone', status: 'sucesso' },
+                { date: 'Ontem, 22:45', device: 'Firefox - Linux', status: 'falha' },
+                { date: 'Ontem, 19:30', device: 'Chrome - Windows', status: 'sucesso' },
+            ];
+            let html = hist.map(h => `
+                <div class="js-modal-border-bottom" style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-color);">
+                    <div>
+                        <div class="js-modal-history-label" style="font-weight:500;color:var(--text-dark);">${h.device}</div>
+                        <div class="js-modal-history-sub" style="font-size:0.85rem;color:var(--text-muted);">${h.date}</div>
+                    </div>
+                    <span class="${h.status === 'sucesso' ? 'js-modal-status-success' : 'js-modal-status-fail'}" style="padding:4px 10px;border-radius:6px;font-size:0.8rem;font-weight:600;background:${h.status === 'sucesso' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)'};color:${h.status === 'sucesso' ? '#10b981' : '#ef4444'};">
+                        ${h.status === 'sucesso' ? 'Sucesso' : 'Falha'}
+                    </span>
+                </div>`).join('');
+            showInfoModal('Histórico de Login', `<p style="margin-bottom:1rem;">Últimos acessos:</p>${html}`, 'Fechar');
+        }
+
+        function exportUserData() {
+            const data = { perfil: Storage.get('userProfile', {}), dataExportacao: new Date().toISOString() };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = `auxilio-encceja-dados-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+            showToast('Dados exportados!', 'success');
+        }
+
+        // ============================================================
+        // INICIALIZAÇÃO
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('anoAtual').textContent = new Date().getFullYear();
+
+            initAvatarSystem();
+            loadProfile();
+            loadAccessibilitySettings();
+
+            // Carregar aparência salva
+            const app = Storage.get('appearanceSettings');
+            if (app) {
+                if (app.theme) { document.getElementById('themeSelect').value = app.theme; handleThemeChange(app.theme); }
+                if (app.accentColor) {
+                    document.querySelectorAll('.color-option').forEach(o => o.classList.toggle('active', o.dataset.color === app.accentColor));
+                    changeAccentColor(app.accentColor);
+                }
+                if (app.animations !== undefined) { document.getElementById('animationsToggle').checked = app.animations; toggleAnimations(app.animations); }
+                if (app.parallax !== undefined) { document.getElementById('parallaxToggle').checked = app.parallax; toggleParallax(app.parallax); }
+            }
+
+            // Tab Navigation
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+                    document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
+                    btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
+                    document.getElementById(`panel-${btn.dataset.tab}`)?.classList.add('active');
+                });
+            });
+
+            // Color Options — sem toast
+            document.querySelectorAll('.color-option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+                    opt.classList.add('active');
+                    changeAccentColor(opt.dataset.color);
+                });
+            });
+
+            // Phone mask
+            const phoneInput = document.querySelector('#panel-perfil input[type="tel"]');
+            if (phoneInput) phoneInput.addEventListener('input', () => formatPhone(phoneInput));
+
+            // Password strength
+            const newPw = document.getElementById('newPwField');
+            const confPw = document.getElementById('confirmPwField');
+            if (newPw) newPw.addEventListener('input', () => showPasswordStrength(newPw.value, newPw));
+            if (confPw) confPw.addEventListener('input', () => showPasswordStrength(confPw.value, confPw));
+
+            // ========================================================
+            // TOGGLES E SELECTS — aplicam visualmente, SEM toast
+            // ========================================================
+            document.getElementById('themeSelect')?.addEventListener('change', e => handleThemeChange(e.target.value));
+            document.getElementById('highContrastToggle')?.addEventListener('change', toggleHighContrast);
+            document.getElementById('monochromeToggle')?.addEventListener('change', toggleMonochrome);
+            document.getElementById('invertColorsToggle')?.addEventListener('change', toggleInvertColors);
+            document.getElementById('bigCursorToggle')?.addEventListener('change', toggleBigCursor);
+            document.getElementById('highlightLinksToggle')?.addEventListener('change', toggleHighlightLinks);
+            document.getElementById('visibleFocusToggle')?.addEventListener('change', toggleVisibleFocus);
+            document.getElementById('fontSizeRange')?.addEventListener('input', e => changeFontSize(e.target.value));
+            document.getElementById('lineHeightRange')?.addEventListener('input', e => changeLineHeight(e.target.value));
+            document.getElementById('animationsToggle')?.addEventListener('change', e => toggleAnimations(e.target.checked));
+            document.getElementById('parallaxToggle')?.addEventListener('change', e => toggleParallax(e.target.checked));
+
+            // ========================================================
+            // BOTÕES "APLICAR" — ÚNICO lugar onde o toast aparece
+            // ========================================================
+
+            // Perfil → Salvar Alterações
+            document.getElementById('btnSalvarPerfil').addEventListener('click', saveProfile);
+
+            // Perfil → Cancelar (sem toast)
+            document.getElementById('btnCancelarPerfil').addEventListener('click', () => { });
+
+            // Aparência → Aplicar
+            document.getElementById('btnSalvarAparencia').addEventListener('click', () => {
+                const settings = {
+                    theme: document.getElementById('themeSelect').value,
+                    accentColor: document.querySelector('.color-option.active')?.dataset.color || 'teal',
+                    cardStyle: document.getElementById('cardStyleSelect')?.value || 'rounded',
+                    animations: document.getElementById('animationsToggle').checked,
+                    parallax: document.getElementById('parallaxToggle').checked
+                };
+                Storage.set('appearanceSettings', settings);
+                showToast('Preferências de aparência aplicadas!', 'success');
+            });
+
+            // Aparência → Restaurar Padrão (sem toast, apenas reseta)
+            document.getElementById('btnRestaurarAparencia').addEventListener('click', resetAppearance);
+
+            // Acessibilidade → Aplicar
+            document.getElementById('btnSalvarAcessibilidade').addEventListener('click', () => {
+                const settings = {
+                    highContrast: document.getElementById('highContrastToggle').checked,
+                    monochrome: document.getElementById('monochromeToggle').checked,
+                    invertColors: document.getElementById('invertColorsToggle').checked,
+                    bigCursor: document.getElementById('bigCursorToggle').checked,
+                    highlightLinks: document.getElementById('highlightLinksToggle').checked,
+                    visibleFocus: document.getElementById('visibleFocusToggle').checked,
+                    fontSize: document.getElementById('fontSizeRange').value,
+                    lineHeight: document.getElementById('lineHeightRange').value
+                };
+                Storage.set('accessibilitySettings', settings);
+                showToast('Configurações de acessibilidade aplicadas!', 'success');
+            });
+
+            // Acessibilidade → Restaurar Padrões (sem toast)
+            document.getElementById('btnRestaurarAcessibilidade').addEventListener('click', resetAccessibility);
+
+            // Notificações → Aplicar
+            document.getElementById('btnSalvarNotificacoes').addEventListener('click', () => {
+                showToast('Preferências de notificação aplicadas!', 'success');
+            });
+
+            // Privacidade → Aplicar
+            document.getElementById('btnSalvarPrivacidade').addEventListener('click', () => {
+                showToast('Configurações de privacidade aplicadas!', 'success');
+            });
+
+            // Conta → Alterar Senha (toast de erro/sucesso são válidos pois é ação imediata)
+            document.getElementById('btnAlterarSenha').addEventListener('click', changePassword);
+
+            // Conta → Sessões / Histórico / Exportar / Excluir (ações imediatas com feedback)
+            document.getElementById('btnVerSessoes').addEventListener('click', viewActiveSessions);
+            document.getElementById('btnVerHistorico').addEventListener('click', viewLoginHistory);
+            document.getElementById('btnExportarDados').addEventListener('click', exportUserData);
+            document.getElementById('btnExcluirConta').addEventListener('click', confirmDeleteAccount);
+
+            // Escutar mudanças de preferência do sistema
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                const theme = document.getElementById('themeSelect')?.value;
+                if (theme === 'auto') {
+                    document.body.classList.toggle('dark-mode', e.matches);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

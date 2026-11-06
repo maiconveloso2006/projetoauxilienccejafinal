@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo do Encceja - Auxílio Encceja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/guia.css">
+    
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="plataforma.html">
+                <img src="Logo 3.0.png" alt="Logo Auxilio Encceja">
+                Auxílio Encceja
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menu">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.html">
+                            <i class="bi bi-house"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contato.html">
+                            <i class="bi bi-envelope"></i>
+                            <span>Contato</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="suporte.html">
+                            <i class="bi bi-headset"></i>
+                            <span>Suporte</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Guia Completo do Encceja</h1>
+            <p>Tudo que você precisa saber para se preparar e realizar com sucesso o Exame Nacional para Certificação de Competências de Jovens e Adultos</p>
+            <div class="hero-buttons">
+                <a href="#preparation" class="btn btn-primary" id="btnComecarPreparacao"><i class="fas fa-rocket"></i> Começar a Preparação</a>
+                <a href="#faq" class="btn btn-secondary" id="btnVerRecursos"><i class="fas fa-book"></i> Ver Recursos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo Principal -->
+    <div class="container">
+        <div class="tabs" id="tabsSection">
+            <div class="tab-buttons" id="tabButtonsContainer">
+                <button class="tab-btn active" data-tab="about">Sobre o Encceja</button>
+                <button class="tab-btn" data-tab="registration">Inscrição e Prazos</button>
+                <button class="tab-btn" data-tab="preparation">Preparação</button>
+                <button class="tab-btn" data-tab="exam">Dia do Exame</button>
+                <button class="tab-btn" data-tab="results">Resultados e Certificação</button>
+                <button class="tab-btn" data-tab="faq">FAQ</button>
+            </div>
+
+            <!-- Tab: Sobre -->
+            <div class="tab-content active" id="about">
+                <div class="info-card">
+                    <h2>O que é o Encceja?</h2>
+                    <p>O Exame Nacional para Certificação de Competências de Jovens e Adultos (Encceja) é um exame nacional que avalia as competências e habilidades dos jovens e adultos com idade igual ou superior a 15 anos que não concluíram os estudos no tempo habitual ou que desejam certificar conhecimentos adquiridos de forma informal.</p>
+                    <p>O exame é organizado e aplicado pelo Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep) e tem como objetivo principal certificar o ensino fundamental e médio.</p>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-item-icon"><i class="fas fa-award"></i></div>
+                        <h3>Objetivo</h3>
+                        <p>O Encceja permite que jovens e adultos obtenham o certificado de conclusão do ensino fundamental ou médio, equivalente ao diploma de conclusão da educação básica.</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-icon"><i class="fas fa-users"></i></div>
+                        <h3>Público Alvo</h3>
+                        <p>Jovens e adultos com idade igual ou superior a 15 anos que não concluíram os estudos no tempo habitual ou que desejam certificar conhecimentos adquiridos de forma informal.</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-icon"><i class="fas fa-globe"></i></div>
+                        <h3>Organização</h3>
+                        <p>O exame é organizado e aplicado pelo Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep), autarquia do Ministério da Educação.</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h2>Tipos de Encceja</h2>
+                    <p>O Encceja é aplicado em diferentes formatos para atender às necessidades específicas de diferentes públicos:</p>
+                    <ul class="doc-list">
+                        <li><i class="fas fa-check-circle"></i> <strong>Encceja Nacional:</strong> Para candidatos que têm condições de locomoção e não necessitam de atendimento especializado.</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Encceja para NEE:</strong> Para candidatos com deficiência, transtornos globais de desenvolvimento ou altas habilidades/superdotação.</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Encceja para APL:</strong> Para candidatos que se encontram em estabelecimentos prisionais.</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Encceja para Refugiados:</strong> Para candidatos que tenham reconhecimento de status de refugiado no Brasil.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tab: Inscrição -->
+            <div class="tab-content" id="registration">
+                <div class="info-card">
+                    <h2>Como Fazer a Inscrição</h2>
+                    <p>A inscrição para o Encceja é feita exclusivamente pela internet, no site do Inep. O processo é simples e pode ser concluído em poucos passos:</p>
+                    <ol class="tips-list-styled">
+                        <li>Acesse o site oficial do Encceja</li>
+                        <li>Clique na opção "Fazer Inscrição"</li>
+                        <li>Preencha o formulário com seus dados pessoais</li>
+                        <li>Selecione o tipo de exame que deseja realizar</li>
+                        <li>Confirme seus dados e finalize a inscrição</li>
+                    </ol>
+                </div>
+                <div class="info-card">
+                    <h2>Prazos e Data de Aplicação</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>Período de Inscrições</h3>
+                            <p>Normalmente, o período de inscrições ocorre entre os meses de março e abril. Consulte o edital do ano desejado para confirmar as datas exatas.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Data de Aplicação</h3>
+                            <p>O Encceja é aplicado anualmente, geralmente no mês de setembro. A data exata é definida e divulgada pelo Inep.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Publicação do Resultado</h3>
+                            <p>O resultado final é divulgado entre os meses de outubro e novembro, após a aplicação do exame.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h2>Documentos Necessários</h2>
+                    <p>Para fazer a inscrição e comparecer ao exame, você precisará dos seguintes documentos:</p>
+                    <ul class="doc-list">
+                        <li><i class="fas fa-id-card"></i> <strong>CPF:</strong> Necessário para a inscrição online</li>
+                        <li><i class="fas fa-address-card"></i> <strong>Documento de Identidade:</strong> Para comprovação de identidade no dia do exame</li>
+                        <li><i class="fas fa-map-marker-alt"></i> <strong>Comprovante de Endereço:</strong> Para a inscrição</li>
+                        <li><i class="fas fa-file-alt"></i> <strong>Comprovante de Inscrição:</strong> Impresso após finalizar a inscrição online</li>
+                    </ul>
+                    <p>Além disso, se você tem alguma necessidade especial, será necessário apresentar laudo médico atualizado.</p>
+                </div>
+            </div>
+
+            <!-- Tab: Preparação -->
+            <div class="tab-content" id="preparation">
+                <div class="info-card">
+                    <h2>Como Se Preparar para o Encceja</h2>
+                    <p>A preparação para o Encceja exige dedicação e organização. Aqui estão algumas dicas para ajudar em seu estudo:</p>
+                    <ul class="tips-list-styled">
+                        <li>Conheça o formato e o conteúdo da prova</li>
+                        <li>Crie um cronograma de estudos realista</li>
+                        <li>Use materiais didáticos adequados</li>
+                        <li>Realize simulados para avaliar seu desempenho</li>
+                        <li>Estude em grupos para trocar conhecimentos</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h2>Estrutura da Prova</h2>
+                    <p>A prova do Encceja é composta por diversas áreas do conhecimento:</p>
+                    <ul class="doc-list">
+                        <li><i class="fas fa-pen-fancy"></i> <strong>Língua Portuguesa, Literatura e Redação:</strong> Avalia a capacidade de leitura, interpretação e produção textual</li>
+                        <li><i class="fas fa-language"></i> <strong>Língua Estrangeira (Inglês ou Espanhol):</strong> Avalia a capacidade de compreensão de textos</li>
+                        <li><i class="fas fa-calculator"></i> <strong>Matemática:</strong> Avalia conhecimentos em diversas áreas matemáticas</li>
+                        <li><i class="fas fa-flask"></i> <strong>Ciências da Natureza:</strong> Avalia conhecimentos em Biologia, Física e Química</li>
+                        <li><i class="fas fa-landmark"></i> <strong>Ciências Humanas:</strong> Avalia conhecimentos em História, Geografia e Filosofia</li>
+                    </ul>
+                    <p>A prova dura aproximadamente 5 horas e é composta por questões objetivas e uma redação.</p>
+                </div>
+                <div class="info-card">
+                    <h2>Dicas de Estudo</h2>
+                    <p>Aqui estão algumas estratégias que podem ajudar na sua preparação:</p>
+                    <ul class="tips-list-styled">
+                        <li><strong>Estude diariamente:</strong> Dedique pelo menos 1-2 horas por dia aos estudos</li>
+                        <li><strong>Organize seu espaço:</strong> Crie um ambiente tranquilo e organizado para estudar</li>
+                        <li><strong>Use diferentes métodos:</strong> Combine leitura, anotações, mapas mentais e resumos</li>
+                        <li><strong>Revisão constante:</strong> Revise o conteúdo estudado periodicamente</li>
+                        <li><strong>Descanso:</strong> Não subestime a importância do descanso e do sono</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tab: Dia do Exame -->
+            <div class="tab-content" id="exam">
+                <div class="info-card">
+                    <h2>O Dia do Exame</h2>
+                    <p>No dia do exame, é importante estar preparado para garantir que tudo corra bem. Aqui estão algumas dicas importantes:</p>
+                    <ul class="tips-list-styled">
+                        <li>Compareça ao local designado com pelo menos 30 minutos de antecedência</li>
+                        <li>Leve todos os documentos necessários (identidade, comprovante de inscrição)</li>
+                        <li>Evite levar materiais proibidos (celular, relógio, materiais de estudo)</li>
+                        <li>Evite conversas com outros candidatos antes ou durante a prova</li>
+                        <li>Leia atentamente as instruções antes de começar a prova</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h2>Estratégias Durante a Prova</h2>
+                    <p>Aqui estão algumas dicas para ajudar durante a realização da prova:</p>
+                    <ul class="tips-list-styled">
+                        <li><strong>Gestão do Tempo:</strong> Distribua seu tempo de forma equilibrada entre as questões</li>
+                        <li><strong>Leia Atentamente:</strong> Preste atenção em cada palavra das questões</li>
+                        <li><strong>Questões Fáceis Primeiro:</strong> Responda às questões que você conhece bem primeiro</li>
+                        <li><strong>Marque e Volte:</strong> Marque as questões difíceis e volte para elas depois</li>
+                        <li><strong>Confira as Respostas:</strong> Reserve alguns minutos no final para revisar suas respostas</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h2>Considerações Finais</h2>
+                    <p>É importante lembrar que o Encceja avalia não apenas o conhecimento, mas também as competências e habilidades desenvolvidas ao longo dos estudos. Portanto, além de memorizar conteúdos, é fundamental compreender os conceitos e saber aplicá-los em diferentes situações.</p>
+                    <p>Confie em seu preparo, mantenha a calma durante a prova e lembre-se de que você está prestes a dar um passo importante em sua vida acadêmica e profissional.</p>
+                </div>
+            </div>
+
+            <!-- Tab: Resultados -->
+            <div class="tab-content" id="results">
+                <div class="info-card">
+                    <h2>Divulgação dos Resultados</h2>
+                    <p>Após a aplicação do exame, o Inep realiza a correção e a análise das provas. O resultado final é divulgado no site oficial do Encceja, geralmente entre os meses de outubro e novembro.</p>
+                    <p>Para consultar o resultado, você precisará informar seu número de inscrição e a data de nascimento.</p>
+                </div>
+                <div class="info-card">
+                    <h2>Interpretação da Nota</h2>
+                    <p>A pontuação do Encceja é composta por diferentes áreas do conhecimento. Para ser aprovado e receber o certificado, você precisa atingir a nota mínima em todas as áreas e na redação:</p>
+                    <ul class="doc-list">
+                        <li><i class="fas fa-pen-fancy"></i> <strong>Língua Portuguesa, Literatura e Redação:</strong> Nota mínima de 200 pontos</li>
+                        <li><i class="fas fa-language"></i> <strong>Língua Estrangeira (Inglês ou Espanhol):</strong> Nota mínima de 200 pontos</li>
+                        <li><i class="fas fa-calculator"></i> <strong>Matemática:</strong> Nota mínima de 200 pontos</li>
+                        <li><i class="fas fa-flask"></i> <strong>Ciências da Natureza:</strong> Nota mínima de 200 pontos</li>
+                        <li><i class="fas fa-landmark"></i> <strong>Ciências Humanas:</strong> Nota mínima de 200 pontos</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h2>Certificação</h2>
+                    <p>Após a aprovação, o certificado de conclusão do ensino fundamental ou médio é enviado para o endereço informado durante a inscrição. O prazo para entrega do certificado é de aproximadamente 60 dias após a divulgação do resultado.</p>
+                    <p>O certificado do Encceja tem validade nacional e é equivalente ao diploma de conclusão da educação básica, abrindo portas para o ensino superior e novas oportunidades profissionais.</p>
+                </div>
+                <div class="info-card">
+                    <h2>Recurso e Nova Prova</h2>
+                    <p>Caso você não alcance a nota mínima em alguma área, não desanime! Você tem a oportunidade de se inscrever para a prova de recuperação, que é aplicada no mesmo ano, geralmente em novembro.</p>
+                    <p>Para se inscrever na prova de recuperação, você precisará informar quais áreas você deseja refazer e seguir o processo de inscrição como se fosse um novo candidato.</p>
+                </div>
+            </div>
+
+            <!-- Tab: FAQ -->
+            <div class="tab-content" id="faq">
+                <div class="info-card">
+                    <h2>Perguntas Frequentes</h2>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quem pode fazer o Encceja?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O Encceja é destinado a jovens e adultos com idade igual ou superior a 15 anos que não concluíram os estudos no tempo habitual ou que desejam certificar conhecimentos adquiridos de forma informal. Também é aberto a pessoas que não frequentaram a escola ou que desejam obter o certificado de conclusão do ensino fundamental ou médio.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Qual é a diferença entre o Encceja e o Enem?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O Encceja é destinado especificamente a jovens e adultos que desejam certificar o ensino fundamental ou médio, enquanto o Enem (Exame Nacional do Ensino Médio) é um exame aberto a todos os estudantes do ensino médio, seja concluinte ou não, e pode ser utilizado para acesso ao ensino superior através do Sistema de Seleção Unificada (Sisu) e do Fundo de Financiamento Estudantil (Fies).</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Posso fazer o Encceja se já tenho o diploma do ensino médio?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim, você pode fazer o Encceja mesmo tendo o diploma do ensino médio. O exame pode ser útil para aqueles que desejam avaliar seus conhecimentos ou para aqueles que precisam de um certificado adicional para fins específicos.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quantas vezes por ano o Encceja é aplicado?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O Encceja é aplicado anualmente, geralmente no mês de setembro. Além disso, o Inep pode organizar aplicação suplementar em alguns casos específicos, como para candidatos que não puderam realizar a prova por motivo de doença ou outros impedimentos.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Qual é a validade do certificado do Encceja?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O certificado do Encceja não possui validade. Ele é equivalente ao diploma de conclusão da educação básica e tem validade nacional, abrindo portas para o ensino superior e novas oportunidades profissionais.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Posso fazer o Encceja se tiver alguma deficiência?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim, o Encceja possui uma versão adaptada para candidatos com deficiência, transtornos globais de desenvolvimento ou altas habilidades/superdotação. Para participar, você precisará informar sua situação durante o processo de inscrição e apresentar laudo médico atualizado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulário de Contato -->
+            <div class="info-card" id="contact">
+                <h2>Entre em Contato</h2>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">Se você tiver alguma dúvida ou precisar de mais informações sobre o Encceja, por favor, preencha o formulário abaixo e entraremos em contato com você em breve.</p>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" class="form-control" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" class="form-control" placeholder="seuemail@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Assunto</label>
+                        <select id="subject" class="form-control" required>
+                            <option value="">Selecione um assunto</option>
+                            <option value="inscricao">Inscrição</option>
+                            <option value="preparacao">Preparação</option>
+                            <option value="prova">Dia da Prova</option>
+                            <option value="resultados">Resultados</option>
+                            <option value="recursos">Recursos de Estudo</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" class="form-control" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-dark"><i class="fas fa-paper-plane"></i> Enviar Mensagem</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><i class="bi bi-mortarboard"></i> Auxílio ENCCEJA</h3>
+                    <ul>
+                        <li><a href="plataforma.html"><i class="bi bi-chevron-right"></i> Home</a></li>
+                        <li><a href="conteudos.html"><i class="bi bi-chevron-right"></i> Conteúdos</a></li>
+                        <li><a href="sobre.html"><i class="bi bi-chevron-right"></i> Sobre Nós</a></li>
+                        <li><a href="contato.html"><i class="bi bi-chevron-right"></i> Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><i class="bi bi-box-seam"></i> Recursos</h3>
+                    <ul>
+                        <li><a href="guia.html"><i class="bi bi-chevron-right"></i> Guia Completo do Encceja</a></li>
+                        <li><a href="biblioteca.html"><i class="bi bi-chevron-right"></i> Biblioteca Digital</a></li>
+                        <li><a href="links.html"><i class="bi bi-chevron-right"></i> Links Uteis</a></li>
+                        <li><a href="dicas.html"><i class="bi bi-chevron-right"></i> Dicas de Estudo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><i class="bi bi-shield-check"></i> Políticas</h3>
+                    <ul>
+                        <li><a href="termos.html"><i class="bi bi-chevron-right"></i> Termos de Uso</a></li>
+                        <li><a href="politica.html"><i class="bi bi-chevron-right"></i> Política de Privacidade</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Acessibilidade</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Certificação</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><i class="bi bi-share"></i> Redes Sociais</h3>
+                    <ul>
+                        <li><a href="#"><i class="bi bi-youtube"></i> YouTube</a></li>
+                        <li><a href="#"><i class="bi bi-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="bi bi-facebook"></i> Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="anoAtual"></span> Auxílio Encceja. Todos os Direitos Reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-content">
+            <h4>Mensagem enviada com sucesso!</h4>
+            <p>Nós entraremos em contato em breve.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/contact-form-api.js"></script>
+    <script src="JS/guia.js"></script>
+
+</body>
+</html>

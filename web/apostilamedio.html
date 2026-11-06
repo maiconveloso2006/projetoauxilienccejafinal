@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostilas para ENCCEJA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/apostilas-base.css">
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SRNKXZCX54"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SRNKXZCX54');
+</script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="ap-navbar">
+        <a class="ap-navbar-brand" href="plataforma.html">
+            <img src="Logo 3.0.png" alt="Logo Auxílio Encceja">
+            <span>Auxílio Encceja</span>
+        </a>
+        <div class="ap-navlinks"><a href="#matematica">Matemática</a><a href="#portugues">Português</a><a href="#fisica">Física</a><a href="#quimica">Química</a><a href="#historia">História</a><a href="#contato">Contato</a></div>
+        <button class="ap-navbar-back" onclick="goBack()">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+    </nav>
+
+    <div class="ap-container">
+
+        <!-- Hero -->
+        <div class="ap-hero ap-animate">
+            <div class="ap-hero-content">
+                <span class="ap-hero-badge"><i class="bi bi-journal-bookmark-fill"></i> Apostilas</span>
+                <h1>Apostilas do Ensino Médio</h1>
+                <p>Prepare-se para os seus exames com nossas apostilas completas e bem estruturadas para todas as matérias do Ensino Médio.</p>
+                <div class="ap-hero-actions">
+                    <a href="#apostilas" class="ap-btn ap-btn-light">Ver Apostilas</a>
+                    <a href="#contato" class="ap-btn ap-btn-ghost">Fale Conosco</a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="ap-chips" aria-label="Matérias"><a class="ap-chip" href="#matematica">Matemática</a><a class="ap-chip" href="#portugues">Português</a><a class="ap-chip" href="#fisica">Física</a><a class="ap-chip" href="#quimica">Química</a><a class="ap-chip" href="#historia">História</a><a class="ap-chip" href="#contato">Contato</a></nav>
+
+        <!-- Apostilas -->
+        <section id="apostilas" class="ap-section">
+            <h2 class="ap-title"><i class="bi bi-journal-text"></i> Nossas Apostilas</h2>
+            <div id="matematica" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-calculator-fill"></i> Matemática</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-calculator"></i></span>
+                            <h3>Álgebra</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos de álgebra para o ensino médio, incluindo equações, inequações e funções.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Equações lineares e quadráticas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Sistemas de equações</span></li><li><i class="bi bi-check-circle-fill"></i><span>Funções e gráficos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Progressões aritméticas e geométricas</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Álgebra')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Álgebra')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-triangle"></i></span>
+                            <h3>Geometria</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Princípios da geometria plana e espacial, com foco em teoremas e demonstrações.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Triângulos e seus teoremas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Geometria analítica</span></li><li><i class="bi bi-check-circle-fill"></i><span>Círculos e suas propriedades</span></li><li><i class="bi bi-check-circle-fill"></i><span>Geometria espacial: volumes e áreas</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Geometria')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Geometria')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-circle"></i></span>
+                            <h3>Trigonometria</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos da trigonometria e suas aplicações em problemas geométricos e físicos.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Funções trigonométricas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Identidades trigonométricas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Triângulos e trigonometria</span></li><li><i class="bi bi-check-circle-fill"></i><span>Aplicações da trigonometria</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Trigonometria')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Trigonometria')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="portugues" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-book-fill"></i> Português</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-journal-text"></i></span>
+                            <h3>Gramática Básica</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Conceitos fundamentais de gramática para o ensino médio, incluindo fonética, morfologia e sintaxe.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Fonética e fonologia</span></li><li><i class="bi bi-check-circle-fill"></i><span>Classes de palavras</span></li><li><i class="bi bi-check-circle-fill"></i><span>Concordância verbal e nominal</span></li><li><i class="bi bi-check-circle-fill"></i><span>Regência verbal e nominal</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Gramática Básica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Gramática Básica')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-book"></i></span>
+                            <h3>Literatura Brasileira</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Principais movimentos literários e autores brasileiros para o ensino médio.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Período colonial</span></li><li><i class="bi bi-check-circle-fill"></i><span>Romantismo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Realismo e Naturalismo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Modernismo</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Literatura Brasileira')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Literatura Brasileira')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-pencil-square"></i></span>
+                            <h3>Redação e Texto Argumentativo</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Técnicas e estratégias para elaborar textos argumentativos para o ensino médio.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Tipos de texto</span></li><li><i class="bi bi-check-circle-fill"></i><span>Estrutura do texto argumentativo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Argumentação e persuasão</span></li><li><i class="bi bi-check-circle-fill"></i><span>Revisão e correção</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Redação e Texto Argumentativo')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Redação e Texto Argumentativo')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="fisica" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-lightning-charge-fill"></i> Física</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-gear"></i></span>
+                            <h3>Mecânica</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos da mecânica clássica, incluindo movimento, forças e energia.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Movimento e vetores</span></li><li><i class="bi bi-check-circle-fill"></i><span>Leis de Newton</span></li><li><i class="bi bi-check-circle-fill"></i><span>Trabalho e energia</span></li><li><i class="bi bi-check-circle-fill"></i><span>Dinâmica e conservação de energia</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Mecânica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Mecânica')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-lightning"></i></span>
+                            <h3>Eletricidade</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Princípios da eletricidade estática e dinâmica, com foco em circuitos elétricos.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Eletricidade estática</span></li><li><i class="bi bi-check-circle-fill"></i><span>Campo elétrico</span></li><li><i class="bi bi-check-circle-fill"></i><span>Eletricidade dinâmica</span></li><li><i class="bi bi-check-circle-fill"></i><span>Circuitos elétricos e Ohm</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Eletricidade')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Eletricidade')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-eye"></i></span>
+                            <h3>Óptica</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Estudo da luz, suas propriedades e aplicações em sistemas ópticos.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Propriedades da luz</span></li><li><i class="bi bi-check-circle-fill"></i><span>Reflexão e refração</span></li><li><i class="bi bi-check-circle-fill"></i><span>Lentes e espelhos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Instrumentos ópticos</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Óptica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Óptica')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="quimica" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-droplet-half"></i> Química</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-flask"></i></span>
+                            <h3>Química Orgânica</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Fundamentos da química orgânica, com foco em compostos orgânicos e reações.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Estrutura da matéria orgânica</span></li><li><i class="bi bi-check-circle-fill"></i><span>Hidrocarbonetos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Funções orgânicas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Reações orgânicas</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Química Orgânica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Química Orgânica')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-droplet"></i></span>
+                            <h3>Química Inorgânica</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Estudo dos elementos químicos, suas propriedades e compostos inorgânicos.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Tabela periódica</span></li><li><i class="bi bi-check-circle-fill"></i><span>Reações químicas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Ácidos e bases</span></li><li><i class="bi bi-check-circle-fill"></i><span>Sais e oxidação-redução</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Química Inorgânica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Química Inorgânica')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-search"></i></span>
+                            <h3>Química Analítica</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Métodos e técnicas para análise química de substâncias e compostos.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Métodos de análise química</span></li><li><i class="bi bi-check-circle-fill"></i><span>Técnicas de titulação</span></li><li><i class="bi bi-check-circle-fill"></i><span>Análise espectrométrica</span></li><li><i class="bi bi-check-circle-fill"></i><span>Análise de água e solo</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('Química Analítica')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('Química Analítica')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="historia" class="ap-subject">
+                <h3 class="ap-subtitle"><i class="bi bi-hourglass-split"></i> História</h3>
+                <div class="ap-grid">
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-building"></i></span>
+                            <h3>História Antiga</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Civilizações antigas e seus legados para a humanidade.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Civilizações mesopotâmicas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Egito antigo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Grécia antiga</span></li><li><i class="bi bi-check-circle-fill"></i><span>Império Romano</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('História Antiga')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('História Antiga')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-shield"></i></span>
+                            <h3>História Medieval</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Período medieval e suas transformações sociais, políticas e culturais.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Feudalismo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Impérios islâmicos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Cruzadas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Renascimento</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('História Medieval')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('História Medieval')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="ap-card ap-animate">
+                        <header class="ap-card-header">
+                            <span class="ap-card-icon"><i class="bi bi-globe"></i></span>
+                            <h3>História Moderna e Contemporânea</h3>
+                        </header>
+                        <div class="ap-card-body">
+                            <p>Transformações do mundo moderno e contemporâneo, com foco em movimentos sociais e políticos.</p>
+                            <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Revoluções burguesas</span></li><li><i class="bi bi-check-circle-fill"></i><span>Imperialismo e colonialismo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Guerras mundiais</span></li><li><i class="bi bi-check-circle-fill"></i><span>Guerra Fria e globalização</span></li></ul>
+                            <div class="ap-card-actions">
+                                <button class="ap-btn ap-btn-outline" onclick="showPreview('História Moderna e Contemporânea')"><i class="bi bi-eye-fill"></i> Visualizar</button>
+                                <button class="ap-btn ap-btn-primary" onclick="downloadApostila('História Moderna e Contemporânea')"><i class="bi bi-download"></i> Baixar</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre -->
+        <section id="sobre" class="ap-section">
+            <div class="ap-card ap-about">
+                <div>
+                    <h2 class="ap-title">Sobre Nossas Apostilas</h2>
+                    <p>As apostilas do ensino médio foram desenvolvidas por especialistas em educação com foco no conteúdo programático dos exames e vestibulares. Cada apostila foi cuidadosamente estruturada para proporcionar uma aprendizagem eficaz e direta.</p>
+                    <p>As apostilas contêm:</p>
+                    <ul class="ap-topics"><li><i class="bi bi-check-circle-fill"></i><span>Explicações claras e concisas dos conceitos de cada matéria</span></li><li><i class="bi bi-check-circle-fill"></i><span>Exemplos práticos e resolvidos</span></li><li><i class="bi bi-check-circle-fill"></i><span>Exercícios para fixação do conteúdo</span></li><li><i class="bi bi-check-circle-fill"></i><span>Dicas e estratégias para resolver questões</span></li></ul>
+                    <p>Nossa metodologia é baseada na experiência de professores que atuam em escolas de excelência e já atuaram como corretores e elaboradores de questões para os principais vestibulares do país.</p>
+                </div>
+                <div class="ap-features">
+                    <h3>Por que escolher nossas apostilas?</h3>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-arrow-repeat"></i></span><div><h4>Conteúdo Atualizado</h4><p>Nossas apostilas são atualizadas regularmente para acompanhar as mudanças nos currículos escolares e nos formatos dos exames.</p></div></div>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-diagram-3-fill"></i></span><div><h4>Metodologia Eficaz</h4><p>Organização do conteúdo que facilita a absorção dos conceitos de cada matéria.</p></div></div>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-collection-fill"></i></span><div><h4>Material Completo</h4><p>Cobertura de todos os tópicos de cada matéria que podem ser cobrados nos exames e vestibulares.</p></div></div>
+                    <div class="ap-feature"><span class="ap-card-icon"><i class="bi bi-trophy-fill"></i></span><div><h4>Resultados Comprovados</h4><p>Estudantes que utilizam nossas apostilas apresentam melhor desempenho nos exames e vestibulares.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="ap-section">
+            <div class="ap-card ap-contact">
+                <h2 class="ap-title"><i class="bi bi-envelope-fill"></i> Fale Conosco</h2>
+                <form id="contactForm" class="ap-form">
+                    <div class="ap-field"><label for="name">Nome</label><input type="text" id="name" required></div>
+                    <div class="ap-field"><label for="email">E-mail</label><input type="email" id="email" required></div>
+                    <div class="ap-field ap-full"><label for="subject">Assunto</label><input type="text" id="subject" required></div>
+                    <div class="ap-field ap-full"><label for="message">Mensagem</label><textarea id="message" rows="4" required></textarea></div>
+                    <div class="ap-full ap-center">
+                        <button type="submit" class="ap-btn ap-btn-accent"><i class="bi bi-send-fill"></i> Enviar Mensagem</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toasts -->
+    <div class="toast-container"></div>
+
+    <!-- Modal de visualização -->
+    <div id="apostilaModal" class="ap-warning-overlay" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+        <div class="ap-warning-box ap-modal">
+            <div class="ap-modal-head">
+                <h3 id="previewTitle">Título da Apostila</h3>
+                <button type="button" class="ap-modal-x" data-close aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="ap-modal-body">
+                <div class="preview-content" id="previewContent"></div>
+                <p class="ap-note">Esta é uma visualização parcial da apostila. Baixe a versão completa para acessar todo o conteúdo.</p>
+            </div>
+            <div class="ap-modal-foot">
+                <button type="button" class="ap-btn ap-btn-outline" data-close>Fechar</button>
+                <button type="button" class="ap-btn ap-btn-primary" id="downloadFromModal"><i class="bi bi-download"></i> Baixar Apostila</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/apostilas-ui.js"></script>
+    <script src="JS/api.js"></script>
+    <script src="JS/contact-form-api.js"></script>
+    <script src="JS/apostilamedio.js"></script>
+
+</body>
+</html>

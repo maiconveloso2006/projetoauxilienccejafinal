@@ -1,0 +1,3643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Estudos - Auxilio Encceja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #34495e;
+            --primary-dark: #344953;
+            --secondary: #57c5b6;
+            --accent: #159895;
+            --bg-light: #f8fafb;
+            --bg-card: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --radius: 16px;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 100px;
+            color: var(--text-dark);
+            transition: all var(--transition-speed) ease;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f0f4f3 0%, #e2e8f0 100%);
+            z-index: -1;
+        }
+
+        /* Modo Alto Contraste */
+        body.high-contrast {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast::before {
+            display: none !important;
+        }
+
+        body.high-contrast .navbar {
+            background: #000000 !important;
+            border-bottom: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .navbar-brand,
+        body.high-contrast .navbar-nav .nav-link {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .welcome-banner {
+            background: #000000 !important;
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .welcome-title,
+        body.high-contrast .welcome-subtitle,
+        body.high-contrast .section-title {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .content-card,
+        body.high-contrast .resource-card {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .content-title,
+        body.high-contrast .content-count,
+        body.high-contrast .resource-title,
+        body.high-contrast .modal-subtitle,
+        body.high-contrast .resource-description,
+        body.high-contrast .content-option-title,
+        body.high-contrast .content-option-count {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .modal-content {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffffff !important;
+            box-shadow: none;
+        }
+
+        body.high-contrast .modal-header {
+            background: #000000 !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-bottom: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .modal-header::before {
+            display: none !important;
+        }
+
+        body.high-contrast .modal-footer {
+            border: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .content-option {
+            background-color: #000000 !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .content-option:hover {
+            background-color: #000000 !important;
+        }
+
+        body.high-contrast .footer {
+            background: #000000 !important;
+            border-top: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-modal-content {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-modal-header {
+            background: #000000 !important;
+            border-bottom: 3px solid #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-modal-title {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-modal-close {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #000000;
+        }
+
+        body.high-contrast .accessibility-modal-body {
+            background-color: #000000 !important;
+        }
+
+        body.high-contrast .accessibility-section-title {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-option {
+            background-color: #1a1a1a !important;
+            color: #ffffff !important;
+            border: 1px solid #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-option-title {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .accessibility-option-description {
+            color: #cccccc !important;
+        }
+
+        body.high-contrast .accessibility-modal-footer {
+            background-color: #1a1a1a !important;
+            border-top: 2px solid #ffffff !important;
+        }
+
+        body.high-contrast .btn-accessibility {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        /* Modo Escuro */
+        body.dark-mode {
+            background-color: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode::before {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%) !important;
+        }
+
+        body.dark-mode .navbar {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        body.dark-mode .navbar-brand,
+        body.dark-mode .navbar-nav .nav-link {
+            color: rgba(224, 224, 224, 0.9) !important;
+        }
+
+        body.dark-mode .navbar-nav .nav-link.active {
+            background-color: var(--accent) !important;
+            color: white !important;
+        }
+
+        body.dark-mode .welcome-banner {
+            background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+        }
+
+        body.dark-mode .welcome-title,
+        body.dark-mode .section-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .welcome-subtitle {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .content-card,
+        body.dark-mode .resource-card {
+            background-color: #1e1e1e !important;
+            color: #e0e0e0 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .content-card:hover,
+        body.dark-mode .resource-card:hover {
+            border-color: var(--accent) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        body.dark-mode .content-title,
+        body.dark-mode .content-count,
+        body.dark-mode .resource-title,
+        body.dark-mode .resource-description,
+        body.dark-mode .content-option-title,
+        body.dark-mode .content-option-count {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .footer {
+            background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #1e1e1e !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .modal-header {
+            background: #2d2d2d !important;
+            border-bottom-color: rgba(255,255,255,0.1) !important;
+        }
+
+        body.dark-mode .modal-footer {
+            border-top-color: rgba(255,255,255,0.1) !important;
+        }
+
+        body.dark-mode .content-option {
+            background-color: #2d2d2d !important;
+            border-color: rgba(255,255,255,0.1) !important;
+        }
+
+        body.dark-mode .content-option:hover {
+            background-color: #3d3d3d !important;
+        }
+
+        body.dark-mode .accessibility-modal-content {
+            background-color: #1e1e1e !important;
+            color: #e0e0e0 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .accessibility-modal-header {
+            background: #2d2d2d !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .accessibility-modal-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-modal-body {
+            background-color: #1e1e1e !important;
+        }
+
+        body.dark-mode .accessibility-section-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-option {
+            background-color: #2d2d2d !important;
+            color: #e0e0e0 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .accessibility-option:hover {
+            background-color: #3d3d3d !important;
+        }
+
+        body.dark-mode .accessibility-option-title {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-option-description {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .accessibility-toggle-label,
+        body.dark-mode .accessibility-range-label {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-range {
+            background: #3d3d3d !important;
+        }
+
+        body.dark-mode .accessibility-modal-footer {
+            background-color: #2d2d2d !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .accessibility-reset-btn {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .accessibility-reset-btn:hover {
+            background-color: #3d3d3d !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .accessibility-save-btn {
+            background-color: var(--accent) !important;
+        }
+
+        /* Modo de Leitura */
+        body.reading-mode {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        body.reading-mode .item-card {
+            margin-bottom: 25px;
+        }
+
+        body.reading-mode .item-title {
+            font-size: 1.2rem;
+        }
+
+        /* Modo Monocromático */
+        body.monochrome::before,
+        body.monochrome .navbar,
+        body.monochrome .footer,
+        body.monochrome .main-container,
+        body.monochrome .accessibility-modal-content,
+        body.monochrome .btn-accessibility,
+        body.monochrome .item-card,
+        body.monochrome .stat-card {
+            filter: grayscale(100%);
+        }
+
+        /* Modo de Baixa Saturação */
+        body.low-saturation::before,
+        body.low-saturation .navbar,
+        body.low-saturation .main-container,
+        body.low-saturation .footer,
+        body.low-saturation .btn-accessibility,
+        body.low-saturation .accessibility-modal-content {
+            filter: saturate(50%);
+        }
+
+        /* Modo de Inversão de Cores */
+        body.invert-colors::before,
+        body.invert-colors .navbar,
+        body.invert-colors .main-container,
+        body.invert-colors .footer,
+        body.invert-colors .btn-accessibility,
+        body.invert-colors .accessibility-modal-content {
+            filter: invert(100%) hue-rotate(180deg);
+        }
+
+        body.invert-colors .main-container img,
+        body.invert-colors .main-container video,
+        body.invert-colors .navbar img,
+        body.invert-colors .footer img,
+        body.invert-colors .accessibility-modal-content img {
+            filter: invert(100%) hue-rotate(180deg);
+        }
+
+        /* Realce de Links */
+        body.highlight-links a {
+            text-decoration: underline !important;
+            text-decoration-thickness: 2px !important;
+            text-underline-offset: 3px !important;
+        }
+
+        body.highlight-links .nav-link,
+        body.highlight-links .footer-links a {
+            background-color: rgba(255, 255, 0, 0.3) !important;
+            padding: 4px 8px !important;
+            border-radius: 4px !important;
+        }
+
+        /* Tipos de Daltonismo */
+        body.protanopia::before,
+        body.protanopia .navbar,
+        body.protanopia .footer,
+        body.protanopia .main-container,
+        body.protanopia .accessibility-modal-content,
+        body.protanopia .btn-accessibility {
+            filter: url('#protanopia-filter');
+        }
+
+        body.deuteranopia::before,
+        body.deuteranopia .navbar,
+        body.deuteranopia .footer,
+        body.deuteranopia .main-container,
+        body.deuteranopia .accessibility-modal-content,
+        body.deuteranopia .btn-accessibility {
+            filter: url('#deuteranopia-filter');
+        }
+
+        body.tritanopia::before,
+        body.tritanopia .navbar,
+        body.tritanopia .footer,
+        body.tritanopia .main-container,
+        body.tritanopia .accessibility-modal-content,
+        body.tritanopia .btn-accessibility {
+            filter: url('#tritanopia-filter');
+        }
+
+        /* Cursor Grande */
+        body.big-cursor,
+        body.big-cursor * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="%23000" stroke="%23fff" stroke-width="3"/></svg>') 24 24, auto !important;
+        }
+
+        body.big-cursor a,
+        body.big-cursor button,
+        body.big-cursor input,
+        body.big-cursor select,
+        body.big-cursor textarea,
+        body.big-cursor .item-card {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="%2328a745" stroke="%23fff" stroke-width="3"/></svg>') 24 24, pointer !important;
+        }
+
+        /* Foco Visível */
+        body.visible-focus *:focus {
+            outline: 3px solid var(--accent) !important;
+            outline-offset: 3px !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            box-shadow: var(--shadow-lg);
+            padding: 0.75rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: #fff !important;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.85) !important;
+            margin: 0 3px;
+            border-radius: 8px;
+            padding: 8px 14px !important;
+            transition: all var(--transition-speed) ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: rgba(255,255,255,0.15);
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            background: rgba(255,255,255,0.25);
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link i {
+            margin-right: 6px;
+        }
+
+        .navbar-toggler {
+            border: none;
+            color: white;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-toggler:focus,
+        .navbar-toggler:active {
+            outline: none !important;
+            box-shadow: none !important;
+            background-color: transparent !important;
+        }
+
+        .navbar-toggler i {
+            font-size: 1.5rem;
+        }
+
+        /* Language Dropdown */
+        .lang-dropdown .dropdown-toggle::after {
+            display: none;
+        }
+
+        .lang-dropdown .dropdown-menu {
+            background: var(--primary);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 6px;
+            min-width: 170px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-top: 8px;
+        }
+
+        .lang-dropdown .dropdown-item {
+            color: rgba(255,255,255,0.85);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-dropdown .dropdown-item:hover {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+        }
+
+        .lang-dropdown .dropdown-item.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .lang-dropdown .dropdown-item .lang-flag {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .lang-dropdown .dropdown-item .lang-check {
+            margin-left: auto;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .lang-dropdown .dropdown-item.active .lang-check {
+            opacity: 1;
+        }
+
+        .lang-btn-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-btn-flag {
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        .lang-btn-code {
+            font-weight: 700;
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Container */
+        .main-container {
+            padding: 2rem 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary) 100%);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(52, 73, 94, 0.3);
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(87, 197, 182, 0.3) 0%, transparent 70%);
+            animation: floatBlob 8s ease-in-out infinite;
+        }
+
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 40%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(21, 152, 149, 0.2) 0%, transparent 70%);
+            animation: floatBlob 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatBlob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -20px) scale(1.1); }
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .welcome-text {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            max-width: 500px;
+        }
+
+        .welcome-illustration {
+            display: flex;
+            gap: 1rem;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 8px 20px;
+            border: 1px solid rgba(255,255,255,0.25);
+            margin-bottom: 12px;
+            width: 100%;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        .countdown-label i {
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+
+        .countdown-label-text {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .countdown-label.inscricoes {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .countdown-label.inscricoes i {
+            color: var(--success);
+        }
+
+        .countdown-label.provas {
+            border-color: rgba(245, 158, 11, 0.4);
+        }
+
+        .countdown-label.provas i {
+            color: var(--warning);
+        }
+
+        .countdown-label.encerrada {
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .countdown-label.encerrada i {
+            color: var(--danger);
+        }
+
+        .countdown-bubbles {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-bubble {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: bubbleFloat 3s ease-in-out infinite;
+            min-width: 80px;
+        }
+
+        .stat-bubble:nth-child(2) { animation-delay: 0.5s; }
+        .stat-bubble:nth-child(3) { animation-delay: 1s; }
+        .stat-bubble:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .stat-bubble-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #ffffff;
+            display: block;
+        }
+
+        .stat-bubble-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Content Cards Section */
+        .content-section {
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .content-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .content-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--card-accent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+            border-color: var(--card-accent);
+        }
+
+        .content-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .content-card:active {
+            transform: translateY(-8px) scale(0.98);
+        }
+
+        .content-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            background: var(--card-bg);
+            color: var(--card-accent);
+            transition: all 0.4s ease;
+        }
+
+        .content-card:hover .content-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--card-accent);
+            color: white;
+        }
+
+        .content-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .content-count {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .content-count i {
+            color: var(--card-accent);
+        }
+
+        .content-card.matematica { --card-accent: #3b82f6; --card-bg: rgba(59, 130, 246, 0.1); }
+        .content-card.portugues { --card-accent: #ef4444; --card-bg: rgba(239, 68, 68, 0.1); }
+        .content-card.historia { --card-accent: #f59e0b; --card-bg: rgba(245, 158, 11, 0.1); }
+        .content-card.geografia { --card-accent: #10b981; --card-bg: rgba(16, 185, 129, 0.1); }
+        .content-card.ciencias { --card-accent: #8b5cf6; --card-bg: rgba(139, 92, 246, 0.1); }
+
+        /* Resources Section */
+        .resources-section {
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--resource-accent);
+        }
+
+        .resource-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--resource-bg);
+            color: var(--resource-accent);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover .resource-icon {
+            background: var(--resource-accent);
+            color: white;
+            transform: rotate(-5deg);
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .resource-description {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .resource-arrow {
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover .resource-arrow {
+            color: var(--resource-accent);
+            transform: translateX(5px);
+        }
+
+        .resource-card.biblioteca { --resource-accent: #3b82f6; --resource-bg: rgba(59, 130, 246, 0.1); }
+        .resource-card.links { --resource-accent: #10b981; --resource-bg: rgba(16, 185, 129, 0.1); }
+        .resource-card.guia { --resource-accent: #f59e0b; --resource-bg: rgba(245, 158, 11, 0.1); }
+        .resource-card.dicas { --resource-accent: #ec4899; --resource-bg: rgba(236, 72, 153, 0.1); }
+        .resource-card.provas { --resource-accent: #8b5cf6; --resource-bg: rgba(139, 92, 246, 0.1); }
+        .resource-card.suporte { --resource-accent: #ef4444; --resource-bg: rgba(239, 68, 68, 0.1); }
+
+        /* Content Modal */
+        .content-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .content-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 24px;
+            width: 95%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(80px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary));
+            color: white;
+            padding: 1.75rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #000000;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-title i {
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .content-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .content-option {
+            background: var(--bg-light);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .content-option:hover {
+            border-color: var(--option-accent);
+            background: var(--option-bg);
+            transform: translateY(-4px);
+        }
+
+        .content-option.selected {
+            border-color: var(--option-accent);
+            background: var(--option-bg);
+        }
+
+        .content-option-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            background: var(--option-accent);
+            color: white;
+        }
+
+        .content-option-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .content-option-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .content-option.videoaula { --option-accent: #3b82f6; --option-bg: rgba(59, 130, 246, 0.1); }
+        .content-option.apostilas { --option-accent: #10b981; --option-bg: rgba(16, 185, 129, 0.1); }
+        .content-option.exercicios { --option-accent: #f59e0b; --option-bg: rgba(245, 158, 11, 0.1); }
+        .content-option.simulados { --option-accent: #8b5cf6; --option-bg: rgba(139, 92, 246, 0.1); }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .btn-cancel {
+            padding: 0.85rem 1.75rem;
+            border: 2px solid var(--border-color);
+            background: transparent;
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            border-color: var(--text-dark);
+            color: var(--text-dark);
+        }
+
+        .btn-continue {
+            padding: 0.85rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(21, 152, 149, 0.4);
+        }
+
+        .btn-continue:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            transition: color var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.3rem;
+            margin: 0 8px;
+            transition: all var(--transition-speed);
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-2px);
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Modal de Acessibilidade */
+        .btn-accessibility {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(21, 152, 149, 0.4);
+            transition: all var(--transition-speed);
+            cursor: pointer;
+        }
+
+        .btn-accessibility:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(21, 152, 149, 0.5);
+        }
+
+        .btn-accessibility:focus {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .btn-accessibility.active {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+        }
+
+        .accessibility-modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .accessibility-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .accessibility-modal-content {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            width: 95%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .accessibility-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accessibility-modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            background-size: 60px 60px;
+            opacity: 0.5;
+        }
+
+        .accessibility-modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .accessibility-modal-title i {
+            font-size: 1.6rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .accessibility-modal-close {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            font-size: 1.3rem;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 12px;
+            transition: all var(--transition-speed);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .accessibility-modal-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: rotate(90deg);
+        }
+
+        .accessibility-modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .accessibility-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            background: #f1f5f9;
+            padding: 6px;
+            border-radius: 14px;
+        }
+
+        .accessibility-tab {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .accessibility-tab i {
+            font-size: 1.1rem;
+        }
+
+        .accessibility-tab:hover {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text-dark);
+        }
+
+        .accessibility-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .accessibility-tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .accessibility-tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .accessibility-section {
+            margin-bottom: 24px;
+        }
+
+        .accessibility-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .accessibility-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .accessibility-section-title i {
+            color: var(--accent);
+        }
+
+        .accessibility-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .accessibility-option {
+            background: white;
+            border-radius: 14px;
+            padding: 16px;
+            transition: all var(--transition-speed);
+            border: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accessibility-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            transform: scaleX(0);
+            transition: transform var(--transition-speed);
+        }
+
+        .accessibility-option:hover {
+            border-color: rgba(21, 152, 149, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .accessibility-option:hover::before {
+            transform: scaleX(1);
+        }
+
+        .accessibility-option.active {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(21, 152, 149, 0.05), rgba(87, 197, 182, 0.05));
+        }
+
+        .accessibility-option.active::before {
+            transform: scaleX(1);
+        }
+
+        .accessibility-option-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .accessibility-option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .accessibility-option-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .accessibility-option-description {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-left: 52px;
+        }
+
+        .accessibility-toggle {
+            display: flex;
+            align-items: center;
+            margin-top: 12px;
+            margin-left: 52px;
+        }
+
+        .accessibility-toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+
+        .accessibility-toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .accessibility-toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e2e8f0;
+            transition: var(--transition-speed);
+            border-radius: 26px;
+        }
+
+        .accessibility-toggle-slider::before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: var(--transition-speed);
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .accessibility-toggle-switch input:checked+.accessibility-toggle-slider {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+        }
+
+        .accessibility-toggle-switch input:checked+.accessibility-toggle-slider::before {
+            transform: translateX(22px);
+        }
+
+        .accessibility-toggle-switch input:focus+.accessibility-toggle-slider {
+            box-shadow: 0 0 0 3px rgba(21, 152, 149, 0.3);
+        }
+
+        .accessibility-toggle-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .accessibility-range-control {
+            margin-top: 12px;
+            margin-left: 52px;
+        }
+
+        .accessibility-range-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .accessibility-range-label span:last-child {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .accessibility-range {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #e2e8f0, #e2e8f0);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .accessibility-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(21, 152, 149, 0.4);
+            transition: transform var(--transition-speed);
+        }
+
+        .accessibility-range::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .accessibility-range::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(21, 152, 149, 0.4);
+        }
+
+        .colorblind-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .colorblind-option {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .colorblind-option:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .colorblind-option.active {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(21, 152, 149, 0.05), rgba(87, 197, 182, 0.05));
+        }
+
+        .colorblind-preview {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .colorblind-preview span {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .colorblind-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .accessibility-modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 28px;
+            background: #f8fafb;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .accessibility-reset-btn {
+            background: white;
+            border: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .accessibility-reset-btn:hover {
+            background: var(--bg-light);
+            border-color: var(--text-muted);
+            color: var(--text-dark);
+        }
+
+        .accessibility-save-btn {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(21, 152, 149, 0.3);
+        }
+
+        .accessibility-save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(21, 152, 149, 0.4);
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            z-index: 1100;
+        }
+
+        .custom-toast {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideInLeft 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 350px;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-toast i {
+            font-size: 1.4rem;
+            color: var(--secondary);
+        }
+
+        .custom-toast-message {
+            font-weight: 500;
+        }
+
+        .accessibility-status {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+        .accessibility-option.active .accessibility-status {
+            opacity: 1;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 992px) {
+            .welcome-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .welcome-text {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .welcome-illustration {
+                width: 100%;
+                justify-content: center;
+                margin-top: 1.5rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+                padding-bottom: 140px;
+            }
+
+            .navbar {
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .navbar-brand img {
+                height: 32px;
+            }
+
+            .main-container {
+                padding: 1rem 0.75rem;
+            }
+
+            .welcome-banner {
+                padding: 2rem 1.5rem;
+                border-radius: 16px;
+            }
+
+            .welcome-title {
+                font-size: 1.75rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .resource-card {
+                padding: 1.25rem;
+            }
+
+            .content-options {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .btn-cancel, .btn-continue {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer {
+                padding: 10px 0;
+            }
+            .footer .container .row {
+                text-align: center;
+            }
+            .footer-links {
+                margin-bottom: 10px;
+            }
+            .footer-links a {
+                margin: 0 8px;
+                font-size: 0.8rem;
+            }
+            
+            .social-icons {
+                text-align: center !important;
+            }
+
+            .btn-accessibility {
+                bottom: 100px; 
+                right: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            .accessibility-modal-content {
+                max-height: 85vh;
+                width: 98%;
+            }
+
+            .accessibility-modal-header, 
+            .accessibility-modal-footer {
+                padding: 16px 20px;
+            }
+
+            .accessibility-tabs {
+                flex-wrap: wrap;
+            }
+
+            .accessibility-tab {
+                flex: 1 1 calc(50% - 4px);
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+
+            .accessibility-options {
+                grid-template-columns: 1fr;
+            }
+
+            .accessibility-modal-footer {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .accessibility-reset-btn,
+            .accessibility-save-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .countdown-label {
+                padding: 6px 16px;
+            }
+
+            .countdown-label-text {
+                font-size: 0.8rem;
+                letter-spacing: 0.5px;
+            }
+
+            .lang-dropdown .dropdown-menu {
+                min-width: 150px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .welcome-banner {
+                padding: 1.5rem 1rem;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+
+            .stat-bubble {
+                padding: 1rem 1.0rem;
+                min-width: 70px;
+            }
+            .stat-bubble-value {
+                font-size: 1.25rem;
+            }
+
+            .content-cards-grid {
+                gap: 1rem;
+            }
+
+            .content-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .content-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                border-radius: 16px;
+            }
+
+            .colorblind-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.25rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .section-title i {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        *:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--secondary);
+            outline-offset: 2px;
+        }
+
+        body.font-size-small { font-size: 0.9rem; }
+        body.font-size-medium { font-size: 1rem; }
+        body.font-size-large { font-size: 1.15rem; }
+        body.font-size-xlarge { font-size: 1.3rem; }
+        body.line-height-normal { line-height: 1.5; }
+        body.line-height-medium { line-height: 1.7; }
+        body.line-height-large { line-height: 2.0; }
+
+        .svg-filters {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .no-transition {
+            transition: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG Filters para Daltonismo -->
+    <svg class="svg-filters">
+        <defs>
+            <filter id="protanopia-filter">
+                <feColorMatrix type="matrix" values="0.567,0.433,0,0,0 0.558,0.442,0,0,0 0,0.242,0.758,0,0 0,0,0,1,0" />
+            </filter>
+            <filter id="deuteranopia-filter">
+                <feColorMatrix type="matrix" values="0.625,0.375,0,0,0 0.7,0.3,0,0,0 0,0.3,0.7,0,0 0,0,0,1,0" />
+            </filter>
+            <filter id="tritanopia-filter">
+                <feColorMatrix type="matrix" values="0.95,0.05,0,0,0 0,0.433,0.567,0,0 0,0.475,0.525,0,0 0,0,0,1,0" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Botão de Acessibilidade -->
+    <button class="btn-accessibility" id="accessibilityBtn" aria-label="Abrir configurações de acessibilidade"
+        title="Acessibilidade">
+        <i class="bi bi-universal-access"></i>
+    </button>
+
+    <!-- Modal de Acessibilidade -->
+    <div class="accessibility-modal" id="accessibilityModal" role="dialog" aria-modal="true"
+        aria-labelledby="accessibilityModalTitle">
+        <div class="accessibility-modal-content">
+            <div class="accessibility-modal-header">
+                <h3 class="accessibility-modal-title" id="accessibilityModalTitle">
+                    <i class="bi bi-universal-access"></i>
+                    <span data-i18n="accessibility.title">Configurações de Acessibilidade</span>
+                </h3>
+                <button class="accessibility-modal-close" id="accessibilityModalClose" aria-label="Fechar">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="accessibility-modal-body">
+                <div class="accessibility-tabs" role="tablist">
+                    <button class="accessibility-tab active" data-tab="visual" role="tab" aria-selected="true"
+                        aria-controls="tab-visual">
+                        <i class="bi bi-eye"></i>
+                        <span data-i18n="accessibility.tab.visual">Visual</span>
+                    </button>
+                    <button class="accessibility-tab" data-tab="content" role="tab" aria-selected="false"
+                        aria-controls="tab-content">
+                        <i class="bi bi-fonts"></i>
+                        <span data-i18n="accessibility.tab.content">Conteúdo</span>
+                    </button>
+                    <button class="accessibility-tab" data-tab="navigation" role="tab" aria-selected="false"
+                        aria-controls="tab-navigation">
+                        <i class="bi bi-cursor"></i>
+                        <span data-i18n="accessibility.tab.navigation">Navegação</span>
+                    </button>
+                    <button class="accessibility-tab" data-tab="colorblind" role="tab" aria-selected="false"
+                        aria-controls="tab-colorblind">
+                        <i class="bi bi-palette"></i>
+                        <span data-i18n="accessibility.tab.colorblind">Daltonismo</span>
+                    </button>
+                </div>
+
+                <!-- Tab Visual -->
+                <div class="accessibility-tab-content active" id="tab-visual" role="tabpanel">
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-circle-half"></i>
+                            <span data-i18n="accessibility.appearance">Aparência Geral</span>
+                        </h4>
+                        <div class="accessibility-options">
+                            <div class="accessibility-option" data-option="dark-mode">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-moon-stars"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.darkMode">Modo Escuro</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.darkMode.desc">Ativa tema escuro para reduzir brilho da tela.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="darkModeToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.darkMode.label">Ativar modo escuro</span>
+                                </div>
+                            </div>
+                            <div class="accessibility-option" data-option="high-contrast">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-brightness-high"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.highContrast">Alto Contraste</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.highContrast.desc">Aumenta contraste entre texto e fundo.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="highContrastToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.highContrast.label">Ativar alto contraste</span>
+                                </div>
+                            </div>
+                            <div class="accessibility-option" data-option="monochrome">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-palette2"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.monochrome">Monocromático</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.monochrome.desc">Remove todas as cores da tela.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="monochromeToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.monochrome.label">Ativar monocromático</span>
+                                </div>
+                            </div>
+                            <div class="accessibility-option" data-option="low-saturation">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-droplet-half"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.lowSaturation">Baixa Saturação</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.lowSaturation.desc">Reduz intensidade das cores.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="lowSaturationToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.lowSaturation.label">Ativar baixa saturação</span>
+                                </div>
+                            </div>
+                            <div class="accessibility-option" data-option="invert-colors">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-arrow-repeat"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.invertColors">Inverter Cores</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.invertColors.desc">Inverte as cores da tela.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="invertColorsToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.invertColors.label">Ativar inversão</span>
+                                </div>
+                            </div>
+                            <div class="accessibility-option" data-option="reading-mode">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-book"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.readingMode">Modo Leitura</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.readingMode.desc">Otimiza interface para leitura.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="readingModeToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.readingMode.label">Ativar modo leitura</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Conteúdo -->
+                <div class="accessibility-tab-content" id="tab-content" role="tabpanel">
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-type"></i>
+                            <span data-i18n="accessibility.fontSize">Tamanho do Texto</span>
+                        </h4>
+                        <div class="accessibility-options">
+                            <div class="accessibility-option">
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-textarea-resize"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.fontSize">Tamanho do Texto</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.fontSize.desc">Ajuste o tamanho do texto na página.</div>
+                                <div class="accessibility-range-control">
+                                    <div class="accessibility-range-label">
+                                        <span data-i18n="accessibility.fontSmaller">A- (Menor)</span>
+                                        <span id="fontSizeValue">Normal</span>
+                                        <span data-i18n="accessibility.fontLarger">A+ (Maior)</span>
+                                    </div>
+                                    <input type="range" min="1" max="4" value="2" class="accessibility-range" id="fontSizeRange">
+                                </div>
+                            </div>
+                            <div class="accessibility-option">
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-text-paragraph"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.lineHeight">Espaçamento de Linha</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.lineHeight.desc">Ajuste o espaço entre linhas.</div>
+                                <div class="accessibility-range-control">
+                                    <div class="accessibility-range-label">
+                                        <span data-i18n="accessibility.lineCompact">Compacto</span>
+                                        <span id="lineHeightValue">Normal</span>
+                                        <span data-i18n="accessibility.lineSpaced">Espaçado</span>
+                                    </div>
+                                    <input type="range" min="1" max="3" value="2" class="accessibility-range" id="lineHeightRange">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-link-45deg"></i>
+                            <span data-i18n="accessibility.links.title">Links e Elementos</span>
+                        </h4>
+                        <div class="accessibility-options">
+                            <div class="accessibility-option" data-option="highlight-links">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-link"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.highlightLinks">Realçar Links</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.highlightLinks.desc">Destaca todos os links na página.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="highlightLinksToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.highlightLinks.label">Realçar links</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Navegação -->
+                <div class="accessibility-tab-content" id="tab-navigation" role="tabpanel">
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-mouse"></i>
+                            <span data-i18n="accessibility.cursor.title">Cursor e Foco</span>
+                        </h4>
+                        <div class="accessibility-options">
+                            <div class="accessibility-option" data-option="big-cursor">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-hand-index"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.bigCursor">Cursor Grande</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.bigCursor.desc">Aumenta o tamanho do cursor.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="bigCursorToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.bigCursor.label">Cursor grande</span>
+                                </div>
+                            </div>
+                            <div class="accessibility-option" data-option="visible-focus">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-bullseye"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.visibleFocus">Foco Visível</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.visibleFocus.desc">Destaca elementos em foco pelo teclado.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="visibleFocusToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.visibleFocus.label">Foco visível</span>
+                                </div>
+                            </div>
+                            <div class="accessibility-option" data-option="reduce-motion">
+                                <span class="accessibility-status" data-i18n="accessibility.active">Ativo</span>
+                                <div class="accessibility-option-header">
+                                    <div class="accessibility-option-icon"><i class="bi bi-pause-circle"></i></div>
+                                    <div class="accessibility-option-title" data-i18n="accessibility.reduceMotion">Reduzir Animações</div>
+                                </div>
+                                <div class="accessibility-option-description" data-i18n="accessibility.reduceMotion.desc">Desativa animações e transições.</div>
+                                <div class="accessibility-toggle">
+                                    <label class="accessibility-toggle-switch">
+                                        <input type="checkbox" id="reduceMotionToggle">
+                                        <span class="accessibility-toggle-slider"></span>
+                                    </label>
+                                    <span class="accessibility-toggle-label" data-i18n="accessibility.reduceMotion.label">Reduzir animações</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Daltonismo -->
+                <div class="accessibility-tab-content" id="tab-colorblind" role="tabpanel">
+                    <div class="accessibility-section">
+                        <h4 class="accessibility-section-title">
+                            <i class="bi bi-palette"></i>
+                            <span data-i18n="accessibility.colorblind.title">Ajustes de Cor para Daltonismo</span>
+                        </h4>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;" data-i18n="accessibility.colorblind.desc">
+                            Selecione uma opção para ajustar as cores da página de acordo com seu tipo de visão.
+                        </p>
+                        <div class="colorblind-options">
+                            <div class="colorblind-option active" data-type="normal">
+                                <div class="colorblind-preview">
+                                    <span style="background: #e74c3c;"></span>
+                                    <span style="background: #2ecc71;"></span>
+                                    <span style="background: #3498db;"></span>
+                                    <span style="background: #f1c40f;"></span>
+                                </div>
+                                <div class="colorblind-name" data-i18n="accessibility.colorblind.normal">Visão Normal</div>
+                            </div>
+                            <div class="colorblind-option" data-type="protanopia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #8b4513;"></span>
+                                    <span style="background: #228b22;"></span>
+                                    <span style="background: #1e90ff;"></span>
+                                    <span style="background: #ffd700;"></span>
+                                </div>
+                                <div class="colorblind-name">Protanopia</div>
+                            </div>
+                            <div class="colorblind-option" data-type="deuteranopia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #a0522d;"></span>
+                                    <span style="background: #6b8e23;"></span>
+                                    <span style="background: #4682b4;"></span>
+                                    <span style="background: #daa520;"></span>
+                                </div>
+                                <div class="colorblind-name">Deuteranopia</div>
+                            </div>
+                            <div class="colorblind-option" data-type="tritanopia">
+                                <div class="colorblind-preview">
+                                    <span style="background: #ff6b6b;"></span>
+                                    <span style="background: #51cf66;"></span>
+                                    <span style="background: #74c0fc;"></span>
+                                    <span style="background: #fcc419;"></span>
+                                </div>
+                                <div class="colorblind-name">Tritanopia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accessibility-modal-footer">
+                <button class="accessibility-reset-btn" id="resetAccessibility">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <span data-i18n="accessibility.reset">Restaurar Padrões</span>
+                </button>
+                <button class="accessibility-save-btn" id="saveAccessibility">
+                    <i class="bi bi-check-lg"></i>
+                    <span data-i18n="accessibility.save">Salvar Configurações</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Content Selection Modal -->
+    <div class="content-modal" id="contentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="bi bi-collection" id="modalIcon"></i>
+                    <span id="modalTitle" data-i18n="modal.choose">Escolha o tipo de conteúdo</span>
+                </h3>
+                <button class="modal-close" id="modalClose" aria-label="Fechar">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle" data-i18n="modal.select">Selecione o que você deseja estudar:</p>
+                <div class="content-options" id="contentOptions">
+                    <div class="content-option videoaula" data-type="videoaula">
+                        <div class="content-option-icon">
+                            <i class="bi bi-play-circle-fill"></i>
+                        </div>
+                        <div class="content-option-title" data-i18n="modal.videos">Videoaulas</div>
+                        <div class="content-option-count" data-i18n="modal.videos.count">6 Vídeos Disponíveis</div>
+                    </div>
+                    <div class="content-option apostilas" data-type="apostila">
+                        <div class="content-option-icon">
+                            <i class="bi bi-file-earmark-text-fill"></i>
+                        </div>
+                        <div class="content-option-title" data-i18n="modal.booklets">Apostilas</div>
+                        <div class="content-option-count" data-i18n="modal.booklets.count">6 Apostilas Disponíveis</div>
+                    </div>
+                    <div class="content-option exercicios" data-type="exercicio">
+                        <div class="content-option-icon">
+                            <i class="bi bi-pencil-fill"></i>
+                        </div>
+                        <div class="content-option-title" data-i18n="modal.exercises">Exercícios</div>
+                        <div class="content-option-count" data-i18n="modal.exercises.count">6 Questões Disponíveis</div>
+                    </div>
+                    <div class="content-option simulados" data-type="simulado">
+                        <div class="content-option-icon">
+                            <i class="bi bi-clipboard-check-fill"></i>
+                        </div>
+                        <div class="content-option-title" data-i18n="modal.mocks">Simulados</div>
+                        <div class="content-option-count" data-i18n="modal.mocks.count">6 Simulados Disponíveis</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="btnCancel" data-i18n="modal.cancel">Cancelar</button>
+                <button class="btn-continue" id="btnContinue" disabled>
+                    <span data-i18n="modal.continue">Continuar</span> <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="plataforma.html">
+                <img src="Logo 3.0.png" alt="Logo Auxilio Encceja">
+                <span data-i18n="nav.brand">Auxílio Encceja</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Seletor de Idioma -->
+                    <li class="nav-item dropdown lang-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="lang-btn-content">
+                                <i class="bi bi-translate"></i>
+                                <span class="lang-btn-flag" id="currentLangFlag">🇧🇷</span>
+                                <span class="lang-btn-code" id="currentLangCode">PT</span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item active" href="#" data-lang="pt-BR">
+                                <span class="lang-flag">🇧🇷</span> Português
+                                <i class="bi bi-check-lg lang-check"></i>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="en">
+                                <span class="lang-flag">🇺🇸</span> English
+                                <i class="bi bi-check-lg lang-check"></i>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="es">
+                                <span class="lang-flag">🇪🇸</span> Español
+                                <i class="bi bi-check-lg lang-check"></i>
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="plataforma.html">
+                            <i class="bi bi-house"></i> <span data-i18n="nav.home">Início</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="conteudos.html">
+                            <i class="bi bi-collection"></i> <span data-i18n="nav.contents">Conteúdos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="acompanhamento.html">
+                            <i class="bi bi-graph-up"></i> <span data-i18n="nav.progress">Acompanhamento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="config.html">
+                            <i class="bi bi-gear"></i> <span data-i18n="nav.settings">Configurações</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <div class="welcome-content">
+                <div class="welcome-text">
+                    <h1 class="welcome-title" data-i18n="welcome.title">Bem-vindo de volta, Estudante!</h1>
+                    <p class="welcome-subtitle" id="welcomeSubtitle" data-i18n="welcome.subtitle.inscricoes">Continue sua jornada de estudos para o ENCCEJA. Escolha uma matéria abaixo para começar a estudar agora mesmo.</p>
+                </div>
+                <div class="welcome-illustration">
+                    <div class="countdown-label inscricoes" id="countdownLabel">
+                        <i class="bi bi-pencil-square"></i>
+                        <span class="countdown-label-text" id="countdownLabelText" data-i18n="countdown.inscricoes">Inscrições Encceja</span>
+                    </div>
+                    <div class="countdown-bubbles">
+                        <div class="stat-bubble">
+                            <div class="stat-bubble-value" id="days">00</div>
+                            <div class="stat-bubble-label" data-i18n="countdown.days">Dias</div>
+                        </div>
+                        <div class="stat-bubble">
+                            <div class="stat-bubble-value" id="hours">00</div>
+                            <div class="stat-bubble-label" data-i18n="countdown.hours">Horas</div>
+                        </div>
+                        <div class="stat-bubble">
+                            <div class="stat-bubble-value" id="minutes">00</div>
+                            <div class="stat-bubble-label" data-i18n="countdown.minutes">Minutos</div>
+                        </div>
+                        <div class="stat-bubble">
+                            <div class="stat-bubble-value" id="seconds">00</div>
+                            <div class="stat-bubble-label" data-i18n="countdown.seconds">Segundos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Cards Section -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="bi bi-book"></i> <span data-i18n="section.study">O que você quer estudar hoje?</span>
+                </h2>
+            </div>
+            <div class="content-cards-grid">
+                <div class="content-card matematica" data-type="matematica">
+                    <div class="content-icon"><i class="bi bi-calculator-fill"></i></div>
+                    <h3 class="content-title" data-i18n="subject.math">Matemática</h3>
+                    <p class="content-count"><i class="bi bi-graph-up-arrow"></i> <span data-i18n="subject.access">Acessar matéria</span></p>
+                </div>
+                <div class="content-card portugues" data-type="portugues">
+                    <div class="content-icon"><i class="bi bi-book-half"></i></div>
+                    <h3 class="content-title" data-i18n="subject.portuguese">Português</h3>
+                    <p class="content-count"><i class="bi bi-pencil"></i> <span data-i18n="subject.access">Acessar matéria</span></p>
+                </div>
+                <div class="content-card historia" data-type="historia">
+                    <div class="content-icon"><i class="bi bi-clock-history"></i></div>
+                    <h3 class="content-title" data-i18n="subject.history">História</h3>
+                    <p class="content-count"><i class="bi bi-hourglass-split"></i> <span data-i18n="subject.access">Acessar matéria</span></p>
+                </div>
+                <div class="content-card geografia" data-type="geografia">
+                    <div class="content-icon"><i class="bi bi-globe-americas"></i></div>
+                    <h3 class="content-title" data-i18n="subject.geography">Geografia</h3>
+                    <p class="content-count"><i class="bi bi-map"></i> <span data-i18n="subject.access">Acessar matéria</span></p>
+                </div>
+                <div class="content-card ciencias" data-type="ciencias">
+                    <div class="content-icon"><i class="bi bi-lightning-fill"></i></div>
+                    <h3 class="content-title" data-i18n="subject.science">Ciências</h3>
+                    <p class="content-count"><i class="bi bi-lightbulb"></i> <span data-i18n="subject.access">Acessar matéria</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Resources Section -->
+        <div class="resources-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="bi bi-star"></i> <span data-i18n="section.resources">Recursos Recomendados</span>
+                </h2>
+            </div>
+            <div class="resources-grid">
+                <a href="biblioteca.html" class="resource-card biblioteca" data-resource="biblioteca">
+                    <div class="resource-icon"><i class="bi bi-book"></i></div>
+                    <div class="resource-info">
+                        <h4 class="resource-title" data-i18n="resource.library.title">Biblioteca de Estudos</h4>
+                        <p class="resource-description" data-i18n="resource.library.desc">Acesse materiais complementares e documentos de apoio.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="links.html" class="resource-card links" data-resource="links">
+                    <div class="resource-icon"><i class="bi bi-link-45deg"></i></div>
+                    <div class="resource-info">
+                        <h4 class="resource-title" data-i18n="resource.links.title">Links Úteis</h4>
+                        <p class="resource-description" data-i18n="resource.links.desc">Sites e recursos externos para aprofundar seus estudos.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="guia.html" class="resource-card guia" data-resource="guia">
+                    <div class="resource-icon"><i class="bi bi-map-fill"></i></div>
+                    <div class="resource-info">
+                        <h4 class="resource-title" data-i18n="resource.guide.title">Guia Completo do ENCCEJA</h4>
+                        <p class="resource-description" data-i18n="resource.guide.desc">Tudo que você precisa saber sobre o exame.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="dicas.html" class="resource-card dicas" data-resource="dicas">
+                    <div class="resource-icon"><i class="bi bi-lightbulb-fill"></i></div>
+                    <div class="resource-info">
+                        <h4 class="resource-title" data-i18n="resource.tips.title">Dicas de Estudo</h4>
+                        <p class="resource-description" data-i18n="resource.tips.desc">Técnicas e métodos para otimizar seu aprendizado.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="provas.html" class="resource-card provas" data-resource="provas">
+                    <div class="resource-icon"><i class="bi bi-file-earmark-ruled-fill"></i></div>
+                    <div class="resource-info">
+                        <h4 class="resource-title" data-i18n="resource.exams.title">Provas Anteriores</h4>
+                        <p class="resource-description" data-i18n="resource.exams.desc">Pratique com provas de edições anteriores do ENCCEJA.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+                <a href="suporte.html" class="resource-card suporte" data-resource="suporte">
+                    <div class="resource-icon"><i class="bi bi-headset"></i></div>
+                    <div class="resource-info">
+                        <h4 class="resource-title" data-i18n="resource.support.title">Suporte</h4>
+                        <p class="resource-description" data-i18n="resource.support.desc">Tire suas dúvidas e obtenha ajuda da equipe.</p>
+                    </div>
+                    <i class="bi bi-chevron-right resource-arrow"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-links">
+                        <a href="termos.html" data-i18n="footer.terms">Termos de Uso</a>
+                        <a href="politica.html" data-i18n="footer.privacy">Política de Privacidade</a>
+                        <a href="contato.html" data-i18n="footer.contact">Contato</a>
+                        <a href="sobre.html" data-i18n="footer.about">Sobre</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-icons">
+                        <a href="#" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; <span id="anoAtual"></span> <span data-i18n="footer.copyright">Auxílio Encceja. Todos os Direitos Reservados.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ======================================================
+        // SISTEMA DE INTERNACIONALIZAÇÃO (i18n)
+        // ======================================================
+        const translations = {
+            'pt-BR': {
+                // Navbar
+                'nav.home': 'Início',
+                'nav.brand': 'Auxílio Encceja',
+                'nav.contents': 'Conteúdos',
+                'nav.progress': 'Acompanhamento',
+                'nav.settings': 'Configurações',
+                // Welcome
+                'welcome.title': 'Bem-vindo de volta, Estudante!',
+                'welcome.subtitle.inscricoes': 'Continue sua jornada de estudos para o ENCCEJA. Escolha uma matéria abaixo para começar a estudar agora mesmo.',
+                'welcome.subtitle.provas': 'As inscrições foram encerradas. Prepare-se, as provas do ENCCEJA se aproximam!',
+                'welcome.subtitle.encerrada': 'O período do ENCCEJA foi encerrado. Acompanhe o site oficial para informações sobre a próxima edição.',
+                // Countdown
+                'countdown.inscricoes': 'Inscrições Encceja',
+                'countdown.provas': 'Provas Encceja',
+                'countdown.encerrada': 'Encceja Encerrado',
+                'countdown.days': 'Dias',
+                'countdown.hours': 'Horas',
+                'countdown.minutes': 'Minutos',
+                'countdown.seconds': 'Segundos',
+                // Sections
+                'section.study': 'O que você quer estudar hoje?',
+                'section.resources': 'Recursos Recomendados',
+                // Subjects
+                'subject.math': 'Matemática',
+                'subject.portuguese': 'Português',
+                'subject.history': 'História',
+                'subject.geography': 'Geografia',
+                'subject.science': 'Ciências',
+                'subject.access': 'Acessar matéria',
+                // Resources
+                'resource.library.title': 'Biblioteca de Estudos',
+                'resource.library.desc': 'Acesse materiais complementares e documentos de apoio.',
+                'resource.links.title': 'Links Úteis',
+                'resource.links.desc': 'Sites e recursos externos para aprofundar seus estudos.',
+                'resource.guide.title': 'Guia Completo do ENCCEJA',
+                'resource.guide.desc': 'Tudo que você precisa saber sobre o exame.',
+                'resource.tips.title': 'Dicas de Estudo',
+                'resource.tips.desc': 'Técnicas e métodos para otimizar seu aprendizado.',
+                'resource.exams.title': 'Provas Anteriores',
+                'resource.exams.desc': 'Pratique com provas de edições anteriores do ENCCEJA.',
+                'resource.support.title': 'Suporte',
+                'resource.support.desc': 'Tire suas dúvidas e obtenha ajuda da equipe.',
+                // Modal
+                'modal.choose': 'Escolha o tipo de conteúdo',
+                'modal.select': 'Selecione o que você deseja estudar:',
+                'modal.videos': 'Videoaulas',
+                'modal.videos.count': '6 Vídeos Disponíveis',
+                'modal.booklets': 'Apostilas',
+                'modal.booklets.count': '6 Apostilas Disponíveis',
+                'modal.exercises': 'Exercícios',
+                'modal.exercises.count': '6 Questões Disponíveis',
+                'modal.mocks': 'Simulados',
+                'modal.mocks.count': '6 Simulados Disponíveis',
+                'modal.cancel': 'Cancelar',
+                'modal.continue': 'Continuar',
+                'modal.subjectChoose': '{subject} - Escolha o tipo de conteúdo',
+                // Footer
+                'footer.terms': 'Termos de Uso',
+                'footer.privacy': 'Política de Privacidade',
+                'footer.contact': 'Contato',
+                'footer.about': 'Sobre',
+                'footer.copyright': 'Auxílio Encceja. Todos os Direitos Reservados.',
+                // Accessibility
+                'accessibility.title': 'Configurações de Acessibilidade',
+                'accessibility.tab.visual': 'Visual',
+                'accessibility.tab.content': 'Conteúdo',
+                'accessibility.tab.navigation': 'Navegação',
+                'accessibility.tab.colorblind': 'Daltonismo',
+                'accessibility.appearance': 'Aparência Geral',
+                'accessibility.active': 'Ativo',
+                'accessibility.darkMode': 'Modo Escuro',
+                'accessibility.darkMode.desc': 'Ativa tema escuro para reduzir brilho da tela.',
+                'accessibility.darkMode.label': 'Ativar modo escuro',
+                'accessibility.highContrast': 'Alto Contraste',
+                'accessibility.highContrast.desc': 'Aumenta contraste entre texto e fundo.',
+                'accessibility.highContrast.label': 'Ativar alto contraste',
+                'accessibility.monochrome': 'Monocromático',
+                'accessibility.monochrome.desc': 'Remove todas as cores da tela.',
+                'accessibility.monochrome.label': 'Ativar monocromático',
+                'accessibility.lowSaturation': 'Baixa Saturação',
+                'accessibility.lowSaturation.desc': 'Reduz intensidade das cores.',
+                'accessibility.lowSaturation.label': 'Ativar baixa saturação',
+                'accessibility.invertColors': 'Inverter Cores',
+                'accessibility.invertColors.desc': 'Inverte as cores da tela.',
+                'accessibility.invertColors.label': 'Ativar inversão',
+                'accessibility.readingMode': 'Modo Leitura',
+                'accessibility.readingMode.desc': 'Otimiza interface para leitura.',
+                'accessibility.readingMode.label': 'Ativar modo leitura',
+                'accessibility.fontSize': 'Tamanho do Texto',
+                'accessibility.fontSize.desc': 'Ajuste o tamanho do texto na página.',
+                'accessibility.fontSmaller': 'A- (Menor)',
+                'accessibility.fontLarger': 'A+ (Maior)',
+                'accessibility.lineHeight': 'Espaçamento de Linha',
+                'accessibility.lineHeight.desc': 'Ajuste o espaço entre linhas.',
+                'accessibility.lineCompact': 'Compacto',
+                'accessibility.lineSpaced': 'Espaçado',
+                'accessibility.links.title': 'Links e Elementos',
+                'accessibility.highlightLinks': 'Realçar Links',
+                'accessibility.highlightLinks.desc': 'Destaca todos os links na página.',
+                'accessibility.highlightLinks.label': 'Realçar links',
+                'accessibility.cursor.title': 'Cursor e Foco',
+                'accessibility.bigCursor': 'Cursor Grande',
+                'accessibility.bigCursor.desc': 'Aumenta o tamanho do cursor.',
+                'accessibility.bigCursor.label': 'Cursor grande',
+                'accessibility.visibleFocus': 'Foco Visível',
+                'accessibility.visibleFocus.desc': 'Destaca elementos em foco pelo teclado.',
+                'accessibility.visibleFocus.label': 'Foco visível',
+                'accessibility.reduceMotion': 'Reduzir Animações',
+                'accessibility.reduceMotion.desc': 'Desativa animações e transições.',
+                'accessibility.reduceMotion.label': 'Reduzir animações',
+                'accessibility.colorblind.title': 'Ajustes de Cor para Daltonismo',
+                'accessibility.colorblind.desc': 'Selecione uma opção para ajustar as cores da página de acordo com seu tipo de visão.',
+                'accessibility.colorblind.normal': 'Visão Normal',
+                'accessibility.reset': 'Restaurar Padrões',
+                'accessibility.save': 'Salvar Configurações',
+                'accessibility.saved': 'Configurações salvas com sucesso!',
+                'accessibility.restored': 'Configurações restauradas!',
+                // Sizes
+                'size.small': 'Pequeno',
+                'size.normal': 'Normal',
+                'size.large': 'Grande',
+                'size.xlarge': 'Muito Grande',
+                // Toast
+                'toast.opening': 'Abrindo'
+            },
+            'en': {
+                'nav.home': 'Home',
+                'nav.brand': 'Encceja Assistance',
+                'nav.contents': 'Contents',
+                'nav.progress': 'Progress',
+                'nav.settings': 'Settings',
+                'welcome.title': 'Welcome back, Student!',
+                'welcome.subtitle.inscricoes': 'Continue your ENCCEJA study journey. Choose a subject below to start studying right now.',
+                'welcome.subtitle.provas': 'Registrations are closed. Get ready, the ENCCEJA exams are approaching!',
+                'welcome.subtitle.encerrada': 'The ENCCEJA period has ended. Check the official website for information about the next edition.',
+                'countdown.inscricoes': 'ENCCEJA Registrations',
+                'countdown.provas': 'ENCCEJA Exams',
+                'countdown.encerrada': 'ENCCEJA Ended',
+                'countdown.days': 'Days',
+                'countdown.hours': 'Hours',
+                'countdown.minutes': 'Minutes',
+                'countdown.seconds': 'Seconds',
+                'section.study': 'What do you want to study today?',
+                'section.resources': 'Recommended Resources',
+                'subject.math': 'Mathematics',
+                'subject.portuguese': 'Portuguese',
+                'subject.history': 'History',
+                'subject.geography': 'Geography',
+                'subject.science': 'Science',
+                'subject.access': 'Access subject',
+                'resource.library.title': 'Study Library',
+                'resource.library.desc': 'Access supplementary materials and support documents.',
+                'resource.links.title': 'Useful Links',
+                'resource.links.desc': 'Websites and external resources to deepen your studies.',
+                'resource.guide.title': 'Complete ENCCEJA Guide',
+                'resource.guide.desc': 'Everything you need to know about the exam.',
+                'resource.tips.title': 'Study Tips',
+                'resource.tips.desc': 'Techniques and methods to optimize your learning.',
+                'resource.exams.title': 'Previous Exams',
+                'resource.exams.desc': 'Practice with exams from past ENCCEJA editions.',
+                'resource.support.title': 'Support',
+                'resource.support.desc': 'Get your questions answered and receive help from the team.',
+                'modal.choose': 'Choose the content type',
+                'modal.select': 'Select what you want to study:',
+                'modal.videos': 'Video Lessons',
+                'modal.videos.count': '6 Videos Available',
+                'modal.booklets': 'Booklets',
+                'modal.booklets.count': '6 Booklets Available',
+                'modal.exercises': 'Exercises',
+                'modal.exercises.count': '6 Questions Available',
+                'modal.mocks': 'Mock Exams',
+                'modal.mocks.count': '6 Mock Exams Available',
+                'modal.cancel': 'Cancel',
+                'modal.continue': 'Continue',
+                'modal.subjectChoose': '{subject} - Choose the content type',
+                'footer.terms': 'Terms of Use',
+                'footer.privacy': 'Privacy Policy',
+                'footer.contact': 'Contact',
+                'footer.about': 'About',
+                'footer.copyright': 'Auxílio Encceja. All Rights Reserved.',
+                'accessibility.title': 'Accessibility Settings',
+                'accessibility.tab.visual': 'Visual',
+                'accessibility.tab.content': 'Content',
+                'accessibility.tab.navigation': 'Navigation',
+                'accessibility.tab.colorblind': 'Color Blindness',
+                'accessibility.appearance': 'General Appearance',
+                'accessibility.active': 'Active',
+                'accessibility.darkMode': 'Dark Mode',
+                'accessibility.darkMode.desc': 'Activates dark theme to reduce screen brightness.',
+                'accessibility.darkMode.label': 'Enable dark mode',
+                'accessibility.highContrast': 'High Contrast',
+                'accessibility.highContrast.desc': 'Increases contrast between text and background.',
+                'accessibility.highContrast.label': 'Enable high contrast',
+                'accessibility.monochrome': 'Monochrome',
+                'accessibility.monochrome.desc': 'Removes all colors from the screen.',
+                'accessibility.monochrome.label': 'Enable monochrome',
+                'accessibility.lowSaturation': 'Low Saturation',
+                'accessibility.lowSaturation.desc': 'Reduces color intensity.',
+                'accessibility.lowSaturation.label': 'Enable low saturation',
+                'accessibility.invertColors': 'Invert Colors',
+                'accessibility.invertColors.desc': 'Inverts screen colors.',
+                'accessibility.invertColors.label': 'Enable inversion',
+                'accessibility.readingMode': 'Reading Mode',
+                'accessibility.readingMode.desc': 'Optimizes interface for reading.',
+                'accessibility.readingMode.label': 'Enable reading mode',
+                'accessibility.fontSize': 'Text Size',
+                'accessibility.fontSize.desc': 'Adjust the text size on the page.',
+                'accessibility.fontSmaller': 'A- (Smaller)',
+                'accessibility.fontLarger': 'A+ (Larger)',
+                'accessibility.lineHeight': 'Line Spacing',
+                'accessibility.lineHeight.desc': 'Adjust the space between lines.',
+                'accessibility.lineCompact': 'Compact',
+                'accessibility.lineSpaced': 'Spaced',
+                'accessibility.links.title': 'Links and Elements',
+                'accessibility.highlightLinks': 'Highlight Links',
+                'accessibility.highlightLinks.desc': 'Highlights all links on the page.',
+                'accessibility.highlightLinks.label': 'Highlight links',
+                'accessibility.cursor.title': 'Cursor and Focus',
+                'accessibility.bigCursor': 'Large Cursor',
+                'accessibility.bigCursor.desc': 'Increases cursor size.',
+                'accessibility.bigCursor.label': 'Large cursor',
+                'accessibility.visibleFocus': 'Visible Focus',
+                'accessibility.visibleFocus.desc': 'Highlights keyboard-focused elements.',
+                'accessibility.visibleFocus.label': 'Visible focus',
+                'accessibility.reduceMotion': 'Reduce Animations',
+                'accessibility.reduceMotion.desc': 'Disables animations and transitions.',
+                'accessibility.reduceMotion.label': 'Reduce animations',
+                'accessibility.colorblind.title': 'Color Adjustments for Color Blindness',
+                'accessibility.colorblind.desc': 'Select an option to adjust the page colors according to your type of vision.',
+                'accessibility.colorblind.normal': 'Normal Vision',
+                'accessibility.reset': 'Restore Defaults',
+                'accessibility.save': 'Save Settings',
+                'accessibility.saved': 'Settings saved successfully!',
+                'accessibility.restored': 'Settings restored!',
+                'size.small': 'Small',
+                'size.normal': 'Normal',
+                'size.large': 'Large',
+                'size.xlarge': 'Very Large',
+                'toast.opening': 'Opening'
+            },
+            'es': {
+                'nav.home': 'Inicio',
+                'nav.brand': 'Asistencia Encceja',
+                'nav.contents': 'Contenidos',
+                'nav.progress': 'Seguimiento',
+                'nav.settings': 'Configuraciones',
+                'welcome.title': '¡Bienvenido de vuelta, Estudiante!',
+                'welcome.subtitle.inscricoes': 'Continúa tu jornada de estudios para el ENCCEJA. Elige una materia abajo para comenzar a estudiar ahora mismo.',
+                'welcome.subtitle.provas': 'Las inscripciones se han cerrado. ¡Prepárate, los exámenes del ENCCEJA se acercan!',
+                'welcome.subtitle.encerrada': 'El período del ENCCEJA ha terminado. Consulta el sitio oficial para información sobre la próxima edición.',
+                'countdown.inscricoes': 'Inscripciones Encceja',
+                'countdown.provas': 'Exámenes Encceja',
+                'countdown.encerrada': 'Encceja Terminado',
+                'countdown.days': 'Días',
+                'countdown.hours': 'Horas',
+                'countdown.minutes': 'Minutos',
+                'countdown.seconds': 'Segundos',
+                'section.study': '¿Qué quieres estudiar hoy?',
+                'section.resources': 'Recursos Recomendados',
+                'subject.math': 'Matemáticas',
+                'subject.portuguese': 'Portugués',
+                'subject.history': 'Historia',
+                'subject.geography': 'Geografía',
+                'subject.science': 'Ciencias',
+                'subject.access': 'Acceder a materia',
+                'resource.library.title': 'Biblioteca de Estudios',
+                'resource.library.desc': 'Accede a materiales complementarios y documentos de apoyo.',
+                'resource.links.title': 'Enlaces Útiles',
+                'resource.links.desc': 'Sitios y recursos externos para profundizar tus estudios.',
+                'resource.guide.title': 'Guía Completa del ENCCEJA',
+                'resource.guide.desc': 'Todo lo que necesitas saber sobre el examen.',
+                'resource.tips.title': 'Consejos de Estudio',
+                'resource.tips.desc': 'Técnicas y métodos para optimizar tu aprendizaje.',
+                'resource.exams.title': 'Exámenes Anteriores',
+                'resource.exams.desc': 'Practica con exámenes de ediciones anteriores del ENCCEJA.',
+                'resource.support.title': 'Soporte',
+                'resource.support.desc': 'Resuelve tus dudas y obtén ayuda del equipo.',
+                'modal.choose': 'Elige el tipo de contenido',
+                'modal.select': 'Selecciona lo que deseas estudiar:',
+                'modal.videos': 'Videolecciones',
+                'modal.videos.count': '6 Videos Disponibles',
+                'modal.booklets': 'Fascículos',
+                'modal.booklets.count': '6 Fascículos Disponibles',
+                'modal.exercises': 'Ejercicios',
+                'modal.exercises.count': '6 Preguntas Disponibles',
+                'modal.mocks': 'Simulacros',
+                'modal.mocks.count': '6 Simulacros Disponibles',
+                'modal.cancel': 'Cancelar',
+                'modal.continue': 'Continuar',
+                'modal.subjectChoose': '{subject} - Elige el tipo de contenido',
+                'footer.terms': 'Términos de Uso',
+                'footer.privacy': 'Política de Privacidad',
+                'footer.contact': 'Contacto',
+                'footer.about': 'Acerca de',
+                'footer.copyright': 'Auxílio Encceja. Todos los Derechos Reservados.',
+                'accessibility.title': 'Configuraciones de Accesibilidad',
+                'accessibility.tab.visual': 'Visual',
+                'accessibility.tab.content': 'Contenido',
+                'accessibility.tab.navigation': 'Navegación',
+                'accessibility.tab.colorblind': 'Daltonismo',
+                'accessibility.appearance': 'Apariencia General',
+                'accessibility.active': 'Activo',
+                'accessibility.darkMode': 'Modo Oscuro',
+                'accessibility.darkMode.desc': 'Activa el tema oscuro para reducir el brillo de la pantalla.',
+                'accessibility.darkMode.label': 'Activar modo oscuro',
+                'accessibility.highContrast': 'Alto Contraste',
+                'accessibility.highContrast.desc': 'Aumenta el contraste entre texto y fondo.',
+                'accessibility.highContrast.label': 'Activar alto contraste',
+                'accessibility.monochrome': 'Monocromático',
+                'accessibility.monochrome.desc': 'Elimina todos los colores de la pantalla.',
+                'accessibility.monochrome.label': 'Activar monocromático',
+                'accessibility.lowSaturation': 'Baja Saturación',
+                'accessibility.lowSaturation.desc': 'Reduce la intensidad de los colores.',
+                'accessibility.lowSaturation.label': 'Activar baja saturación',
+                'accessibility.invertColors': 'Invertir Colores',
+                'accessibility.invertColors.desc': 'Invierte los colores de la pantalla.',
+                'accessibility.invertColors.label': 'Activar inversión',
+                'accessibility.readingMode': 'Modo Lectura',
+                'accessibility.readingMode.desc': 'Optimiza la interfaz para lectura.',
+                'accessibility.readingMode.label': 'Activar modo lectura',
+                'accessibility.fontSize': 'Tamaño del Texto',
+                'accessibility.fontSize.desc': 'Ajusta el tamaño del texto en la página.',
+                'accessibility.fontSmaller': 'A- (Menor)',
+                'accessibility.fontLarger': 'A+ (Mayor)',
+                'accessibility.lineHeight': 'Espaciado de Línea',
+                'accessibility.lineHeight.desc': 'Ajusta el espacio entre líneas.',
+                'accessibility.lineCompact': 'Compacto',
+                'accessibility.lineSpaced': 'Espaciado',
+                'accessibility.links.title': 'Enlaces y Elementos',
+                'accessibility.highlightLinks': 'Resaltar Enlaces',
+                'accessibility.highlightLinks.desc': 'Resalta todos los enlaces en la página.',
+                'accessibility.highlightLinks.label': 'Resaltar enlaces',
+                'accessibility.cursor.title': 'Cursor y Enfoque',
+                'accessibility.bigCursor': 'Cursor Grande',
+                'accessibility.bigCursor.desc': 'Aumenta el tamaño del cursor.',
+                'accessibility.bigCursor.label': 'Cursor grande',
+                'accessibility.visibleFocus': 'Enfoque Visible',
+                'accessibility.visibleFocus.desc': 'Resalta elementos enfocados por teclado.',
+                'accessibility.visibleFocus.label': 'Enfoque visible',
+                'accessibility.reduceMotion': 'Reducir Animaciones',
+                'accessibility.reduceMotion.desc': 'Desactiva animaciones y transiciones.',
+                'accessibility.reduceMotion.label': 'Reducir animaciones',
+                                'accessibility.colorblind.title': 'Ajustes de Color para Daltonismo',
+                'accessibility.colorblind.desc': 'Selecciona una opción para ajustar los colores de la página según tu tipo de visión.',
+                'accessibility.colorblind.normal': 'Visión Normal',
+                'accessibility.reset': 'Restaurar Valores Predeterminados',
+                'accessibility.save': 'Guardar Configuraciones',
+                'accessibility.saved': '¡Configuraciones guardadas con éxito!',
+                'accessibility.restored': '¡Configuraciones restauradas!',
+                'size.small': 'Pequeño',
+                'size.normal': 'Normal',
+                'size.large': 'Grande',
+                'size.xlarge': 'Muy Grande',
+                'toast.opening': 'Abriendo'
+            }
+        };
+
+        // ======================================================
+        // ESTADO GLOBAL
+        // ======================================================
+        let currentLang = localStorage.getItem('auxilio-encceja-lang') || 'pt-BR';
+        let selectedSubject = null;
+        let selectedContentType = null;
+
+        const state = {
+            'dark-mode': false,
+            'high-contrast': false,
+            'monochrome': false,
+            'low-saturation': false,
+            'invert-colors': false,
+            'reading-mode': false,
+            'highlight-links': false,
+            'big-cursor': false,
+            'visible-focus': false,
+            'reduce-motion': false,
+            'colorblind-type': 'normal',
+            'font-size': 2,
+            'line-height': 2
+        };
+
+        // ======================================================
+        // SISTEMA DE TRADUÇÃO
+        // ======================================================
+        function t(key) {
+            return (translations[currentLang] && translations[currentLang][key]) || translations['pt-BR'][key] || key;
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                let text = t(key);
+                if (key === 'modal.subjectChoose' && selectedSubject) {
+                    const subjectKey = 'subject.' + selectedSubject;
+                    text = t('modal.subjectChoose').replace('{subject}', t(subjectKey));
+                }
+                if (text) el.textContent = text;
+            });
+
+            // Atualiza valores dos sliders
+            const sizeLabels = ['size.small', 'size.normal', 'size.large', 'size.xlarge'];
+            const fontSizeValue = document.getElementById('fontSizeValue');
+            if (fontSizeValue) fontSizeValue.textContent = t(sizeLabels[state['font-size'] - 1]);
+
+            const lineLabels = ['accessibility.lineCompact', 'size.normal', 'accessibility.lineSpaced'];
+            const lineHeightValue = document.getElementById('lineHeightValue');
+            if (lineHeightValue) lineHeightValue.textContent = t(lineLabels[state['line-height'] - 1]);
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('auxilio-encceja-lang', lang);
+
+            const flags = { 'pt-BR': '🇧🇷', 'en': '🇺🇸', 'es': '🇪🇸' };
+            const codes = { 'pt-BR': 'PT', 'en': 'EN', 'es': 'ES' };
+
+            document.getElementById('currentLangFlag').textContent = flags[lang] || '🇧🇷';
+            document.getElementById('currentLangCode').textContent = codes[lang] || 'PT';
+
+            document.querySelectorAll('.lang-dropdown .dropdown-item').forEach(item => {
+                item.classList.toggle('active', item.getAttribute('data-lang') === lang);
+            });
+
+            applyTranslations();
+            updateCountdownDisplay();
+        }
+
+        // ======================================================
+        // COUNTDOWN - ENCCEJA 2025
+        // ======================================================
+        const encceja2025 = {
+            inscricoesInicio: new Date('2026, 4, 14'),  // 14/04/2025
+            inscricoesFim: new Date('2026, 5, 25'),     // 25/05/2025
+            provas: new Date('2026, 7, 3')               // 03/08/2025
+        };
+
+        function getCountdownPhase() {
+            const now = new Date();
+            if (now < encceja2025.inscricoesInicio) return 'pre-inscricoes';
+            if (now >= encceja2025.inscricoesInicio && now <= encceja2025.inscricoesFim) return 'inscricoes';
+            if (now > encceja2025.inscricoesFim && now <= encceja2025.provas) return 'provas';
+            return 'encerrada';
+        }
+
+        function getTargetDate() {
+            const phase = getCountdownPhase();
+            switch (phase) {
+                case 'pre-inscricoes': return encceja2025.inscricoesInicio;
+                case 'inscricoes': return encceja2025.inscricoesFim;
+                case 'provas': return encceja2025.provas;
+                default: return null;
+            }
+        }
+
+        function updateCountdownDisplay() {
+            const phase = getCountdownPhase();
+            const label = document.getElementById('countdownLabel');
+            const labelText = document.getElementById('countdownLabelText');
+            const subtitle = document.getElementById('welcomeSubtitle');
+
+            label.className = 'countdown-label';
+
+            switch (phase) {
+                case 'pre-inscricoes':
+                case 'inscricoes':
+                    label.classList.add('inscricoes');
+                    labelText.setAttribute('data-i18n', 'countdown.inscricoes');
+                    subtitle.setAttribute('data-i18n', 'welcome.subtitle.inscricoes');
+                    break;
+                case 'provas':
+                    label.classList.add('provas');
+                    labelText.setAttribute('data-i18n', 'countdown.provas');
+                    subtitle.setAttribute('data-i18n', 'welcome.subtitle.provas');
+                    break;
+                case 'encerrada':
+                    label.classList.add('encerrada');
+                    labelText.setAttribute('data-i18n', 'countdown.encerrada');
+                    subtitle.setAttribute('data-i18n', 'welcome.subtitle.encerrada');
+                    break;
+            }
+            applyTranslations();
+        }
+
+        function updateCountdown() {
+            const target = getTargetDate();
+            const phase = getCountdownPhase();
+
+            if (phase === 'encerrada') {
+                document.getElementById('days').textContent = '--';
+                document.getElementById('hours').textContent = '--';
+                document.getElementById('minutes').textContent = '--';
+                document.getElementById('seconds').textContent = '--';
+                updateCountdownDisplay();
+                return;
+            }
+
+            if (!target) return;
+
+            const now = new Date();
+            const diff = target - now;
+
+            if (diff <= 0) {
+                updateCountdownDisplay();
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // ======================================================
+        // MODAL DE CONTEÚDO
+        // ======================================================
+        const contentModal = document.getElementById('contentModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalIcon = document.getElementById('modalIcon');
+        const btnCancel = document.getElementById('btnCancel');
+        const btnContinue = document.getElementById('btnContinue');
+        const modalClose = document.getElementById('modalClose');
+
+        const subjectIcons = {
+            matematica: 'bi-calculator-fill',
+            portugues: 'bi-book-half',
+            historia: 'bi-clock-history',
+            geografia: 'bi-globe-americas',
+            ciencias: 'bi-lightning-fill'
+        };
+
+        const subjectNames = {
+            matematica: 'subject.math',
+            portugues: 'subject.portuguese',
+            historia: 'subject.history',
+            geografia: 'subject.geography',
+            ciencias: 'subject.science'
+        };
+
+        function openContentModal(subject) {
+            selectedSubject = subject;
+            selectedContentType = null;
+            btnContinue.disabled = true;
+
+            modalIcon.className = 'bi ' + subjectIcons[subject];
+            const key = 'modal.subjectChoose';
+            const subjectKey = subjectNames[subject];
+            modalTitle.textContent = t(key).replace('{subject}', t(subjectKey));
+            modalTitle.setAttribute('data-i18n', 'modal.subjectChoose');
+
+            document.querySelectorAll('.content-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            contentModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                modalClose.focus();
+            }, 100);
+        }
+
+        function closeContentModal() {
+            contentModal.classList.remove('show');
+            document.body.style.overflow = '';
+            selectedSubject = null;
+            selectedContentType = null;
+        }
+
+        document.querySelectorAll('.content-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const type = card.getAttribute('data-type');
+                openContentModal(type);
+            });
+        });
+
+        document.querySelectorAll('.content-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.content-option').forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedContentType = option.getAttribute('data-type');
+                btnContinue.disabled = false;
+            });
+        });
+
+        btnCancel.addEventListener('click', closeContentModal);
+        modalClose.addEventListener('click', closeContentModal);
+
+        contentModal.addEventListener('click', (e) => {
+            if (e.target === contentModal) closeContentModal();
+        });
+
+        btnContinue.addEventListener('click', () => {
+            if (!selectedSubject || !selectedContentType) return;
+
+            const contentTypeLabels = {
+                'videoaula': 'modal.videos',
+                'apostila': 'modal.booklets',
+                'exercicio': 'modal.exercises',
+                'simulado': 'modal.mocks'
+            };
+
+            showToast(t('toast.opening') + ' ' + t(contentTypeLabels[selectedContentType]) + '...');
+
+            closeContentModal();
+
+            setTimeout(() => {
+                window.location.href = `conteudos.html?materia=${selectedSubject}&tipo=${selectedContentType}`;
+            }, 800);
+        });
+
+        // ======================================================
+        // TOAST NOTIFICAÇÕES
+        // ======================================================
+        function showToast(message, icon = 'bi-check-circle-fill') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+            toast.innerHTML = `<i class="bi ${icon}"></i><span class="custom-toast-message">${message}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-100%)';
+                toast.style.transition = 'all 0.4s ease';
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
+
+        // ======================================================
+        // MODAL DE ACESSIBILIDADE
+        // ======================================================
+        const accessibilityBtn = document.getElementById('accessibilityBtn');
+        const accessibilityModal = document.getElementById('accessibilityModal');
+        const accessibilityModalClose = document.getElementById('accessibilityModalClose');
+
+        function openAccessibilityModal() {
+            accessibilityModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            accessibilityBtn.classList.add('active');
+            syncTogglesWithState();
+            setTimeout(() => accessibilityModalClose.focus(), 100);
+        }
+
+        function closeAccessibilityModal() {
+            accessibilityModal.classList.remove('show');
+            document.body.style.overflow = '';
+            accessibilityBtn.classList.remove('active');
+            accessibilityBtn.focus();
+        }
+
+        accessibilityBtn.addEventListener('click', openAccessibilityModal);
+        accessibilityModalClose.addEventListener('click', closeAccessibilityModal);
+
+        accessibilityModal.addEventListener('click', (e) => {
+            if (e.target === accessibilityModal) closeAccessibilityModal();
+        });
+
+        // Tabs
+        document.querySelectorAll('.accessibility-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.accessibility-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                document.querySelectorAll('.accessibility-tab-content').forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+                const target = document.getElementById('tab-' + tab.getAttribute('data-tab'));
+                if (target) target.classList.add('active');
+            });
+        });
+
+        // ======================================================
+        // TOGGLES DE ACESSIBILIDADE
+        // ======================================================
+        const toggleMap = {
+            'darkModeToggle': 'dark-mode',
+            'highContrastToggle': 'high-contrast',
+            'monochromeToggle': 'monochrome',
+            'lowSaturationToggle': 'low-saturation',
+            'invertColorsToggle': 'invert-colors',
+            'readingModeToggle': 'reading-mode',
+            'highlightLinksToggle': 'highlight-links',
+            'bigCursorToggle': 'big-cursor',
+            'visibleFocusToggle': 'visible-focus',
+            'reduceMotionToggle': 'reduce-motion'
+        };
+
+        const bodyClassMap = {
+            'dark-mode': 'dark-mode',
+            'high-contrast': 'high-contrast',
+            'monochrome': 'monochrome',
+            'low-saturation': 'low-saturation',
+            'invert-colors': 'invert-colors',
+            'reading-mode': 'reading-mode',
+            'highlight-links': 'highlight-links',
+            'big-cursor': 'big-cursor',
+            'visible-focus': 'visible-focus',
+            'reduce-motion': 'no-transition'
+        };
+
+        Object.entries(toggleMap).forEach(([toggleId, stateKey]) => {
+            const toggle = document.getElementById(toggleId);
+            if (!toggle) return;
+
+            toggle.addEventListener('change', () => {
+                state[stateKey] = toggle.checked;
+                applyAccessibilityState();
+            });
+        });
+
+        // Font Size Range
+        const fontSizeRange = document.getElementById('fontSizeRange');
+        if (fontSizeRange) {
+            fontSizeRange.addEventListener('input', () => {
+                state['font-size'] = parseInt(fontSizeRange.value);
+                applyAccessibilityState();
+            });
+        }
+
+        // Line Height Range
+        const lineHeightRange = document.getElementById('lineHeightRange');
+        if (lineHeightRange) {
+            lineHeightRange.addEventListener('input', () => {
+                state['line-height'] = parseInt(lineHeightRange.value);
+                applyAccessibilityState();
+            });
+        }
+
+        // Colorblind Options
+        document.querySelectorAll('.colorblind-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.colorblind-option').forEach(o => o.classList.remove('active'));
+                option.classList.add('active');
+                state['colorblind-type'] = option.getAttribute('data-type');
+                applyAccessibilityState();
+            });
+        });
+
+        // ======================================================
+        // APLICAR ESTADO DE ACESSIBILIDADE
+        // ======================================================
+        function applyAccessibilityState() {
+            const body = document.body;
+
+            // Remove todas as classes de acessibilidade primeiro
+            Object.values(bodyClassMap).forEach(cls => body.classList.remove(cls));
+            body.classList.remove(
+                'protanopia', 'deuteranopia', 'tritanopia',
+                'font-size-small', 'font-size-medium', 'font-size-large', 'font-size-xlarge',
+                'line-height-normal', 'line-height-medium', 'line-height-large'
+            );
+
+            // Aplica modos visuais (mutuamente exclusivos para alguns)
+            const visualModes = ['dark-mode', 'high-contrast', 'invert-colors'];
+            let visualApplied = false;
+            visualModes.forEach(mode => {
+                if (state[mode]) {
+                    body.classList.add(bodyClassMap[mode]);
+                    visualApplied = true;
+                }
+            });
+
+            // Modos que podem combinar
+            ['monochrome', 'low-saturation', 'reading-mode', 'highlight-links', 'big-cursor', 'visible-focus'].forEach(mode => {
+                if (state[mode]) body.classList.add(bodyClassMap[mode]);
+            });
+
+            // Reduzir animações
+            if (state['reduce-motion']) {
+                body.classList.add('no-transition');
+            }
+
+            // Tamanho da fonte
+            const fontClasses = ['font-size-small', 'font-size-medium', 'font-size-large', 'font-size-xlarge'];
+            body.classList.add(fontClasses[state['font-size'] - 1]);
+
+            // Espaçamento de linha
+            const lineClasses = ['line-height-normal', 'line-height-medium', 'line-height-large'];
+            body.classList.add(lineClasses[state['line-height'] - 1]);
+
+            // Daltonismo
+            body.classList.remove('protanopia', 'deuteranopia', 'tritanopia');
+            if (state['colorblind-type'] !== 'normal') {
+                body.classList.add(state['colorblind-type']);
+            }
+
+            // Atualiza labels dos sliders
+            const sizeLabels = ['size.small', 'size.normal', 'size.large', 'size.xlarge'];
+            const fontSizeValue = document.getElementById('fontSizeValue');
+            if (fontSizeValue) fontSizeValue.textContent = t(sizeLabels[state['font-size'] - 1]);
+
+            const lineLabels = ['accessibility.lineCompact', 'size.normal', 'accessibility.lineSpaced'];
+            const lineHeightValue = document.getElementById('lineHeightValue');
+            if (lineHeightValue) lineHeightValue.textContent = t(lineLabels[state['line-height'] - 1]);
+
+            // Atualiza badges "Ativo" nas opções
+            document.querySelectorAll('.accessibility-option[data-option]').forEach(opt => {
+                const optKey = opt.getAttribute('data-option');
+                opt.classList.toggle('active', state[optKey]);
+            });
+        }
+
+        function syncTogglesWithState() {
+            Object.entries(toggleMap).forEach(([toggleId, stateKey]) => {
+                const toggle = document.getElementById(toggleId);
+                if (toggle) toggle.checked = state[stateKey];
+            });
+
+            if (fontSizeRange) fontSizeRange.value = state['font-size'];
+            if (lineHeightRange) lineHeightRange.value = state['line-height'];
+
+            document.querySelectorAll('.colorblind-option').forEach(opt => {
+                opt.classList.toggle('active', opt.getAttribute('data-type') === state['colorblind-type']);
+            });
+        }
+
+        // ======================================================
+        // SALVAR / RESTAURAR CONFIGURAÇÕES
+        // ======================================================
+        document.getElementById('saveAccessibility').addEventListener('click', () => {
+            localStorage.setItem('auxilio-encceja-accessibility', JSON.stringify(state));
+            showToast(t('accessibility.saved'), 'bi-check-circle-fill');
+            closeAccessibilityModal();
+        });
+
+        document.getElementById('resetAccessibility').addEventListener('click', () => {
+            state['dark-mode'] = false;
+            state['high-contrast'] = false;
+            state['monochrome'] = false;
+            state['low-saturation'] = false;
+            state['invert-colors'] = false;
+            state['reading-mode'] = false;
+            state['highlight-links'] = false;
+            state['big-cursor'] = false;
+            state['visible-focus'] = false;
+            state['reduce-motion'] = false;
+            state['colorblind-type'] = 'normal';
+            state['font-size'] = 2;
+            state['line-height'] = 2;
+
+            syncTogglesWithState();
+            applyAccessibilityState();
+            localStorage.removeItem('auxilio-encceja-accessibility');
+            showToast(t('accessibility.restored'), 'bi-arrow-counterclockwise');
+        });
+
+        // ======================================================
+        // CARREGAR CONFIGURAÇÕES SALVAS
+        // ======================================================
+        function loadAccessibilitySettings() {
+            const saved = localStorage.getItem('auxilio-encceja-accessibility');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    Object.assign(state, parsed);
+                } catch (e) {
+                    console.warn('Erro ao carregar configurações de acessibilidade:', e);
+                }
+            }
+            syncTogglesWithState();
+            applyAccessibilityState();
+        }
+
+        // ======================================================
+        // SELETOR DE IDIOMA
+        // ======================================================
+        document.querySelectorAll('.lang-dropdown .dropdown-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = item.getAttribute('data-lang');
+                if (lang) setLanguage(lang);
+            });
+        });
+
+        // ======================================================
+        // ANO ATUAL NO FOOTER
+        // ======================================================
+        document.getElementById('anoAtual').textContent = new Date().getFullYear();
+
+        // ======================================================
+        // FECHAR MODAIS COM ESCAPE
+        // ======================================================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (accessibilityModal.classList.contains('show')) {
+                    closeAccessibilityModal();
+                } else if (contentModal.classList.contains('show')) {
+                    closeContentModal();
+                }
+            }
+        });
+
+        // ======================================================
+        // INICIALIZAÇÃO
+        // ======================================================
+        function init() {
+            setLanguage(currentLang);
+            loadAccessibilitySettings();
+            updateCountdown();
+            updateCountdownDisplay();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Aguarda DOM estar pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
+                

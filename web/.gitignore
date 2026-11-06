@@ -1,0 +1,27 @@
+# Dependências
+node_modules/
+backend/node_modules/
+
+# Banco de dados SQLite
+*.sqlite
+*.db
+
+# Variáveis de ambiente
+.env
+backend/.env
+
+# Uploads de usuários
+backend/uploads/
+
+# Pastas de módulos npm acidentais na raiz
+mysql2/
+named-placeholders/
+napi-build-utils/
+negotiator/
+node-abi/
+node-addon-api/
+typings/
+
+# Arquivos de sistema
+Thumbs.db
+.DS_Store

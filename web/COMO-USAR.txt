@@ -1,0 +1,38 @@
+COMO RESOLVER "Failed to fetch" NO LOGIN
+========================================
+
+O erro significa: o navegador nao alcancou a API.
+Siga estes passos NA ORDEM:
+
+1) Instalar Node.js (se ainda nao tiver)
+   - Baixe: https://nodejs.org/ (versao LTS)
+   - Instale com as opcoes padrao
+   - Reinicie o computador ou o terminal
+
+2) Iniciar o backend
+   Opcao A - Duplo clique:
+     backend\iniciar-servidor.bat
+
+   Opcao B - Terminal (PowerShell):
+     cd "d:\Telas 2.0 API Adaptada\backend"
+     npm install
+     npm start
+
+3) Abrir o site pelo navegador (IMPORTANTE)
+   http://localhost:3600/login.html
+
+   NAO abra login.html com duplo clique na pasta.
+   (Isso usa file:// e o login falha.)
+
+4) Se ainda der erro, no navegador pressione F12,
+   aba Console, cole e Enter:
+
+   localStorage.removeItem('auxilio-api-url')
+
+   Depois atualize a pagina (F5).
+
+5) Testar se a API esta no ar
+   Abra: http://localhost:3600/test
+   Deve aparecer JSON com message "servidor Rodando ..."
+
+Pronto: faca cadastro ou login em http://localhost:3600/login.html

@@ -1,0 +1,198 @@
+/* Profile popover — navbar (plataforma, conteúdos, acompanhamento, config) */
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-dropdown .dropdown-toggle::after {
+    display: none;
+}
+
+.profile-dropdown .profile-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.9) !important;
+    margin: 0 3px;
+    border-radius: 8px;
+    padding: 6px 12px !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.profile-dropdown .profile-trigger:hover,
+.profile-dropdown .profile-trigger.show {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff !important;
+}
+
+.profile-trigger-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent, #159895), #57c5b6);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.profile-trigger-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-trigger-name {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-trigger-chevron {
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+.profile-dropdown .dropdown-menu.profile-popover-menu {
+    background: var(--primary, #34495e);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    padding: 0;
+    min-width: 260px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.profile-popover-header {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-popover-header-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent, #159895), #57c5b6);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.profile-popover-header-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-popover-header-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.profile-popover-header-name {
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0 0 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-popover-header-email {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-popover-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #57c5b6;
+    background: rgba(87, 197, 182, 0.15);
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.profile-popover-body {
+    padding: 6px;
+}
+
+.profile-popover-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.profile-popover-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.profile-popover-item i {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.profile-popover-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 4px 8px;
+}
+
+.profile-popover-logout {
+    color: #fca5a5 !important;
+}
+
+.profile-popover-logout:hover {
+    background: rgba(239, 68, 68, 0.2) !important;
+    color: #fecaca !important;
+}
+
+@media (max-width: 991px) {
+    .profile-trigger-name {
+        display: none;
+    }
+
+    .profile-dropdown .profile-trigger {
+        padding: 8px 10px !important;
+    }
+}
