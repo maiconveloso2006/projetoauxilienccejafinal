@@ -1,9 +1,9 @@
 # url ou dominio
 @URL = http://localhost
 # Porta do servidor
-@PORT = 3600
+@PORT = 4102
 # endpoint ou rota do teste
-@ENDPOINT = users
+@ENDPOINT = usuarios
 # uri - rota final do teste
 @URI = {{URL}}:{{PORT}}/{{ENDPOINT}}
 

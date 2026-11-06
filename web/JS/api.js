@@ -1,12 +1,14 @@
 (function () {
     function resolveDefaultApiUrl() {
-        if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-            return window.location.origin;
-        }
-        return 'http://localhost:3600';
+        // if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+        //     return window.location.origin;
+        // }
+        return 'http://localhost:4102';
     }
 
     const DEFAULT_API_URL = resolveDefaultApiUrl();
+    console.log( window.location.protocol );
+    console.log( DEFAULT_API_URL);
     const API_BASE_URL = window.API_BASE_URL || localStorage.getItem('auxilio-api-url') || DEFAULT_API_URL;
     const SESSION_KEY = 'auxilio-current-user';
     const PROFILE_EXTRA_KEY = 'auxilio-user-profile-extra';

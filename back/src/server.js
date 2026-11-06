@@ -23,7 +23,8 @@ async function ensureDbInit() {
 
 // ── Middlewares globais ───────────────────────────────────────────────────────
 app.use(express.json());
-app.use(cors({ origin: true }));
+//app.use(cors({ origin: true }));
+app.use(cors({ origin: "*" }));
 
 // Garante que o banco está pronto antes de qualquer rota da API
 app.use(async (req, res, next) => {
