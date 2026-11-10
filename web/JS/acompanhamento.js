@@ -757,6 +757,136 @@ let recentActivities = [];
 let apiTarefas = [];
 let acompanhamentoData = null;
 
+// Dados do acompanhamento vindos do usuário autenticado.
+// Um usuário recém-cadastrado começa com todos os indicadores de desempenho em 0.
+function updateStudentInfo(usuario, resumo) {
+    const nameEl = document.querySelector('.student-name');
+    const metaEl = document.querySelector('.student-meta');
+    const badgeEl = document.querySelector('.student-badge span');
+    const quickStats = document.querySelectorAll('.student-quick-stats .quick-stat-value');
+
+    const nome = usuario?.nome || 'Estudante';
+    const matricula = usuario?.matricula || 'Não definida';
+    const nivel = usuario?.nivel || 'Básico';
+    const progresso = Number(resumo?.progressoGeral ?? usuario?.progresso_geral ?? 0);
+    const dias = Number(usuario?.dias_ativos ?? 0);
+    const xp = Number(usuario?.pontos_xp ?? 0);
+
+    if (nameEl) nameEl.textContent = nome;
+    if (metaEl) metaEl.textContent = `Turma: ENCCEJA 2026 | Matrícula: ${matricula}`;
+    if (badgeEl) badgeEl.textContent = `Nível: ${nivel}`;
+    if (quickStats[0]) quickStats[0].textContent = `${progresso}%`;
+    if (quickStats[1]) quickStats[1].textContent = String(dias);
+    if (quickStats[2]) quickStats[2].textContent = String(xp);
+}
+
+function updateOverviewStatsFromAcompanhamento(resumo) {
+    const r = resumo || {};
+    const progress = Number(r.progressoGeral ?? 0);
+    const completed = Number(r.totalConcluidas ?? 0);
+    const pending = Number(r.totalPendentes ?? 0);
+    const average = Number(r.mediaGeral ?? 0);
+
+    const values = {
+        statProgress: `${progress}%`,
+        statCompleted: String(completed),
+        statPending: String(pending),
+        statAverage: `${average}%`
+    };
+
+    Object.entries(values).forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+    });
+}
+
+function applyApiSubjects(data) {
+    if (!data || !Array.isArray(data.materias)) return;
+
+    const iconByName = {
+        matematica: 'bi-calculator',
+        portugues: 'bi-chat-quote',
+        historia: 'bi-bank',
+        geografia: 'bi-globe-americas',
+        ciencias: 'bi-lightning',
+        ingles: 'bi-translate'
+    };
+    const colorByName = {
+        matematica: 'matematica',
+        portugues: 'portugues',
+        historia: 'historia',
+        geografia: 'geografia',
+        ciencias: 'ciencias',
+        ingles: 'ingles'
+    };
+
+    subjectsData.length = 0;
+    data.materias.forEach((m) => {
+        const key = String(m.nome_materia || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase();
+        const completed = Number(m.atividades_concluidas ?? 0);
+        const pending = Number(m.atividades_pendentes ?? 0);
+        const total = completed + pending;
+        subjectsData.push({
+            id: Number(m.id_materia),
+            nameKey: null,
+            displayName: m.nome_materia || 'Matéria',
+            icon: iconByName[key] || 'bi-book',
+            colorClass: colorByName[key] || 'matematica',
+            progress: Number(m.percentual ?? 0),
+            completed,
+            total,
+            average: Number(m.media ?? 0),
+            topics: []
+        });
+    });
+}
+
+function renderRecentActivitiesFromApi(atividades) {
+    if (!activityList) return;
+    const concluidas = (atividades || []).filter(a => a.status === 'CONCLUIDA');
+    if (!concluidas.length) {
+        activityList.innerHTML = `
+            <div class="activity-card">
+                <div class="activity-card-icon info"><i class="bi bi-info-circle"></i></div>
+                <div class="activity-card-content">
+                    <div class="activity-card-title">Nenhuma atividade registrada</div>
+                    <div class="activity-card-meta">Seu histórico aparecerá aqui conforme você estudar.</div>
+                </div>
+                <div class="activity-card-time">Agora</div>
+            </div>`;
+        return;
+    }
+
+    recentActivities = concluidas.slice(-5).reverse().map(a => ({
+        icon: a.tipo === 'QUIZ' ? 'bi-trophy' : 'bi-check-circle',
+        type: 'success',
+        title: a.titulo || 'Atividade concluída',
+        meta: a.nota != null ? `Nota: ${a.nota}%` : 'Atividade concluída',
+        time: a.concluido_em ? new Date(a.concluido_em).toLocaleDateString('pt-BR') : 'Concluída'
+    }));
+    renderActivities();
+}
+
+async function loadAcompanhamentoFromApi() {
+    if (!window.Api || !Api.getAcompanhamento) return false;
+    const user = Api.getCurrentUser();
+    const userId = user && (user.id_usuario || user.id);
+    if (!userId) return false;
+
+    try {
+        acompanhamentoData = await Api.getAcompanhamento(userId);
+        if (!acompanhamentoData) return false;
+        updateStudentInfo(acompanhamentoData.usuario, acompanhamentoData.resumo);
+        updateOverviewStatsFromAcompanhamento(acompanhamentoData.resumo);
+        applyApiSubjects(acompanhamentoData);
+        renderRecentActivitiesFromApi(acompanhamentoData.atividades);
+        return true;
+    } catch (err) {
+        console.warn('Não foi possível carregar o acompanhamento do usuário:', err.message);
+        return false;
+    }
+}
+
 // DOM Elements
 const subjectsGrid = document.getElementById('subjectsGrid');
 const activityList = document.getElementById('activityList');
@@ -868,11 +998,20 @@ async function loadTarefasFromApi() {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async function () {
+    if (window.Api && !Api.requireAuth()) return;
+
+    // Primeiro carrega os dados reais do usuário. Cadastro novo começa em 0.
+    const loadedFromApi = await loadAcompanhamentoFromApi();
+
     await loadTarefasFromApi();
-    // Se não há tarefas da API, preenche com as atividades padrão traduzidas
-    if (!apiTarefas.length) recentActivities = getDefaultRecentActivities();
+    if (!loadedFromApi && !apiTarefas.length) recentActivities = getDefaultRecentActivities();
+
     renderSubjects();
-    renderActivities();
+    if (loadedFromApi && acompanhamentoData) {
+        updateOverviewStatsFromAcompanhamento(acompanhamentoData.resumo);
+    } else {
+        renderActivities();
+    }
     renderApiTasksList();
     setupEventListeners();
 });
@@ -885,7 +1024,7 @@ function renderSubjects() {
 // Subject Card 
 function createSubjectCard(subject) {
     const progressClass = getProgressClass(subject.progress);
-    const subjectName = t(subject.nameKey);
+    const subjectName = subject.displayName || t(subject.nameKey);
     return `
                 <div class="subject-card" onclick="showSubjectDetail(${subject.id})">
                     <div class="subject-card-header">

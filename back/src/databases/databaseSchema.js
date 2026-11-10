@@ -343,6 +343,20 @@ class DatabaseSchema {
                 valores_antigos TEXT,
                 valores_novos TEXT,
                 criado_em TEXT
+            )`,
+
+            `CREATE TABLE IF NOT EXISTS progresso_eventos (
+                id_evento INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_usuario INTEGER NOT NULL,
+                evento TEXT NOT NULL,
+                pagina TEXT,
+                titulo TEXT,
+                materia TEXT,
+                tipo TEXT,
+                percentual REAL DEFAULT 0,
+                nota REAL,
+                tempo_segundos INTEGER DEFAULT 0,
+                criado_em TEXT DEFAULT CURRENT_TIMESTAMP
             )`
         ];
 
@@ -590,6 +604,20 @@ class DatabaseSchema {
                 valores_antigos JSON,
                 valores_novos JSON,
                 criado_em DATETIME
+            )`,
+
+            `CREATE TABLE IF NOT EXISTS progresso_eventos (
+                id_evento BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                id_usuario INT NOT NULL,
+                evento VARCHAR(30) NOT NULL,
+                pagina VARCHAR(255),
+                titulo VARCHAR(150),
+                materia VARCHAR(100),
+                tipo VARCHAR(30),
+                percentual DECIMAL(5,2) DEFAULT 0,
+                nota DECIMAL(5,2),
+                tempo_segundos INT DEFAULT 0,
+                criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             )`,
             `CREATE TABLE IF NOT EXISTS tarefas (
                 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -1,18 +1,34 @@
+# Auxílio Encceja — Backend
 
+Backend principal do projeto. A pasta `back` é o único backend mantido no projeto.
 
-```sql
-CREATE DATABASE servidores1 ;
-USE servidores1;
+## Banco local
 
-CREATE TABLE users ( 
-    id INT NOT NULL AUTO_INCREMENT,
-    login VARCHAR(100),
-    password VARCHAR(250),
-    name VARCHAR(30),
-    CONSTRAINT PK_USERS_ID PRIMARY KEY(id)
-);
+O backend está configurado por padrão para **MySQL/MariaDB**, compatível com o XAMPP e o phpMyAdmin:
 
-INSERT INTO users ( login, password, name ) VALUES
-( "jose@test.com", "123", "jose"),
-( "marinho@gmail.cm", "234", "marinho");
+- Host: `localhost`
+- Porta: `3306`
+- Usuário: `root`
+- Senha: vazia (padrão do XAMPP)
+- Banco: `auxilioencceja`
+
+Importe primeiro o arquivo `web/banco de dados/auxilioencceja.sql` pelo phpMyAdmin.
+
+## Executar
+
+```bash
+npm install
+npm start
 ```
+
+Depois acesse:
+
+`http://localhost:3600/login.html`
+
+## Cadastro
+
+A tela de cadastro grava diretamente na tabela `usuarios` do banco `auxilioencceja`.
+
+## Progresso
+
+Os eventos de estudo são gravados no MySQL e relacionados ao `id_usuario` do aluno.

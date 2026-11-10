@@ -21,6 +21,7 @@ const rankingRoutes        = require("./rankingRoutes");
 const configuracoesRoutes  = require("./configuracoesRoutes");
 const certificadosRoutes   = require("./certificadosRoutes");
 const conquistasRoutes     = require("./conquistasRoutes");
+const progressoRoutes      = require("./progressoRoutes");
 
 const routes = Routes();
 
@@ -44,6 +45,7 @@ routes.use(rankingRoutes);
 routes.use(configuracoesRoutes);
 routes.use(certificadosRoutes);
 routes.use(conquistasRoutes);
+routes.use(progressoRoutes);
 
 routes.get("/test", (req, res) => {
     res.status(200).json({ message: "servidor Rodando ..." });

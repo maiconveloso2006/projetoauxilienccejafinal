@@ -1,3 +1,14 @@
+-- ============================================================
+-- AUXÍLIO ENCCEJA - BANCO DE DADOS CORRIGIDO
+-- MariaDB/MySQL 10.4+
+-- Este arquivo cria o banco, tabelas, índices, relacionamentos,
+-- dados básicos e views sem apagar dados existentes.
+--
+-- Para cadastro: INSERT/POST devem gravar em `usuarios`.
+-- Para login: consulte `usuarios` por `email` e valide `senha`
+-- no backend. A coluna senha aceita hash (bcrypt/argon2) de até 255 chars.
+-- ============================================================
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -8,6 +19,18 @@
 -- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET NAMES utf8mb4;
+
+CREATE DATABASE IF NOT EXISTS `auxilioencceja`
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_general_ci;
+
+USE `auxilioencceja`;
+
+-- As views podem ser recriadas sem apagar as tabelas nem os dados.
+DROP VIEW IF EXISTS `vw_estatisticas_usuario`;
+DROP VIEW IF EXISTS `vw_ranking`;
+
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -263,7 +286,7 @@ CREATE TABLE `recuperacao_senha` (
   `id_recuperacao` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `token` varchar(255) NOT NULL,
-  `expira_em` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `expira_em` timestamp NOT NULL DEFAULT current_timestamp(),
   `usado` tinyint(1) DEFAULT 0,
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -477,7 +500,7 @@ CREATE TABLE `vw_ranking` (
 --
 DROP TABLE IF EXISTS `vw_estatisticas_usuario`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_estatisticas_usuario`  AS SELECT `respostas_usuario`.`id_usuario` AS `id_usuario`, count(0) AS `total_respostas`, sum(`respostas_usuario`.`correta`) AS `acertos` FROM `respostas_usuario` GROUP BY `respostas_usuario`.`id_usuario` ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY INVOKER VIEW `vw_estatisticas_usuario`  AS SELECT `respostas_usuario`.`id_usuario` AS `id_usuario`, count(0) AS `total_respostas`, sum(`respostas_usuario`.`correta`) AS `acertos` FROM `respostas_usuario` GROUP BY `respostas_usuario`.`id_usuario` ;
 
 -- --------------------------------------------------------
 
@@ -486,7 +509,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_ranking`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_ranking`  AS SELECT `u`.`nome` AS `nome`, `r`.`pontos` AS `pontos`, `r`.`posicao` AS `posicao` FROM (`ranking_usuarios` `r` join `usuarios` `u` on(`u`.`id_usuario` = `r`.`id_usuario`)) ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY INVOKER VIEW `vw_ranking`  AS SELECT `u`.`nome` AS `nome`, `r`.`pontos` AS `pontos`, `r`.`posicao` AS `posicao` FROM (`ranking_usuarios` `r` join `usuarios` `u` on(`u`.`id_usuario` = `r`.`id_usuario`)) ;
 
 --
 -- Índices para tabelas despejadas
@@ -554,7 +577,8 @@ ALTER TABLE `materiais`
 -- Índices de tabela `materias`
 --
 ALTER TABLE `materias`
-  ADD PRIMARY KEY (`id_materia`);
+  ADD PRIMARY KEY (`id_materia`),
+  ADD UNIQUE KEY `uk_materias_nome` (`nome_materia`);
 
 --
 -- Índices de tabela `notificacoes`
@@ -567,7 +591,8 @@ ALTER TABLE `notificacoes`
 -- Índices de tabela `perfis`
 --
 ALTER TABLE `perfis`
-  ADD PRIMARY KEY (`id_perfil`);
+  ADD PRIMARY KEY (`id_perfil`),
+  ADD UNIQUE KEY `uk_perfis_nome` (`nome`);
 
 --
 -- Índices de tabela `progresso_estudos`
@@ -934,8 +959,134 @@ ALTER TABLE `usuario_conquistas`
 ALTER TABLE `usuario_turma`
   ADD CONSTRAINT `usuario_turma_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   ADD CONSTRAINT `usuario_turma_ibfk_2` FOREIGN KEY (`id_turma`) REFERENCES `turmas` (`id_turma`);
+
+--
+-- Relacionamentos adicionais que estavam faltando no dump original
+--
+ALTER TABLE `alternativas`
+  ADD KEY `idx_alternativas_questao` (`id_questao`);
+
+ALTER TABLE `auditoria`
+  ADD KEY `idx_auditoria_registro` (`tabela_nome`, `registro_id`);
+
+ALTER TABLE `certificados`
+  ADD KEY `idx_certificados_usuario` (`id_usuario`);
+
+ALTER TABLE `logs_admin`
+  ADD KEY `idx_logs_admin_usuario` (`id_usuario`);
+
+ALTER TABLE `progresso_estudos`
+  ADD KEY `idx_progresso_estudos_usuario` (`id_usuario`),
+  ADD KEY `idx_progresso_estudos_materia` (`id_materia`);
+
+ALTER TABLE `ranking_usuarios`
+  ADD KEY `idx_ranking_usuario` (`id_usuario`);
+
+ALTER TABLE `refresh_tokens`
+  ADD KEY `idx_refresh_usuario` (`id_usuario`),
+  ADD KEY `idx_refresh_token` (`token`);
+
+ALTER TABLE `respostas_usuario`
+  ADD KEY `idx_resposta_questao` (`id_questao`),
+  ADD KEY `idx_resposta_alternativa` (`id_alternativa`);
+
+ALTER TABLE `simulado_questoes`
+  ADD KEY `idx_simulado_questoes_questao` (`id_questao`);
+
+ALTER TABLE `tentativas_simulado`
+  ADD KEY `idx_tentativas_usuario` (`id_usuario`),
+  ADD KEY `idx_tentativas_simulado` (`id_simulado`);
+
+ALTER TABLE `certificados`
+  ADD CONSTRAINT `certificados_ibfk_1`
+    FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+ALTER TABLE `logs_admin`
+  ADD CONSTRAINT `logs_admin_ibfk_1`
+    FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+ALTER TABLE `progresso_estudos`
+  ADD CONSTRAINT `progresso_estudos_ibfk_1`
+    FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `progresso_estudos_ibfk_2`
+    FOREIGN KEY (`id_materia`) REFERENCES `materias` (`id_materia`);
+
+ALTER TABLE `ranking_usuarios`
+  ADD CONSTRAINT `ranking_usuarios_ibfk_1`
+    FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+ALTER TABLE `refresh_tokens`
+  ADD CONSTRAINT `refresh_tokens_ibfk_1`
+    FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+ALTER TABLE `respostas_usuario`
+  ADD CONSTRAINT `respostas_usuario_ibfk_2`
+    FOREIGN KEY (`id_questao`) REFERENCES `questoes` (`id_questao`),
+  ADD CONSTRAINT `respostas_usuario_ibfk_3`
+    FOREIGN KEY (`id_alternativa`) REFERENCES `alternativas` (`id_alternativa`);
+
+ALTER TABLE `alternativas`
+  ADD CONSTRAINT `alternativas_ibfk_1`
+    FOREIGN KEY (`id_questao`) REFERENCES `questoes` (`id_questao`);
+
+ALTER TABLE `simulado_questoes`
+  ADD CONSTRAINT `simulado_questoes_ibfk_1`
+    FOREIGN KEY (`id_simulado`) REFERENCES `simulados` (`id_simulado`),
+  ADD CONSTRAINT `simulado_questoes_ibfk_2`
+    FOREIGN KEY (`id_questao`) REFERENCES `questoes` (`id_questao`);
+
+ALTER TABLE `tentativas_simulado`
+  ADD CONSTRAINT `tentativas_simulado_ibfk_1`
+    FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `tentativas_simulado_ibfk_2`
+    FOREIGN KEY (`id_simulado`) REFERENCES `simulados` (`id_simulado`);
+
+--
+-- Dados iniciais necessários para a plataforma
+-- Não cria usuários de teste com senha em texto aberto.
+--
+INSERT INTO `perfis` (`id_perfil`, `nome`) VALUES
+  (1, 'ALUNO'),
+  (2, 'ADMIN'),
+  (3, 'PROFESSOR')
+ON DUPLICATE KEY UPDATE `nome` = VALUES(`nome`);
+
+INSERT INTO `materias` (`nome_materia`, `descricao`, `icone`) VALUES
+  ('Matemática', 'Conteúdos de Matemática para o Encceja.', 'calculator-variant'),
+  ('Português', 'Conteúdos de Língua Portuguesa para o Encceja.', 'book-open-variant'),
+  ('História', 'Conteúdos de História para o Encceja.', 'history'),
+  ('Geografia', 'Conteúdos de Geografia para o Encceja.', 'earth'),
+  ('Ciências', 'Conteúdos de Ciências da Natureza para o Encceja.', 'flask')
+ON DUPLICATE KEY UPDATE
+  `descricao` = VALUES(`descricao`),
+  `icone` = VALUES(`icone`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- Registro de progresso/uso por usuário
+CREATE TABLE `progresso_eventos` (
+  `id_evento` BIGINT NOT NULL AUTO_INCREMENT,
+  `id_usuario` INT NOT NULL,
+  `evento` VARCHAR(30) NOT NULL,
+  `pagina` VARCHAR(255) DEFAULT NULL,
+  `titulo` VARCHAR(150) DEFAULT NULL,
+  `materia` VARCHAR(100) DEFAULT NULL,
+  `tipo` VARCHAR(30) DEFAULT NULL,
+  `percentual` DECIMAL(5,2) DEFAULT 0.00,
+  `nota` DECIMAL(5,2) DEFAULT NULL,
+  `tempo_segundos` INT DEFAULT 0,
+  `criado_em` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_evento`),
+  KEY `idx_progresso_eventos_usuario` (`id_usuario`),
+  KEY `idx_progresso_eventos_data` (`criado_em`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `progresso_eventos`
+  ADD CONSTRAINT `progresso_eventos_ibfk_1`
+  FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+  ON DELETE CASCADE ON UPDATE CASCADE;

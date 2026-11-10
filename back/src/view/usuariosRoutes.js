@@ -19,6 +19,7 @@ function handle(fn) {
 }
 
 routes.get(ep, handle(controller.Get));
+routes.post(`${ep}/login`, handle(controller.Login));
 routes.get(`${ep}/:id`, handle(controller.GetById));
 routes.post(ep, handle(controller.Post));
 routes.put(`${ep}/:id`, handle(controller.Put));

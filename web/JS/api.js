@@ -1,9 +1,11 @@
 (function () {
     function resolveDefaultApiUrl() {
-        // if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-        //     return window.location.origin;
-        // }
-        return 'http://localhost:4102';
+        // Quando o site é servido pelo próprio backend, use a mesma origem/porta.
+        // Isso evita divergência entre a porta do frontend e a porta real da API.
+        if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+            return window.location.origin;
+        }
+        return 'http://localhost:3600';
     }
 
     const DEFAULT_API_URL = resolveDefaultApiUrl();
@@ -73,7 +75,7 @@
             if (viaArquivo) {
                 msg += 'Não abra o HTML pelo Explorer (file://). ';
             }
-            msg += 'Inicie o backend: abra o terminal na pasta backend, execute "npm install" e depois "npm start". ';
+            msg += 'Inicie o backend: abra o terminal na pasta back, execute "npm install" e depois "npm start". ';
             msg += 'Acesse o login em http://localhost:3600/login.html';
             throw new Error(msg);
         }
@@ -120,48 +122,33 @@
     }
 
     async function login(loginValue, password) {
-        // Tenta primeiro na tabela "usuarios" (banco auxilioencceja)
-        try {
-            const result = await request('/api/usuarios');
-            const usuarios = Array.isArray(result && result.data) ? result.data : [];
-            const found = usuarios.find(function (u) {
-                return u.email === loginValue && u.senha === password;
-            });
-            if (found) {
-                // Normaliza para o formato esperado pelo frontend
-                const user = {
-                    id: found.id_usuario,
-                    id_usuario: found.id_usuario,
-                    name: found.nome,
-                    nome: found.nome,
-                    login: found.email,
-                    email: found.email,
-                    password: found.senha,
-                    senha: found.senha,
-                    nivel: found.nivel,
-                    pontos_xp: found.pontos_xp,
-                    dias_ativos: found.dias_ativos,
-                    progresso_geral: found.progresso_geral,
-                    matricula: found.matricula,
-                    foto_perfil: found.foto_perfil,
-                    status_conta: found.status_conta
-                };
-                setCurrentUser(user);
-                return user;
-            }
-        } catch (e) {
-            // Silencia e tenta tabela legada
-        }
-
-        // Fallback: tabela "users" legada
-        const users = await list('users');
-        const user = users.find(function (item) {
-            return item.login === loginValue && item.password === password;
+        const result = await request('/api/usuarios/login', {
+            method: 'POST',
+            body: JSON.stringify({ email: loginValue, senha: password })
         });
 
-        if (!user) {
+        const found = result && result.data;
+        if (!found) {
             throw new Error('E-mail ou senha inválidos.');
         }
+
+        const user = {
+            id: found.id_usuario,
+            id_usuario: found.id_usuario,
+            name: found.nome,
+            nome: found.nome,
+            login: found.email,
+            email: found.email,
+            password: password,
+            senha: password,
+            nivel: found.nivel,
+            pontos_xp: found.pontos_xp,
+            dias_ativos: found.dias_ativos,
+            progresso_geral: found.progresso_geral,
+            matricula: found.matricula,
+            foto_perfil: found.foto_perfil,
+            status_conta: found.status_conta
+        };
 
         setCurrentUser(user);
         return user;
@@ -190,10 +177,10 @@
     async function register(payload) {
         const validated = validateRegisterPayload(payload);
 
-        await create('users', {
-            name: validated.name,
-            login: validated.login,
-            password: validated.password
+        await create('api/usuarios', {
+            nome: validated.name,
+            email: validated.login,
+            senha: validated.password
         });
 
         if (payload.extra) {
@@ -215,8 +202,12 @@
         if (updates.password !== undefined) body.password = updates.password;
 
         if (Object.keys(body).length) {
-            await update('users', user.id, body);
-            const refreshed = await get('users', user.id);
+            await update('api/usuarios', user.id_usuario || user.id, {
+                ...(body.name !== undefined ? { nome: body.name } : {}),
+                ...(body.login !== undefined ? { email: body.login } : {}),
+                ...(body.password !== undefined ? { senha: body.password } : {})
+            });
+            const refreshed = await get('api/usuarios', user.id_usuario || user.id);
             if (refreshed) {
                 setCurrentUser(refreshed);
             } else {
@@ -250,7 +241,7 @@
             throw new Error('Usuário não autenticado.');
         }
 
-        await remove('users', user.id);
+        await remove('api/usuarios', user.id_usuario || user.id);
         clearCurrentUser();
     }
 
@@ -345,6 +336,23 @@
         return result && result.data ? result.data : result;
     }
 
+    async function trackProgress(eventData, userId) {
+        const user = getCurrentUser();
+        const id = userId || (user && (user.id_usuario || user.id));
+        if (!id) return null;
+
+        try {
+            const result = await request('/api/progresso/' + id + '/evento', {
+                method: 'POST',
+                body: JSON.stringify(eventData || {})
+            });
+            return result && result.data ? result.data : result;
+        } catch (err) {
+            console.warn('Não foi possível registrar o progresso:', err.message);
+            return null;
+        }
+    }
+
     window.Api = {
         baseUrl: API_BASE_URL,
         request,
@@ -369,6 +377,7 @@
         isTarefaConcluida,
         getAcompanhamento,
         updateAcompanhamentoAtividade,
+        trackProgress,
         getCurrentUser,
         setCurrentUser,
         clearCurrentUser,

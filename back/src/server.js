@@ -42,7 +42,15 @@ const routes = require("./view/routes");
 app.use(routes);
 
 // ── Arquivos estáticos (frontend) ─────────────────────────────────────────────
-app.use(express.static(projectRoot));
+// O frontend fica dentro de /web. Antes o servidor apontava para a raiz do
+// projeto, fazendo /login.html retornar "Cannot GET /login.html".
+const webRoot = path.join(projectRoot, 'web');
+app.use(express.static(webRoot));
+
+// Acesso à raiz abre a tela de login.
+app.get('/', (req, res) => {
+    res.sendFile(path.join(webRoot, 'login.html'));
+});
 
 app.use(
     '/uploads',

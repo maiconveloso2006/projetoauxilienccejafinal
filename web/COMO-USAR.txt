@@ -11,10 +11,10 @@ Siga estes passos NA ORDEM:
 
 2) Iniciar o backend
    Opcao A - Duplo clique:
-     backend\iniciar-servidor.bat
+     back\iniciar-servidor.bat
 
    Opcao B - Terminal (PowerShell):
-     cd "d:\Telas 2.0 API Adaptada\backend"
+     cd "d:\Telas 2.0 API Adaptada\back"
      npm install
      npm start
 

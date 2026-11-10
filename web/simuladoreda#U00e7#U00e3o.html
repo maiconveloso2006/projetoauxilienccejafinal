@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Redação ENCCEJA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="Logo 3.0.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/simuladoredação.css">
+    <link rel="stylesheet" href="CSS/simulados-base.css">
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SRNKXZCX54"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SRNKXZCX54');
+</script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="sim-navbar">
+        <a class="sim-navbar-brand" href="plataforma.html">
+            <img src="Logo 3.0.png" alt="Logo Auxílio Encceja">
+            <span>Auxílio Encceja</span>
+        </a>
+        <button class="sim-navbar-back" onclick="history.back()">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+    </nav>
+
+    <div class="sim-container">
+
+        <!-- Hero -->
+        <div class="sim-hero sim-animate">
+            <div class="sim-hero-content">
+                <span class="sim-hero-badge"><i class="bi bi-pen-fill"></i> Redação</span>
+                <h1>Prova de Redação do ENCCEJA</h1>
+                <p>Prepare-se para a prova de redação com nosso simulado. Você terá 60 minutos para produzir uma redação dissertativa-argumentativa sobre o tema proposto. Boa sorte!</p>
+            </div>
+        </div>
+
+        <!-- Card principal -->
+        <div class="sim-card sim-animate sim-animate-delay-1">
+
+            <!-- Regras -->
+            <div class="sim-rules">
+                <h4><i class="bi bi-exclamation-triangle-fill"></i> Instruções para a Redação</h4>
+                <ul>
+                    <li>Não é permitido abrir outras abas ou janelas do navegador durante a prova</li>
+                    <li>A prova será encerrada automaticamente se você tentar sair desta página</li>
+                    <li>Você terá 60 minutos para concluir a redação</li>
+                    <li>A redação deve ter no mínimo 7 linhas e no máximo 30 linhas</li>
+                    <li>Utilize o rascunho para organizar suas ideias antes de escrever a versão final</li>
+                </ul>
+            </div>
+
+            <!-- Status bar -->
+            <div class="sim-status-bar">
+                <div class="sim-timer">
+                    <i class="bi bi-clock-fill"></i>
+                    <span id="timer">00:00</span>
+                </div>
+                <div class="sim-counter">
+                    Linhas: <span id="line-count">0</span>/30
+                </div>
+            </div>
+
+            <!-- Tela de início -->
+            <div id="start-screen" class="sim-start-screen">
+                <p>Esta prova segue o modelo do ENCCEJA. Você deverá produzir um texto dissertativo-argumentativo sobre o tema proposto, com base nos textos de apoio. Você terá 60 minutos para concluir sua redação.</p>
+                <button class="sim-btn sim-btn-accent sim-btn-block" id="start-btn">
+                    <i class="bi bi-play-fill"></i> Iniciar Prova
+                </button>
+            </div>
+
+            <!-- Área de redação -->
+            <div id="redacao-container" class="sim-redacao-container">
+
+                <div class="sim-theme-box">
+                    <h3><i class="bi bi-lightbulb-fill"></i> Tema da Redação</h3>
+                    <p><strong>O impacto das redes sociais na sociedade contemporânea</strong></p>
+                    <p>As redes sociais transformaram a forma como nos comunicamos, nos relacionamos e acessamos informações. Essas plataformas digitais trouxeram tanto benefícios quanto desafios para a sociedade moderna.</p>
+                    <h4>Textos de apoio:</h4>
+                    <ul>
+                        <li>"As redes sociais democratizaram o acesso à informação, permitindo que qualquer pessoa possa compartilhar conteúdo e opiniões com um público global." (Pesquisa sobre Comunicação Digital, 2022)</li>
+                        <li>"Estudos indicam que o uso excessivo de redes sociais pode estar associado a problemas de saúde mental, como ansiedade e depressão, especialmente entre jovens." (Revista de Saúde Pública, 2023)</li>
+                        <li>"As redes sociais se tornaram ferramentas importantes para movimentos sociais e políticos, permitindo a organização de protestos e a conscientização sobre diversas causas." (Anuário de Sociologia, 2021)</li>
+                    </ul>
+                </div>
+
+                <div class="sim-writing-area">
+                    <h3><i class="bi bi-pencil"></i> Rascunho</h3>
+                    <textarea id="draft-area" class="sim-textarea sim-textarea-draft" placeholder="Use este espaço para organizar suas ideias antes de escrever a versão final."></textarea>
+
+                    <h3><i class="bi bi-file-text-fill"></i> Redação Final</h3>
+                    <textarea id="final-area" class="sim-textarea sim-textarea-final" placeholder="Escreva sua redação dissertativa-argumentativa aqui. Mínimo 7 linhas, máximo 30 linhas."></textarea>
+                    <div id="word-count-warning" class="sim-line-warning">
+                        <i class="bi bi-exclamation-circle-fill"></i> Atenção: sua redação está fora do limite de linhas permitido.
+                    </div>
+                </div>
+
+                <div class="sim-nav-buttons" style="justify-content: flex-end;">
+                    <button id="finish-btn" class="sim-btn sim-btn-accent">
+                        Finalizar Redação <i class="bi bi-check-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resultado -->
+            <div id="result-container" class="sim-result">
+                <div class="sim-result-icon">✍️</div>
+                <h2>Redação Concluída</h2>
+                <p class="sim-result-msg">
+                    Parabéns! Você concluiu sua redação dentro do tempo estipulado.<br>
+                    Você escreveu <strong><span id="final-line-count">0</span> linhas</strong>.
+                </p>
+                <button class="sim-btn sim-btn-primary" id="retry-btn">
+                    <i class="bi bi-arrow-counterclockwise"></i> Tentar Novamente
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal de aviso -->
+    <div id="warning-modal" class="sim-warning-overlay">
+        <div class="sim-warning-box">
+            <h3><i class="bi bi-exclamation-triangle-fill"></i> Aviso Importante</h3>
+            <p id="warning-message">Você tentou sair da página da redação. Esta ação não é permitida e a prova será encerrada automaticamente.</p>
+            <button class="sim-btn sim-btn-primary" id="close-warning">OK</button>
+        </div>
+    </div>
+
+    <script src="JS/simuladoredação.js"></script>
+
+    <script src="JS/api.js"></script>
+    <script src="JS/progress-tracker.js"></script>
+</body>
+</html>
