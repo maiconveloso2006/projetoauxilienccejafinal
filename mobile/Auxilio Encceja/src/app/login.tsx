@@ -16,6 +16,8 @@ import {
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useState } from "react";
+import { Alert } from "react-native";
+import { authLogin, authRegister } from "@/api/apiauth";
 import type { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
 type TabType = "login" | "cadastro";
@@ -138,15 +140,23 @@ export default function Login() {
     return null;
   }
 
-  function handleLogin() {
+  async function handleLogin() {
     if (!loginEmail || !loginSenha) {
       mostrarAlerta("login", "Por favor, preencha todos os campos.");
       return;
     }
-    router.navigate("/plataforma");
+
+    const result = await authLogin(loginEmail, loginSenha);
+
+    if (!result.user) {
+      mostrarAlerta("login", result.message || "E-mail ou senha inválidos.");
+      return;
+    }
+
+    router.replace("/plataforma");
   }
 
-  function handleCadastro() {
+  async function handleCadastro() {
     const erro = validarCadastro();
     if (erro) {
       mostrarAlerta("cadastro", erro);
@@ -156,6 +166,22 @@ export default function Login() {
       }
       return;
     }
+
+    const nomeCompleto = `${nome.trim()} ${sobrenome.trim()}`.trim();
+    const sucesso = await authRegister({
+      login: cadastroEmail,
+      password: cadastroSenha,
+      name: nomeCompleto,
+    });
+
+    if (!sucesso) {
+      mostrarAlerta(
+        "cadastro",
+        "Não foi possível criar a conta. Verifique o e-mail e tente novamente.",
+      );
+      return;
+    }
+
     setCadastroSucesso(true);
   }
 

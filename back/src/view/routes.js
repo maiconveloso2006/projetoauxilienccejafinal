@@ -51,4 +51,19 @@ routes.get("/test", (req, res) => {
     res.status(200).json({ message: "servidor Rodando ..." });
 });
 
+routes.get("/api/health", async (req, res) => {
+    try {
+        const { db } = require("../databases/DatabaseContext.js");
+        await db.execute("SELECT 1 AS ok");
+        res.status(200).json({ ok: true, api: "online", database: "online" });
+    } catch (error) {
+        res.status(503).json({
+            ok: false,
+            api: "online",
+            database: "offline",
+            message: error.message || "Banco indisponível."
+        });
+    }
+});
+
 module.exports = routes;

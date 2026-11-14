@@ -1,4 +1,6 @@
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
+import { getCurrentUser } from "@/api/apiauth";
+import { trackProgress } from "@/api/progresso";
 import {
   Image,
   Modal,
@@ -10,7 +12,7 @@ import {
 } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 type ContentType = "videoaula" | "apostila" | "exercicio" | "simulado";
 
@@ -32,6 +34,23 @@ type TipoConteudo = {
 
 export default function Dashboard() {
   const router = useRouter();
+
+  const [nomeUsuario, setNomeUsuario] = useState("");
+
+  // Carrega o usuário logado e registra a visita do dia (alimenta "Dias Ativos").
+  useFocusEffect(
+    useCallback(() => {
+      let ativo = true;
+      (async () => {
+        const user = await getCurrentUser();
+        if (ativo && user?.nome) setNomeUsuario(user.nome.trim().split(" ")[0]);
+        void trackProgress({ evento: "VISITA", pagina: "plataforma", titulo: "Plataforma" });
+      })();
+      return () => {
+        ativo = false;
+      };
+    }, []),
+  );
 
   const [modalVisible, setModalVisible] = useState(false);
   const [materiaSelecionada, setMateriaSelecionada] = useState<Materia | null>(null);
@@ -229,7 +248,7 @@ export default function Dashboard() {
           <View style={styles.bannerConteudo}>
             <View style={styles.bannerTextoContainer}>
               <Text style={styles.boasVindasTitulo}>
-                Bem-vindo de Volta, Estudante!
+                Bem-vindo de Volta, {nomeUsuario || "Estudante"}!
               </Text>
               <Text style={styles.boasVindasTexto}>
                 Continue sua jornada de estudos para o ENCCEJA.{"\n"}

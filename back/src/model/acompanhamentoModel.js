@@ -64,25 +64,43 @@ function first(rows) {
 }
 
 async function ensureSeedData() {
-    const materiaCount = first(await query('SELECT COUNT(*) AS total FROM materias'));
-    if (materiaCount && Number(materiaCount.total) > 0) return;
-
+    // O SQL do projeto já cria as matérias, mas pode não ter atividades.
     for (const subject of defaultSubjects) {
-        const result = await run(
-            'INSERT INTO materias (nome_materia, descricao, icone) VALUES (?, ?, ?)',
-            [subject.nome, subject.descricao, subject.icone]
+        const materiaRows = await query(
+            'SELECT * FROM materias WHERE LOWER(nome_materia) = LOWER(?)',
+            [subject.nome]
         );
-        const idMateria = result.insertId;
+        let materia = first(materiaRows);
 
-        for (const atividade of subject.atividades) {
-            await run(
-                'INSERT INTO atividades (id_materia, titulo, descricao, tipo, xp_recompensa) VALUES (?, ?, ?, ?, ?)',
-                [idMateria, atividade[0], atividade[1], atividade[2], atividade[3]]
+        if (!materia) {
+            const result = await run(
+                'INSERT INTO materias (nome_materia, descricao, icone) VALUES (?, ?, ?)',
+                [subject.nome, subject.descricao, subject.icone]
             );
+
+            const insertedRows = await query(
+                'SELECT * FROM materias WHERE id_materia = ?',
+                [result.insertId]
+            );
+            materia = first(insertedRows);
+        }
+
+        const activityRows = await query(
+            'SELECT COUNT(*) AS total FROM atividades WHERE id_materia = ?',
+            [materia.id_materia]
+        );
+        const activityCount = first(activityRows);
+
+        if (Number(activityCount?.total || 0) === 0) {
+            for (const atividade of subject.atividades) {
+                await run(
+                    'INSERT INTO atividades (id_materia, titulo, descricao, tipo, xp_recompensa) VALUES (?, ?, ?, ?, ?)',
+                    [materia.id_materia, atividade[0], atividade[1], atividade[2], atividade[3]]
+                );
+            }
         }
     }
 }
-
 async function ensureUsuario(userId) {
     const numericUserId = Number(userId) || 1;
     let usuario = first(await query('SELECT * FROM usuarios WHERE id_usuario = ?', [numericUserId]));
@@ -142,6 +160,16 @@ async function ensureUserProgress(userId) {
     }
 }
 
+async function countActiveDays(userId) {
+    // Dias distintos em que o usuário teve algum evento (visita/conclusão).
+    // DATE() funciona tanto em MySQL quanto em SQLite.
+    const row = first(await query(
+        'SELECT COUNT(DISTINCT DATE(criado_em)) AS total FROM progresso_eventos WHERE id_usuario = ?',
+        [userId]
+    ));
+    return Number(row?.total) || 0;
+}
+
 async function recalculateProgress(userId) {
     const materias = await query('SELECT id_materia FROM materias ORDER BY id_materia');
     let totalAtividades = 0;
@@ -187,12 +215,16 @@ async function recalculateProgress(userId) {
         [progressoGeral, userId]
     );
 
+    const diasAtivos = await countActiveDays(userId);
+    await run('UPDATE usuarios SET dias_ativos = ? WHERE id_usuario = ?', [diasAtivos, userId]);
+
     return {
         progressoGeral,
         mediaGeral,
         totalAtividades,
         totalConcluidas,
-        totalPendentes: Math.max(totalAtividades - totalConcluidas, 0)
+        totalPendentes: Math.max(totalAtividades - totalConcluidas, 0),
+        diasAtivos
     };
 }
 
@@ -201,6 +233,9 @@ async function GetByUser(userId) {
     const usuario = await ensureUsuario(userId);
     await ensureUserProgress(usuario.id_usuario);
     const stats = await recalculateProgress(usuario.id_usuario);
+    const usuarioAtualizado = first(await query(
+        'SELECT * FROM usuarios WHERE id_usuario = ?', [usuario.id_usuario]
+    )) || usuario;
 
     const materias = await query(
         `SELECT
@@ -240,7 +275,7 @@ async function GetByUser(userId) {
     return {
         message: 'Success',
         data: {
-            usuario,
+            usuario: usuarioAtualizado,
             resumo: stats,
             materias,
             atividades
@@ -268,4 +303,4 @@ async function UpdateActivity(userId, activityId, payload) {
     return GetByUser(usuario.id_usuario);
 }
 
-module.exports = { GetByUser, UpdateActivity };
+module.exports = { GetByUser, UpdateActivity, ensureSeedData };

@@ -1,7 +1,5 @@
 (function () {
     function resolveDefaultApiUrl() {
-        // Quando o site é servido pelo próprio backend, use a mesma origem/porta.
-        // Isso evita divergência entre a porta do frontend e a porta real da API.
         if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
             return window.location.origin;
         }

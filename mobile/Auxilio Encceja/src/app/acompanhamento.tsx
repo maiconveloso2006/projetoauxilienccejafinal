@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import {
   Image,
   ScrollView,
@@ -8,7 +8,8 @@ import {
   View,
 } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { getAcompanhamento, type AcompanhamentoResponse } from "@/api/progresso";
 
 type Subject = {
   id: number;
@@ -36,7 +37,7 @@ type Activity = {
   nota?: string | null;
 };
 
-const materias: Subject[] = [
+const materiasIniciais: Subject[] = [
   {
     id: 1, nome: "Matemática", icone: "calculator-variant", progresso: 72,
     concluidas: 18, total: 25, media: 81, cor: "#25717a",
@@ -116,7 +117,7 @@ const materias: Subject[] = [
   },
 ];
 
-const atividadesRecentes = [
+const atividadesRecentesIniciais = [
   {
     icone: "check-circle",
     titulo: "Exercício de Matemática concluído",
@@ -137,10 +138,104 @@ const atividadesRecentes = [
   },
 ];
 
+type ResumoLocal = {
+  progressoGeral: number;
+  mediaGeral: number;
+  totalAtividades: number;
+  totalConcluidas: number;
+  totalPendentes: number;
+  diasAtivos: number;
+};
+
+function mapAcompanhamento(data: AcompanhamentoResponse): Subject[] {
+  return (data.materias || []).map((m) => {
+    const activities = (data.atividades || [])
+      .filter((a) => Number(a.id_materia) === Number(m.id_materia))
+      .map((a) => ({
+        tipo:
+          a.tipo === "VIDEO" ? "video" :
+          a.tipo === "EXERCICIO" ? "exercise" : "simulado",
+        nome: a.titulo,
+        status: a.status === "CONCLUIDA" ? "completed" : "pending",
+        nota: a.nota != null ? `${Math.round(Number(a.nota))}%` : undefined,
+      })) as Activity[];
+
+    return {
+      id: Number(m.id_materia),
+      nome: m.nome_materia,
+      icone: m.icone || "book-open-variant",
+      progresso: Number(m.percentual || 0),
+      concluidas: Number(m.atividades_concluidas || 0),
+      total: Number(m.atividades_concluidas || 0) + Number(m.atividades_pendentes || 0),
+      media: Number(m.media || 0),
+      cor: "#25717a",
+      topicos: [{
+        nome: "Atividades da matéria",
+        progresso: Number(m.percentual || 0),
+        status: Number(m.percentual || 0) >= 100 ? "completed" : "in-progress",
+        atividades: activities,
+      }],
+    };
+  });
+}
+
+function mapRecentActivities(data: AcompanhamentoResponse) {
+  return (data.atividades || [])
+    .filter((a) => a.status === "CONCLUIDA")
+    .slice(0, 5)
+    .map((a) => ({
+      icone: a.tipo === "VIDEO" ? "play-circle" : a.tipo === "QUIZ" ? "trophy" : "check-circle",
+      titulo: `${a.titulo} concluído`,
+      descricao: a.nota != null ? `Nota: ${Math.round(Number(a.nota))}%` : "Atividade concluída",
+      tempo: a.concluido_em ? new Date(a.concluido_em).toLocaleString("pt-BR") : "Recentemente",
+    }));
+}
+
 export default function Acompanhamento() {
   const router = useRouter();
   const [visao, setVisao] = useState<"geral" | "materia">("geral");
   const [materiaSelecionada, setMateriaSelecionada] = useState<Subject | null>(null);
+  const [materias, setMaterias] = useState<Subject[]>(materiasIniciais);
+  const [atividadesRecentes, setAtividadesRecentes] = useState(atividadesRecentesIniciais);
+  const [resumo, setResumo] = useState<ResumoLocal>({
+    progressoGeral: 0,
+    mediaGeral: 0,
+    totalAtividades: 0,
+    totalConcluidas: 0,
+    totalPendentes: 0,
+    diasAtivos: 0,
+  });
+  const [usuario, setUsuario] = useState<any>(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      let ativo = true;
+
+      (async () => {
+        try {
+          const data = await getAcompanhamento();
+          if (!ativo || !data) return;
+
+          setUsuario(data.usuario);
+          setResumo({
+            ...data.resumo,
+            diasAtivos: Number(data.resumo?.diasAtivos ?? data.usuario?.dias_ativos ?? 0),
+          });
+          setMaterias(mapAcompanhamento(data));
+          setAtividadesRecentes(mapRecentActivities(data));
+        } catch (error) {
+          console.warn(
+            "Não foi possível carregar o acompanhamento:",
+            error instanceof Error ? error.message : error,
+          );
+        }
+      })();
+
+      return () => {
+        ativo = false;
+      };
+    }, []),
+  );
 
   const abrirMateria = (materia: Subject) => {
     setMateriaSelecionada(materia);
@@ -209,8 +304,8 @@ export default function Acompanhamento() {
           </View>
 
           <View style={styles.studentDetails}>
-            <Text style={styles.studentName}>Maria Silva Santos</Text>
-            <Text style={styles.studentMeta}>Turma: ENCCEJA 2025 | Matrícula: 2025-001</Text>
+            <Text style={styles.studentName}>{usuario?.nome || "Estudante Encceja"}</Text>
+            <Text style={styles.studentMeta}>Turma: ENCCEJA 2026 | Matrícula: {usuario?.matricula || "—"}</Text>
             <View style={styles.levelBadge}>
               <MaterialCommunityIcons name="star" size={14} color="#25717a" />
               <Text style={styles.levelText}>Nível: Intermediário</Text>
@@ -219,15 +314,15 @@ export default function Acompanhamento() {
 
           <View style={styles.quickStats}>
             <View style={styles.quickStat}>
-              <Text style={styles.quickValue}>67%</Text>
+              <Text style={styles.quickValue}>{resumo.progressoGeral}%</Text>
               <Text style={styles.quickLabel}>Progresso Geral</Text>
             </View>
             <View style={styles.quickStat}>
-              <Text style={styles.quickValue}>12</Text>
+              <Text style={styles.quickValue}>{resumo.diasAtivos}</Text>
               <Text style={styles.quickLabel}>Dias Ativos</Text>
             </View>
             <View style={styles.quickStat}>
-              <Text style={styles.quickValue}>85</Text>
+              <Text style={styles.quickValue}>{Number(usuario?.pontos_xp || 0)}</Text>
               <Text style={styles.quickLabel}>Pontos XP</Text>
             </View>
           </View>
@@ -252,10 +347,10 @@ export default function Acompanhamento() {
         {visao === "geral" ? (
           <>
             <View style={styles.statsGrid}>
-              <StatCard icone="chart-line" valor="67%" titulo="Progresso Geral" />
-              <StatCard icone="check-circle" valor="24" titulo="Atividades Concluídas" />
-              <StatCard icone="timer-sand" valor="12" titulo="Atividades Pendentes" />
-              <StatCard icone="trophy" valor="78%" titulo="Média Geral" />
+              <StatCard icone="chart-line" valor={`${resumo.progressoGeral}%`} titulo="Progresso Geral" />
+              <StatCard icone="check-circle" valor={String(resumo.totalConcluidas)} titulo="Atividades Concluídas" />
+              <StatCard icone="timer-sand" valor={String(resumo.totalPendentes)} titulo="Atividades Pendentes" />
+              <StatCard icone="trophy" valor={`${resumo.mediaGeral}%`} titulo="Média Geral" />
             </View>
 
             <SectionTitle icone="book-open-variant" titulo="Progresso por Matéria" />

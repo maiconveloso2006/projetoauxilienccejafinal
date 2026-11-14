@@ -835,7 +835,7 @@ body {
 .hero-section {
   min-height: 650px;
   padding: 130px 0 90px;
-  background: linear-gradient(135deg, #34495e, #159895 );
+  background: linear-gradient(135deg, #34495e, #159895);
 }
 
 .hero-section:before {

@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Alert, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
+import { trackProgress } from "@/api/progresso";
 
 type Option = { label: string; value: string };
 type Question = { title?: string; prompt: string; options: Option[]; correct?: string; explanation?: string; topic?: string };
@@ -24,15 +25,64 @@ export default function StudyContentScreen({ kind, title, subtitle, materials = 
   const tabs = useMemo(() => ["Todos", ...Array.from(new Set(questions.map(q => q.topic).filter(Boolean) as string[]))], [questions]);
   const visibleQuestions = questions.map((q, originalIndex) => ({ q, originalIndex })).filter(({ q }) => activeTab === "Todos" || q.topic === activeTab);
   const toggle = (i: number) => setExpanded(prev => prev.includes(i) ? prev.filter(x => x !== i) : [...prev, i]);
+  const inferMateria = (value: string) => {
+    const text = value.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase();
+
+    if (text.includes("matemat")) return "Matematica";
+    if (text.includes("portugues") || text.includes("literatura")) return "Portugues";
+    if (text.includes("historia")) return "Historia";
+    if (text.includes("geografia")) return "Geografia";
+    if (text.includes("ciencia")) return "Ciencias";
+    if (text.includes("sociologia")) return "Sociologia";
+
+    return "Geral";
+  };
+
+  const registrarConclusao = async (percentual: number, nota?: number) => {
+    await trackProgress({
+      evento: "CONCLUSAO",
+      pagina: title,
+      titulo: title,
+      materia: inferMateria(title),
+      tipo: isExercise ? "EXERCICIO" : isEssay ? "PDF" : isApostila ? "PDF" : "QUIZ",
+      percentual,
+      nota: nota ?? percentual,
+    });
+  };
+
   const submit = () => {
     const missing = questions.filter((_, i) => !answers[i]).length;
-    if (missing) { Alert.alert("Respostas pendentes", `Você ainda não respondeu ${missing} questão(ões).`); return; }
+    if (missing) {
+      Alert.alert("Respostas pendentes", `Você ainda não respondeu ${missing} questão(ões).`);
+      return;
+    }
+
+    const percentual = questions.length
+      ? Math.round((score / questions.length) * 100)
+      : 0;
+
     setFinished(true);
-    Alert.alert("Resultado do simulado", `Pontuação: ${score} / ${questions.length}\nVocê acertou ${score} questão(ões).`);
+    void registrarConclusao(percentual, percentual);
+
+    Alert.alert(
+      "Resultado do simulado",
+      `Pontuação: ${score} / ${questions.length}\nVocê acertou ${score} questão(ões).`,
+    );
   };
   const isApostila = kind === "apostila";
   const isExercise = kind === "exercicio";
   const isEssay = kind === "redacao";
+
+  React.useEffect(() => {
+    if (!isExercise || questions.length === 0) return;
+
+    const totalChecked = Object.values(checked).filter(Boolean).length;
+    if (totalChecked === questions.length) {
+      const percentual = Math.round((score / questions.length) * 100);
+      void registrarConclusao(percentual, percentual);
+    }
+  }, [checked, isExercise, questions.length, score]);
+
   const kindLabel = isApostila ? "Material de Estudo" : isExercise ? "Exercícios Práticos" : isEssay ? "Proposta de Redação" : "Simulado ENCCEJA";
   const heroDescription = subtitle || (isApostila ? "Explore os conteúdos e organize sua preparação para o ENCCEJA." : isExercise ? "Prepare-se para o exame com exercícios práticos e feedback imediato." : isEssay ? "Pratique sua redação seguindo a proposta do ENCCEJA." : "Teste seus conhecimentos e acompanhe seu desempenho.");
 

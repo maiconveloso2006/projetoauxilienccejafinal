@@ -637,7 +637,7 @@ const contentData = {
         { id: 3, title: 'Simulado de Português e Literatura', titleKey: 'item.simulado_3', subject: 'Português', subjectKey: 'portugues', duration: '60 min', questions: 10, href: 'simuladoportugues.html', img: 'Thumbs/Img 31.png' },
         { id: 4, title: 'Simulado de História e Geografia', titleKey: 'item.simulado_4', subject: 'História/Geografia', subjectKey: 'historia', duration: '90 min', questions: 20, href: 'simulado historia e geografia.html', img: 'Thumbs/Img 32.png' },
         { id: 5, title: 'Simulado de Ciências da Natureza', titleKey: 'item.simulado_5', subject: 'Ciências', subjectKey: 'ciencias', duration: '60 min', questions: 10, href: 'simuladociencias.html', img: 'Thumbs/Img 33.png' },
-        { id: 6, title: 'Simulado de Redação Oficial', titleKey: 'item.simulado_6', subject: 'Redação', subjectKey: 'redacao', duration: '60 min', questions: 1, href: 'simuladoredação.html', img: 'Thumbs/Img 34.png' }
+        { id: 6, title: 'Simulado de Redação Oficial', titleKey: 'item.simulado_6', subject: 'Redação', subjectKey: 'redacao', duration: '60 min', questions: 1, href: 'simuladoredacao.html', img: 'Thumbs/Img 34.png' }
     ]
 };
 

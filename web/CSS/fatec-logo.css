@@ -1,0 +1,23 @@
+:root {
+    --fatec-logo-height: 38px;
+    --fatec-logo-height-mobile: 30px;
+}
+
+img[src*="Fatec" i],
+.fatec-logo {
+    height: var(--fatec-logo-height);
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    vertical-align: middle;
+    margin: 0 12px 0 0;
+    display: inline-block;
+}
+
+@media (max-width: 767.98px) {
+    img[src*="Fatec" i],
+    .fatec-logo {
+        height: var(--fatec-logo-height-mobile);
+        margin: 0 8px 0 0;
+    }
+}

@@ -1,4 +1,5 @@
 const { db } = require('../databases/DatabaseContext.js');
+const { ensureSeedData } = require('./acompanhamentoModel.js');
 
 async function query(sql, params = []) {
     const [rows] = await db.execute(sql, params);
@@ -48,7 +49,7 @@ async function ensureUser(userId) {
             await run(
                 `INSERT INTO usuarios
                     (id_usuario, nome, email, senha, nivel, dias_ativos, progresso_geral, matricula)
-                 VALUES (?, ?, ?, ?, 'Basico', 0, 0, ?)`,
+                 VALUES (?, ?, ?, ?, 'Básico', 0, 0, ?)`,
                 [id, legacy.name, legacy.login, legacy.password, matricula]
             );
             user = first(await query('SELECT * FROM usuarios WHERE id_usuario = ?', [id]));
@@ -106,6 +107,8 @@ async function updateActiveDays(userId) {
 }
 
 async function recalculate(userId) {
+    await ensureSeedData();
+
     const rows = await query(
         `SELECT
             COUNT(a.id_atividade) AS total,

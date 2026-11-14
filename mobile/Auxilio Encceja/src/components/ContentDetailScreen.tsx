@@ -3,6 +3,7 @@ import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "rea
 import { useLocalSearchParams, useRouter } from "expo-router";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { contentScreens, ScreenKind } from "../data/contentScreens";
+import { trackProgress } from "@/api/progresso";
 
 type Props = { kind: ScreenKind; materiaOverride?: string };
 
@@ -70,7 +71,21 @@ export default function ContentDetailScreen({ kind, materiaOverride }: Props) {
                 <View key={item} style={styles.checkRow}><Text style={[styles.number, { backgroundColor: accent }]}>{i + 1}</Text><Text style={styles.rowText}>{item}</Text></View>
               ))}
             </View>
-            <TouchableOpacity style={[styles.primaryButton, { backgroundColor: accent }]} onPress={() => setEstudado(!estudado)}>
+            <TouchableOpacity style={[styles.primaryButton, { backgroundColor: accent }]} onPress={() => {
+              const novoEstado = !estudado;
+              setEstudado(novoEstado);
+              if (novoEstado) {
+                void trackProgress({
+                  evento: "CONCLUSAO",
+                  pagina: `conteudos/${kind}/${materiaKey}`,
+                  titulo: info.titulo,
+                  materia: info.materia,
+                  tipo: "PDF",
+                  percentual: 100,
+                  nota: 100,
+                });
+              }
+            }}>
               <MaterialCommunityIcons name={estudado ? "check-circle" : "bookmark-check-outline"} size={20} color="#fff" />
               <Text style={styles.primaryText}>{estudado ? "Material marcado como estudado" : "Marcar como estudado"}</Text>
             </TouchableOpacity>
@@ -100,7 +115,19 @@ export default function ContentDetailScreen({ kind, materiaOverride }: Props) {
               })}
               {respondida && <View style={styles.feedback}><Text style={styles.feedbackTitle}>{resposta === question.correta ? "Resposta correta!" : "Vamos revisar"}</Text><Text style={styles.rowText}>{question.explicacao}</Text></View>}
               {!respondida ? (
-                <TouchableOpacity disabled={resposta === null} onPress={() => setRespondida(true)} style={[styles.primaryButton, { backgroundColor: accent }, resposta === null && styles.disabledButton]}>
+                <TouchableOpacity disabled={resposta === null} onPress={() => {
+                    setRespondida(true);
+                    const acertou = resposta === question.correta;
+                    void trackProgress({
+                      evento: "CONCLUSAO",
+                      pagina: `conteudos/${kind}/${materiaKey}`,
+                      titulo: info.titulo,
+                      materia: info.materia,
+                      tipo: isExercicio ? "EXERCICIO" : "QUIZ",
+                      percentual: acertou ? 100 : 0,
+                      nota: acertou ? 100 : 0,
+                    });
+                  }} style={[styles.primaryButton, { backgroundColor: accent }, resposta === null && styles.disabledButton]}>
                   <Text style={styles.primaryText}>Conferir resposta</Text>
                 </TouchableOpacity>
               ) : (
