@@ -41,7 +41,6 @@ export default function Home() {
 
   return (
     <View style={styles.TelaInteira}>
-      {/* Header igual ao Dashboard */}
       <View style={styles.header}>
         <View style={styles.headerSuperior}>
           <Image
@@ -167,7 +166,7 @@ export default function Home() {
           ))}
         </View>
 
-        {/* How it Works (Como Funciona) */}
+        {/* Como Funciona */}
         <View style={styles.howSectionBox}>
           <View style={styles.tituloSecaoContainer}>
             <View style={styles.iconeTituloSecao}>
@@ -243,7 +242,7 @@ export default function Home() {
           </TouchableOpacity>
         </View>
 
-        {/* Novo Botão de Sair (Substituindo o Footer antigo) */}
+        {/* Botão de Sair */}
         <TouchableOpacity
           style={styles.botaoSair}
           onPress={() => router.navigate("/")}
@@ -253,7 +252,6 @@ export default function Home() {
           <Text style={styles.textoBotaoSair}>Sair</Text>
         </TouchableOpacity>
 
-        {/* Texto Simples de Copyright no rodapé */}
         <Text style={styles.footerCopyright}>Auxílio Encceja © 2026</Text>
       </ScrollView>
     </View>
@@ -266,7 +264,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F4F6F8",
   },
   
-  // Header (Igual ao Dashboard)
   header: {
     backgroundColor: "#34495e",
     paddingTop: 38,
@@ -280,19 +277,23 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 8,
   },
+
   headerSuperior: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
+
   logo: {
     width: 47,
     height: 47,
     marginRight: 7,
   },
+
   textosHeader: {
     justifyContent: "center",
   },
+
   titulo: {
     color: "#FFFFFF",
     fontSize: 20,
@@ -307,6 +308,7 @@ const styles = StyleSheet.create({
     paddingBottom: 1,
     paddingHorizontal: 7,
   },
+
   menuBotao: {
     flexDirection: "row",
     alignItems: "center",
@@ -317,16 +319,17 @@ const styles = StyleSheet.create({
     marginRight: 2,
     gap: 4,
   },
+
   menuAtivo: {
     backgroundColor: "rgba(255,255,255,0.25)",
   },
+
   menuTexto: {
     color: "#FFFFFF",
     fontSize: 12,
     fontWeight: "600",
   },
 
-  // ScrollView Principal
   scroll: {
     flex: 1,
   },
@@ -335,10 +338,9 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
 
-  // Hero Section
   heroSection: {
     width: "100%",
-    backgroundColor: "#34495e", // Azul escuro do gradiente CSS
+    backgroundColor: "#34495e", 
     borderRadius: 24,
     paddingVertical: 30,
     paddingHorizontal: 20,
@@ -350,6 +352,7 @@ const styles = StyleSheet.create({
     shadowRadius: 18,
     elevation: 7,
   },
+
   heroBadge: {
     flexDirection: "row",
     alignItems: "center",
@@ -361,11 +364,13 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     gap: 6,
   },
+
   heroBadgeText: {
     color: "#FFFFFF",
     fontSize: 12,
     fontWeight: "700",
   },
+
   heroTitle: {
     color: "#FFFFFF",
     fontSize: 28,
@@ -373,21 +378,25 @@ const styles = StyleSheet.create({
     lineHeight: 34,
     marginBottom: 15,
   },
+
   heroTitleDestaque: {
-    color: "#8fe8da", // Verde água do CSS
+    color: "#8fe8da", 
   },
+
   heroText: {
     color: "rgba(255,255,255,0.82)",
     fontSize: 14,
     lineHeight: 21,
     marginBottom: 25,
   },
+
   heroActions: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10,
     marginBottom: 20,
   },
+
   heroPrimary: {
     flexDirection: "row",
     alignItems: "center",
@@ -403,11 +412,13 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 4,
   },
+
   heroPrimaryText: {
     color: "#173b4a",
     fontSize: 14,
     fontWeight: "900",
   },
+
   heroSecondary: {
     flexDirection: "row",
     alignItems: "center",
@@ -420,27 +431,30 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     gap: 8,
   },
+
   heroSecondaryText: {
     color: "#FFFFFF",
     fontSize: 14,
     fontWeight: "800",
   },
+
   heroTrustContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 15,
   },
+
   heroTrustItem: {
     flexDirection: "row",
     alignItems: "center",
     gap: 5,
   },
+
   heroTrustText: {
     color: "rgba(255,255,255,0.8)",
     fontSize: 12,
   },
 
-  // Stats Strip
   statsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -455,11 +469,13 @@ const styles = StyleSheet.create({
     shadowRadius: 9,
     elevation: 4,
   },
+
   statCard: {
     width: "48%",
     alignItems: "center",
     paddingVertical: 10,
   },
+
   statIconBox: {
     width: 45,
     height: 45,
@@ -469,6 +485,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 8,
   },
+
   statNome: {
     color: "#2C3E50",
     fontSize: 15,
@@ -479,13 +496,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-  // Títulos de Seção (Padrão Dashboard)
   tituloSecaoContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 17,
     marginLeft: 2,
   },
+
   iconeTituloSecao: {
     width: 42,
     height: 42,
@@ -495,6 +512,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginRight: 11,
   },
+
   secaoTitulo: {
     flex: 1,
     color: "#2C3E50",
@@ -502,10 +520,10 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
 
-  // Features
   featuresContainer: {
     marginBottom: 28,
   },
+
   featureCard: {
     backgroundColor: "#FFFFFF",
     borderRadius: 17,
@@ -519,6 +537,7 @@ const styles = StyleSheet.create({
     shadowRadius: 7,
     elevation: 3,
   },
+
   featureIconBox: {
     width: 50,
     height: 50,
@@ -528,30 +547,33 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 12,
   },
+
   featureTitulo: {
     color: "#2C3E50",
     fontSize: 17,
     fontWeight: "800",
     marginBottom: 6,
   },
+
   featureTexto: {
     color: "#7F8C8D",
     fontSize: 13,
     lineHeight: 19,
     marginBottom: 12,
   },
+
   featureBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
   },
+
   featureBtnTexto: {
     color: "#159895",
     fontSize: 13,
     fontWeight: "700",
   },
 
-  // How Section
   howSectionBox: {
     backgroundColor: "#FFFFFF",
     borderRadius: 20,
@@ -563,15 +585,18 @@ const styles = StyleSheet.create({
     shadowRadius: 7,
     elevation: 3,
   },
+
   howTexto: {
     color: "#7F8C8D",
     fontSize: 14,
     lineHeight: 21,
     marginBottom: 20,
   },
+
   stepsContainer: {
     marginBottom: 15,
   },
+
   stepItem: {
     flexDirection: "row",
     alignItems: "center",
@@ -579,6 +604,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#E7EAED",
   },
+
   stepNumBox: {
     width: 38,
     height: 38,
@@ -588,27 +614,30 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginRight: 15,
   },
+
   stepNumText: {
     color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "900",
   },
+
   stepContent: {
     flex: 1,
   },
+
   stepTitulo: {
     color: "#2C3E50",
     fontSize: 15,
     fontWeight: "800",
     marginBottom: 4,
   },
+
   stepTexto: {
     color: "#7F8C8D",
     fontSize: 13,
     lineHeight: 18,
   },
 
-  // Botão Padrão
   botaoPadrao: {
     width: "100%",
     height: 50,
@@ -620,15 +649,15 @@ const styles = StyleSheet.create({
     gap: 8,
     marginTop: 12,
   },
+
   botaoPadraoTexto: {
     color: "#FFFFFF",
     fontSize: 15,
     fontWeight: "800",
   },
 
-  // Motivation
   motivationCard: {
-    backgroundColor: "#34495e", // Azul escuro Motivation
+    backgroundColor: "#34495e", 
     borderRadius: 20,
     padding: 25,
     marginBottom: 28,
@@ -638,6 +667,7 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 6,
   },
+
   motivationKicker: {
     color: "#9df1e4",
     fontSize: 12,
@@ -646,6 +676,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
     marginBottom: 10,
   },
+
   motivationTitulo: {
     color: "#FFFFFF",
     fontSize: 22,
@@ -653,12 +684,14 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     marginBottom: 15,
   },
+
   motivationTexto: {
     color: "rgba(255,255,255,0.84)",
     fontSize: 14,
     lineHeight: 21,
     marginBottom: 20,
   },
+
   motivationBtn: {
     flexDirection: "row",
     alignItems: "center",
@@ -670,18 +703,19 @@ const styles = StyleSheet.create({
     gap: 8,
     alignSelf: "flex-start",
   },
+
   motivationBtnTexto: {
     color: "#34495e",
     fontSize: 14,
     fontWeight: "800",
   },
 
-  // Final CTA
   finalCtaBox: {
     alignItems: "center",
     paddingVertical: 20,
     marginBottom: 20,
   },
+
   finalCtaKicker: {
     color: "#159895",
     fontSize: 12,
@@ -690,6 +724,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
     marginBottom: 10,
   },
+
   finalCtaTitulo: {
     color: "#2C3E50",
     fontSize: 24,
@@ -697,11 +732,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 30,
   },
+
   finalCtaTituloDestaque: {
     color: "#159895",
   },
 
-  // Novos estilos de Saída e Footer
   botaoSair: {
     width: "100%",
     height: 50,
@@ -713,11 +748,13 @@ const styles = StyleSheet.create({
     gap: 8,
     marginTop: 12,
   },
+
   textoBotaoSair: {
     color: "#FFFFFF",
     fontSize: 15,
     fontWeight: "800",
   },
+
   footerCopyright: {
     textAlign: "center",
     color: "#7F8C8D",

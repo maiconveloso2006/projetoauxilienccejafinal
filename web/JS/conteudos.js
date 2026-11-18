@@ -132,7 +132,6 @@ const translations = {
         'a11y.line_spaced': 'Espaçado',
         'toast.settings_saved': 'Configurações salvas com sucesso!',
         'toast.settings_reset': 'Configurações restauradas!',
-        // --- Títulos dos Itens (i18n) ---
         'item.video_1': 'Fórmulas Matemáticas com Símbolos, Números e Letras',
         'item.video_2': 'Conjugação Verbal',
         'item.video_3': 'História do Brasil - Visão Geral',
@@ -157,7 +156,6 @@ const translations = {
         'item.simulado_4': 'Simulado de História e Geografia',
         'item.simulado_5': 'Simulado de Ciências da Natureza',
         'item.simulado_6': 'Simulado de Redação Oficial',
-        // --- Níveis (i18n) ---
         'level.basico': 'Básico',
         'level.intermediario': 'Intermediário',
         'level.avancado': 'Avançado',
@@ -297,7 +295,6 @@ const translations = {
         'a11y.line_spaced': 'Spaced',
         'toast.settings_saved': 'Settings saved successfully!',
         'toast.settings_reset': 'Settings restored!',
-        // --- Item Titles (i18n) ---
         'item.video_1': 'Math Formulas with Symbols, Numbers and Letters',
         'item.video_2': 'Verb Conjugation',
         'item.video_3': 'History of Brazil - Overview',
@@ -322,7 +319,6 @@ const translations = {
         'item.simulado_4': 'History and Geography Mock Exam',
         'item.simulado_5': 'Natural Sciences Mock Exam',
         'item.simulado_6': 'Official Writing Mock Exam',
-        // --- Levels (i18n) ---
         'level.basico': 'Basic',
         'level.intermediario': 'Intermediate',
         'level.avancado': 'Advanced',
@@ -462,7 +458,6 @@ const translations = {
         'a11y.line_spaced': 'Espaciado',
         'toast.settings_saved': '¡Configuraciones guardadas con éxito!',
         'toast.settings_reset': '¡Configuraciones restauradas!',
-        // --- Títulos de los Items (i18n) ---
         'item.video_1': 'Fórmulas Matemáticas con Símbolos, Números y Letras',
         'item.video_2': 'Conjugación Verbal',
         'item.video_3': 'Historia de Brasil - Visión General',
@@ -487,7 +482,6 @@ const translations = {
         'item.simulado_4': 'Simulacro de Historia y Geografía',
         'item.simulado_5': 'Simulacro de Ciencias de la Naturaleza',
         'item.simulado_6': 'Simulacro de Redacción Oficial',
-        // --- Niveles (i18n) ---
         'level.basico': 'Básico',
         'level.intermediario': 'Intermedio',
         'level.avancado': 'Avanzado',
@@ -605,7 +599,7 @@ function subjectToKey(subjectName) {
     return map[subjectName] || 'all';
 }
 
-// Dados (Adicionado titleKey em cada item)
+// Dados 
 const contentData = {
     videoaulas: [
         { id: 1, title: 'Fórmulas Matemáticas com Símbolos, Números e Letras', titleKey: 'item.video_1', subject: 'Matemática', subjectKey: 'matematica', level: 'intermediário', duration: '45 min', img: 'Thumbs/Img1.png', videoUrl: 'Videos/matematica_simbolos.mp4' },

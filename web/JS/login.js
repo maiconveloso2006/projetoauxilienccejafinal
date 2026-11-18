@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
             if (window.Api && Api.getCurrentUser()) {
                 window.location.href = 'plataforma.html';
                 return;
@@ -107,13 +107,45 @@ document.addEventListener('DOMContentLoaded', function() {
                     return 'Informe um e-mail válido.';
                 }
                 const phoneDigits = phone.replace(/\D/g, '');
-                if (phoneDigits.length < 10 || phoneDigits.length > 11) {
-                    return 'Informe um telefone válido com DDD.';
+                if (phoneDigits.length !== 10 && phoneDigits.length !== 11) {
+                    return 'Informe um telefone válido com DDD (10 ou 11 dígitos).';
+                }
+    
+                const ddd1 = Number(phoneDigits[0]);
+                const ddd2 = Number(phoneDigits[1]);
+                if (ddd1 < 1 || ddd1 > 9 || ddd2 < 1 || ddd2 > 9) {
+                    return 'Informe um DDD válido (11 a 99).';
+                }
+                if (phoneDigits.length === 11) {
+                    if (phoneDigits[2] !== '9') {
+                        return 'Número de celular deve começar com 9 após o DDD.';
+                    }
+                } else {
+                    const fixo = Number(phoneDigits[2]);
+                    if (fixo < 2 || fixo > 5) {
+                        return 'Número fixo deve começar com 2 a 5 após o DDD.';
+                    }
+                }
+        
+                const [bYear, bMonth, bDay] = birthDate.split('-');
+                if (!bYear || !bMonth || !bDay) {
+                    return 'Data de nascimento inválida.';
+                }
+                const d = Number(bDay);
+                const m = Number(bMonth);
+                const a = Number(bYear);
+                const birth = new Date(a, m - 1, d);
+                if (
+                    Number.isNaN(birth.getTime()) ||
+                    birth.getFullYear() !== a ||
+                    birth.getMonth() !== m - 1 ||
+                    birth.getDate() !== d
+                ) {
+                    return 'Data de nascimento inválida.';
                 }
                 const today = new Date();
-                const birth = new Date(birthDate);
-                if (Number.isNaN(birth.getTime())) {
-                    return 'Data de nascimento inválida.';
+                if (birth.getTime() > today.getTime()) {
+                    return 'A data de nascimento não pode ser no futuro.';
                 }
                 let age = today.getFullYear() - birth.getFullYear();
                 const monthDiff = today.getMonth() - birth.getMonth();
@@ -138,14 +170,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const switchToRegister = document.getElementById('switchToRegister');
             const switchToLogin = document.getElementById('switchToLogin');
             const registerSuccess = document.getElementById('register-success');
-            
+
             function showLoginForm() {
                 loginTab.classList.add('active');
                 registerTab.classList.remove('active');
                 loginForm.classList.add('active');
                 registerForm.classList.remove('active');
                 registerSuccess.style.display = 'none';
-                
+
                 // Reset step indicators
                 document.getElementById('step1').classList.add('active');
                 document.getElementById('step2').classList.remove('active');
@@ -155,14 +187,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('step1').querySelector('.step-line').classList.remove('active');
                 document.getElementById('step2').querySelector('.step-line').classList.remove('active');
             }
-            
+
             function showRegisterForm() {
                 loginTab.classList.remove('active');
                 registerTab.classList.add('active');
                 loginForm.classList.remove('active');
                 registerForm.classList.add('active');
                 registerSuccess.style.display = 'none';
-                
+
                 // Reset step indicators
                 document.getElementById('step1').classList.add('active');
                 document.getElementById('step2').classList.remove('active');
@@ -172,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('step1').querySelector('.step-line').classList.remove('active');
                 document.getElementById('step2').querySelector('.step-line').classList.remove('active');
             }
-            
+
             loginTab.addEventListener('click', function() {
                 showLoginForm();
                 history.replaceState(null, '', 'login.html');
@@ -195,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (window.location.hash === '#cadastro') {
                 showRegisterForm();
             }
-            
+
             // Password toggle
             const loginPasswordToggle = document.getElementById('loginPasswordToggle');
             const loginPassword = document.getElementById('loginPassword');
@@ -203,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const registerPassword = document.getElementById('registerPassword');
             const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
             const confirmPassword = document.getElementById('confirmPassword');
-            
+
             function togglePasswordVisibility(input, toggleIcon) {
                 if (input.type === 'password') {
                     input.type = 'text';
@@ -215,25 +247,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     toggleIcon.classList.add('bi-eye');
                 }
             }
-            
+
             loginPasswordToggle.addEventListener('click', function() {
                 togglePasswordVisibility(loginPassword, this.querySelector('i'));
             });
-            
+
             registerPasswordToggle.addEventListener('click', function() {
                 togglePasswordVisibility(registerPassword, this.querySelector('i'));
             });
-            
+
             confirmPasswordToggle.addEventListener('click', function() {
                 togglePasswordVisibility(confirmPassword, this.querySelector('i'));
             });
-            
+
             // Form submission
             const loginFormElement = document.getElementById('loginForm');
             const registerFormElement = document.getElementById('registerForm');
             const loginAlert = document.getElementById('login-alert');
             const registerAlert = document.getElementById('register-alert');
-            
+
             loginFormElement.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
@@ -271,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitBtn.disabled = false;
                 }
             });
-            
+
             registerFormElement.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
@@ -333,36 +365,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitBtn.disabled = false;
                 }
             });
-            
+
             // Esqueci minha senha
             const forgotPassword = document.getElementById('forgotPassword');
             const resetPasswordModal = new bootstrap.Modal(document.getElementById('resetPasswordModal'));
-            
+
             forgotPassword.addEventListener('click', function(e) {
                 e.preventDefault();
                 resetPasswordModal.show();
             });
-            
+
             // Form submission for password reset
             const resetPasswordForm = document.getElementById('resetPasswordForm');
-            
+
             resetPasswordForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 const email = document.getElementById('resetEmail').value;
-                
+
                 if (email) {
-                    // Simulação de envio de email de redefinição (substituir por lógica real)
                     console.log('Email de redefinição enviado para:', email);
-                    
+
                     // Fechar modal
                     resetPasswordModal.hide();
-                    
+
                     // Mostrar toast de sucesso
                     const toastContainer = document.createElement('div');
                     toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
                     toastContainer.style.zIndex = '11';
-                    
+
                     toastContainer.innerHTML = `
                         <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-header bg-success text-white">
@@ -375,18 +406,18 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
                     `;
-                    
+
                     document.body.appendChild(toastContainer);
-                    
+
                     setTimeout(() => {
                         toastContainer.remove();
                     }, 3000);
                 }
             });
-            
+
             // Go to login from success page
             const goToLoginBtn = document.getElementById('goToLogin');
-            
+
             goToLoginBtn.addEventListener('click', function() {
                 showLoginForm();
                 document.getElementById('registerForm').reset();
@@ -397,24 +428,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 if (termsHint) termsHint.textContent = 'Leia os termos até o final para habilitar o aceite.';
             });
-            
+
             // Password strength indicator
             const passwordStrengthBar = document.getElementById('passwordStrengthBar');
             const passwordStrengthText = document.getElementById('passwordStrengthText');
             const registerPasswordInput = document.getElementById('registerPassword');
-            
+
             registerPasswordInput.addEventListener('input', function() {
                 const password = this.value;
                 let strength = 0;
                 let strengthText = '';
                 let strengthColor = '';
-                
+
                 if (password.length >= 8) strength += 1;
                 if (password.match(/[a-z]+/)) strength += 1;
                 if (password.match(/[A-Z]+/)) strength += 1;
                 if (password.match(/[0-9]+/)) strength += 1;
                 if (password.match(/[^a-zA-Z0-9]+/)) strength += 1;
-                
+
                 switch (strength) {
                     case 0:
                         strengthText = 'Senha Fraca';
@@ -441,15 +472,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         strengthColor = '#28a745';
                         break;
                 }
-                
+
                 passwordStrengthBar.style.width = (strength * 20) + '%';
                 passwordStrengthBar.style.backgroundColor = strengthColor;
                 passwordStrengthText.textContent = strengthText;
             });
-            
+
             // Validação em tempo real dos campos
             const formInputs = document.querySelectorAll('.form-control, .form-select');
-            
+
             formInputs.forEach(input => {
                 input.addEventListener('input', function() {
                     if (this.value) {
@@ -460,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         this.classList.remove('input-invalid');
                     }
                 });
-                
+
                 input.addEventListener('blur', function() {
                     if (this.required && !this.value) {
                         this.classList.add('input-invalid');
@@ -468,7 +499,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             });
-            
+
             function showLoginToast(message) {
                 const toastContainer = document.createElement('div');
                 toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
@@ -488,7 +519,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Adicionar ícones aos campos de formulário
             const inputGroups = document.querySelectorAll('.input-group-text');
-            
+
             inputGroups.forEach(group => {
                 const icon = group.querySelector('i');
                 if (icon) {
@@ -496,4 +527,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     group.style.justifyContent = 'center';
                 }
             });
+
+            // Limita o campo de data de nascimento a hoje 
+            const birthDateInput = document.getElementById('birthDate');
+            if (birthDateInput) {
+                const hoje = new Date();
+                const yyyy = hoje.getFullYear();
+                const mm = String(hoje.getMonth() + 1).padStart(2, '0');
+                const dd = String(hoje.getDate()).padStart(2, '0');
+                birthDateInput.setAttribute('max', `${yyyy}-${mm}-${dd}`);
+            }
         });

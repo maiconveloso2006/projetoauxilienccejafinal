@@ -119,16 +119,53 @@ export default function Login() {
       return "Informe um e-mail válido.";
     }
     const phoneDigits = telefone.replace(/\D/g, "");
-    if (phoneDigits.length < 10 || phoneDigits.length > 11) {
-      return "Informe um telefone válido com DDD.";
+    if (phoneDigits.length !== 10 && phoneDigits.length !== 11) {
+      return "Informe um telefone válido com DDD (10 ou 11 dígitos).";
+    }
+    const ddd1 = Number(phoneDigits[0]);
+    const ddd2 = Number(phoneDigits[1]);
+    if (ddd1 < 1 || ddd1 > 9 || ddd2 < 1 || ddd2 > 9) {
+      return "Informe um DDD válido (11 a 99).";
+    }
+    if (phoneDigits.length === 11) {
+      if (phoneDigits[2] !== "9") {
+        return "Número de celular deve começar com 9 após o DDD.";
+      }
+    } else {
+      const fixo = Number(phoneDigits[2]);
+      if (fixo < 2 || fixo > 5) {
+        return "Número fixo deve começar com 2 a 5 após o DDD.";
+      }
     }
     const [dia, mes, ano] = dataNascimento.split("/");
     if (!dia || !mes || !ano) {
       return "Data de nascimento inválida (DD/MM/AAAA).";
     }
-    const birth = new Date(Number(ano), Number(mes) - 1, Number(dia));
-    if (isNaN(birth.getTime())) return "Data de nascimento inválida.";
+    if (!/^\d+$/.test(dia) || !/^\d+$/.test(mes) || !/^\d+$/.test(ano)) {
+      return "Data de nascimento inválida.";
+    }
+    if (ano.length !== 4) {
+      return "Informe o ano com 4 dígitos (AAAA).";
+    }
+    const d = Number(dia);
+    const m = Number(mes);
+    const a = Number(ano);
+    if (m < 1 || m > 12 || d < 1 || d > 31) {
+      return "Data de nascimento inválida.";
+    }
+    const birth = new Date(a, m - 1, d);
+    if (
+      isNaN(birth.getTime()) ||
+      birth.getFullYear() !== a ||
+      birth.getMonth() !== m - 1 ||
+      birth.getDate() !== d
+    ) {
+      return "Data de nascimento inválida.";
+    }
     const today = new Date();
+    if (birth.getTime() > today.getTime()) {
+      return "A data de nascimento não pode ser no futuro.";
+    }
     let age = today.getFullYear() - birth.getFullYear();
     const mDiff = today.getMonth() - birth.getMonth();
     if (mDiff < 0 || (mDiff === 0 && today.getDate() < birth.getDate())) age--;
