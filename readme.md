@@ -1,4 +1,4 @@
----
+
 titulo: Auxílio Encceja 
 equipe: Auxílio Encceja
 curso: SI
@@ -23,6 +23,6 @@ integrantes:
  - nome: Ana Beatriz Bruno
     ra: ""
     papel: Membro   
----
+
 descreva as tecnologias usadas e forma d einiciar so projetos de back, web e mobile
 
